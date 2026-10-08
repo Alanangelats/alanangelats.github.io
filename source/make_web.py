@@ -12,5 +12,11 @@ out = ('<!doctype html>\n<html lang="en" translate="no">\n<head>\n<meta charset=
        '<meta name="google" content="notranslate">\n'
        '<meta name="color-scheme" content="light">\n'
        '<meta name="description" content="Alan Angelats, Lead Product Designer. Digital products and financial services.">\n'
-       '<meta name="theme-color" content="#E7E0DA">\n' + head + '</head>\n<body>\n' + body + '\n</body>\n</html>\n')
+       '<meta name="theme-color" content="#E7E0DA">\n'
+       '<link rel="icon" href="favicon.svg" type="image/svg+xml">\n'
+       '<link rel="icon" href="favicon.ico" sizes="48x48">\n'
+       '<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">\n'
+       '<link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png">\n'
+       '<link rel="apple-touch-icon" href="apple-touch-icon.png">\n'
+       '<link rel="manifest" href="manifest.webmanifest">\n' + head + '</head>\n<body>\n' + body + '\n</body>\n</html>\n')
 open(os.path.join(d, '..', 'index.html'), 'w', encoding='utf-8').write(out)
