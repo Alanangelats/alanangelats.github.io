@@ -51,7 +51,7 @@ html.touch .spot,html.touch .sec.bone,html.touch .panel.eggs{--sa:0;transition:-
 .rv.in{opacity:1;transform:none}
 
 /* header */
-.hd{position:fixed;top:0;left:0;right:0;z-index:70;display:flex;justify-content:space-between;align-items:center;
+.hd{position:fixed;top:0;left:0;right:0;z-index:92;display:flex;justify-content:space-between;align-items:center;
   padding:calc(env(safe-area-inset-top,0px) + 12px) var(--wp) 12px;color:var(--oxblood);background:rgba(231,224,218,0);transition:color .4s,background .4s,backdrop-filter .4s}
 .hd.show{background:rgba(231,224,218,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 .hd[data-tone=red]{color:var(--hueso)}
@@ -61,7 +61,7 @@ html.touch .spot,html.touch .sec.bone,html.touch .panel.eggs{--sa:0;transition:-
 .menu-btn{font:500 .78rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;background:var(--hueso);color:var(--oxblood);border:1px solid var(--oxblood);border-radius:99px;padding:1.16em 1.3em;cursor:pointer;display:inline-flex;gap:.7em;align-items:center;transition:transform .3s var(--ease),background .3s}
 .menu-btn:hover{background:var(--hueso)}
 .menu-btn i{width:14px;height:6px;border-block:1.5px solid currentColor;display:block}
-.ov{position:fixed;inset:0;z-index:80;background:var(--oxblood);color:var(--hueso);clip-path:circle(0 at calc(100% - 70px) 34px);transition:clip-path .8s var(--ease);padding:calc(env(safe-area-inset-top,0px) + 90px) var(--wp) 40px;display:flex;flex-direction:column;justify-content:center;overflow:auto;visibility:hidden}
+.ov{position:fixed;inset:0;z-index:95;background:var(--oxblood);color:var(--hueso);clip-path:circle(0 at calc(100% - 70px) 34px);transition:clip-path .8s var(--ease);padding:calc(env(safe-area-inset-top,0px) + 90px) var(--wp) 40px;display:flex;flex-direction:column;justify-content:center;overflow:auto;visibility:hidden}
 .ov.open{clip-path:circle(160% at calc(100% - 70px) 34px);visibility:visible}
 .ov a{display:flex;gap:1rem;align-items:baseline;font-family:var(--display);font-weight:700;letter-spacing:-.05em;text-transform:lowercase;font-size:clamp(2.2rem,7vw,5.5rem);line-height:1.08;text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--hueso) 24%,transparent);padding-block:.12em;transition:padding .4s var(--ease),opacity .3s}
 .ov a small{font:500 .75rem var(--body);letter-spacing:.12em;opacity:.7;min-width:2.2em}
@@ -98,7 +98,7 @@ html.touch .spot,html.touch .sec.bone,html.touch .panel.eggs{--sa:0;transition:-
 .role p{font-family:var(--display);font-weight:700;letter-spacing:-.035em;line-height:1.02;font-size:clamp(1.35rem,2.3vw,2.2rem);text-transform:none}
 .pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
 .pill{border:1px solid currentColor;border-radius:99px;padding:.45em 1.1em;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
-.photo{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bone);animation:reveal 1.5s var(--ease) .3s both}
+.photo{position:relative;z-index:91;aspect-ratio:4/5;overflow:hidden;background:var(--bone);animation:reveal 1.5s var(--ease) .3s both}
 .photo img{position:absolute;inset:-6% 0;width:100%;height:112%;object-fit:cover;object-position:50% 20%;display:block;will-change:transform;transform:translateY(var(--py,0px))}
 @keyframes reveal{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(20px 0 0 0)}}
 .marq{margin-top:clamp(40px,6vw,90px);border-block:1px solid var(--line);overflow:hidden;--line:color-mix(in srgb,currentColor 30%,transparent)}
