@@ -12,7 +12,7 @@ def star(cx, cy, r):
 
 b64 = lambda f: base64.b64encode(open(os.path.join(d, f), 'rb').read()).decode()
 s = open(os.path.join(d, 'src.html'), encoding='utf-8').read()
-s = (s.replace('__PHOTO__', 'data:image/jpeg;base64,' + b64('foto.jpg'))
+s = (s.replace('__PHOTOWEBP__', 'foto.webp').replace('__PHOTO__', 'foto.jpg')
       .replace('__CLAUDE__', 'data:image/png;base64,' + b64('claude.png'))
       .replace('__BIG__', star(36, 64, 34))
       .replace('__SMALL__', star(74, 24, 20)))
