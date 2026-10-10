@@ -113,8 +113,9 @@ html.touch .spot,html.touch .sec.bone,html.touch .panel.eggs{--sa:0;transition:-
 .mq2{padding-block:0}
 .mq2 .marq{margin:0;border-top:0}
 .mq2 .track{transform:translate3d(0,0,0)}
-.mq2 .track span:not(.bk){opacity:.42}
-.mq2 .track span.bk{opacity:1}
+.mq2 .marq{cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.mq2 .marq.drag{cursor:grabbing}
+.mq2 .track{width:max-content}
 
 /* intro */
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,90px)}
@@ -311,7 +312,7 @@ body{cursor:none}
 </section>
 
 <section class="sec bone mq2" data-tone="bone" id="clientes-mq" aria-label="Clientes">
-  <div class="marq" aria-hidden="true"><div class="track" id="ctrack"><span>Sanitas</span><span>Endesa</span><span>Repsol</span><span>Vodafone</span><span>Adif · Renfe · AVE</span><span>ABB · Enagás</span><span>esMadrid.com</span><span>Segittur</span><span>Vocento</span><span class="bk">BBVA</span><span class="bk">CaixaBank</span><span class="bk">Bankinter</span><span>Zed</span><span>Junta de Andalucía</span><span>Ministerio de Cultura</span><span>Ministerio de Justicia</span><span>Ministerio de Trabajo</span><span>Ministerio de Vivienda</span><span>Agencia Española de Protección de Datos</span><span>Instituto Cervantes</span></div></div>
+  <div class="marq" aria-hidden="true"><div class="track" id="ctrack"><span>Sanitas</span><span>Endesa</span><span>Repsol</span><span>Vodafone</span><span>Adif · Renfe · AVE</span><span>ABB · Enagás</span><span>esMadrid.com</span><span>Segittur</span><span>Vocento</span><span class="bk">BBVA</span><span class="bk">CaixaBank</span><span class="bk">Bankinter</span><span>Zed</span><span>Junta de Andalucía</span><span>Ministerio de Cultura</span><span>Ministerio de Justicia</span><span>Ministerio de Trabajo</span><span>Ministerio de Vivienda</span><span>Agencia Española de Protección de Datos</span><span>Instituto Cervantes</span><span>Sanitas</span><span>Endesa</span><span>Repsol</span><span>Vodafone</span><span>Adif · Renfe · AVE</span><span>ABB · Enagás</span><span>esMadrid.com</span><span>Segittur</span><span>Vocento</span><span class="bk2">BBVA</span><span class="bk2">CaixaBank</span><span class="bk2">Bankinter</span><span>Zed</span><span>Junta de Andalucía</span><span>Ministerio de Cultura</span><span>Ministerio de Justicia</span><span>Ministerio de Trabajo</span><span>Ministerio de Vivienda</span><span>Agencia Española de Protección de Datos</span><span>Instituto Cervantes</span></div></div>
 </section>
 
 <section class="sec bone" data-tone="bone" id="skills">
@@ -495,17 +496,32 @@ body{cursor:none}
   /* WhatsApp flotante: solo al llegar al pie */
   (function(){var w=$('#wa'),c=$('#contacto');if(!w||!c||!('IntersectionObserver' in window))return;
     new IntersectionObserver(function(es){es.forEach(function(e){w.classList.toggle('on',e.isIntersecting)})},{rootMargin:'0px 0px -35% 0px',threshold:0}).observe(c)})();
-  /* carrusel de clientes: los bancos quedan centrados cuando la banda está en el centro de la pantalla */
+  /* carrusel de clientes: corre solo, se arrastra con dedo o ratón y arranca con los bancos centrados */
   (function(){var t=$('#ctrack'),box=t&&t.parentNode;if(!t)return;
-    var bk=$$('.bk',t),c0=0,ticking=0;
-    function measure(){var a=bk[0],b=bk[bk.length-1];c0=(a.offsetLeft+b.offsetLeft+b.offsetWidth)/2}
-    function place(){ticking=0;measure();var r=box.getBoundingClientRect(),off=rm?0:(r.top+r.height/2)-innerHeight/2;
-      t.style.transform='translate3d('+Math.round(box.clientWidth/2-c0+off*.55)+'px,0,0)'}
-    function req(){if(!ticking){ticking=1;requestAnimationFrame(place)}}
-    addEventListener('scroll',req,{passive:true});addEventListener('resize',req);
-    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(req);
-    if(window.ResizeObserver)new ResizeObserver(req).observe(t);
-    place()})();
+    var bk=[].slice.call(t.querySelectorAll('.bk')),gw=0,x=0,v=0,auto=-42,drag=false,lx=0,lt=0,vis=false,ready=false,ly=scrollY,boost=1,lastT=0;
+    function measure(){gw=t.scrollWidth/2}
+    function center(){measure();var a=bk[0],b=bk[bk.length-1];x=box.clientWidth/2-(a.offsetLeft+b.offsetLeft+b.offsetWidth)/2;ready=true}
+    function wrap(){if(gw>0){while(x<-gw)x+=gw;while(x>0)x-=gw}}
+    function draw(){t.style.transform='translate3d('+x.toFixed(1)+'px,0,0)'}
+    function loop(ts){
+      if(!vis){lastT=0;return}
+      var dt=lastT?Math.min((ts-lastT)/1000,.05):0;lastT=ts;
+      var sy=scrollY,d=sy-ly;ly=sy;boost+=(1+Math.min(Math.abs(d)*.35,6)-boost)*.15;
+      if(!drag){
+        var target=rm?0:auto*boost*(d<0?-1:1);
+        v+=(target-v)*Math.min(dt*3,1);x+=v*dt
+      }
+      wrap();draw();requestAnimationFrame(loop)}
+    new IntersectionObserver(function(es){var on=es[0].isIntersecting;if(on&&!ready)center();if(on&&!vis){vis=true;lastT=0;requestAnimationFrame(loop)}else if(!on)vis=false},{rootMargin:'120px'}).observe(box);
+    box.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse'&&e.button!==0)return;drag=true;lx=e.clientX;lt=performance.now();v=0;box.classList.add('drag');try{box.setPointerCapture(e.pointerId)}catch(_){}});
+    box.addEventListener('pointermove',function(e){if(!drag)return;var n=performance.now(),dx=e.clientX-lx;x+=dx;wrap();draw();if(n>lt)v=dx/((n-lt)/1000)*.6+v*.4;lx=e.clientX;lt=n});
+    function end(){if(!drag)return;drag=false;box.classList.remove('drag');v=Math.max(-2500,Math.min(2500,v))}
+    box.addEventListener('pointerup',end);box.addEventListener('pointercancel',end);box.addEventListener('lostpointercapture',end);
+    box.addEventListener('dragstart',function(e){e.preventDefault()});
+    addEventListener('resize',function(){var r=gw?x/gw:0;measure();x=r*gw});
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){if(!vis)ready=false});
+    if(window.ResizeObserver)new ResizeObserver(function(){var r=gw?x/gw:0;measure();x=r*gw}).observe(t);
+    measure()})();
   /* efectos de scroll: © gira, foto con parallax, marquesina por velocidad */
   var cp=$('#copy'),ph=$('#ph'),last=scrollY,vel=0,raf=0,anim=null;
   var track=$('#track');
