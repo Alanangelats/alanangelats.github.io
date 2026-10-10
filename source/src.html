@@ -220,8 +220,20 @@ ul.skills,ul.clients{padding:0;margin-bottom:0}
   *,*::before,*::after{animation:none!important;transition-duration:.01s!important}
   .pre{opacity:1;transform:none}
 }
+
+/* custom cursor */
+body{cursor:none}
+.cur{position:fixed;width:8px;height:8px;background:var(--oxblood);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease)}
+.cur-ring{position:fixed;width:34px;height:34px;border:1px solid rgba(98,23,14,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease)}
+.cur.big{width:12px;height:12px}
+.cur-ring.big{width:58px;height:58px}
+.red .cur,.cur.onred{background:var(--hueso)}
+.red .cur-ring,.cur-ring.onred{border-color:rgba(240,233,223,.4)}
+@media(hover:none){.cur,.cur-ring{display:none}body{cursor:auto}}
 </style>
 
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="ring"></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
     <symbol id="spark" viewBox="0 0 100 100"><path d="__BIG__"/><path class="s2" d="__SMALL__"/></symbol>
@@ -596,5 +608,30 @@ ul.skills,ul.clients{padding:0;margin-bottom:0}
   var saved='en';try{saved=localStorage.getItem('lang2')==='es'?'es':'en'}catch(e){}
   lg.classList.add('nt');setLang(saved,false);
   requestAnimationFrame(function(){requestAnimationFrame(function(){lg.classList.remove('nt')})});
+})();
+
+/* custom cursor */
+(function(){
+  var cur=document.getElementById('cur'),ring=document.getElementById('ring');
+  if(!cur||!ring)return;
+  var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+  document.addEventListener('mousemove',function(e){
+    mx=e.clientX;my=e.clientY;
+    cur.style.left=mx+'px';cur.style.top=my+'px';
+    /* detect red sections for color swap */
+    var el=document.elementFromPoint(mx,my);
+    var onRed=el&&!!el.closest('.red');
+    cur.classList.toggle('onred',onRed);
+    ring.classList.toggle('onred',onRed);
+  });
+  (function loop(){
+    rx+=(mx-rx)*.11;ry+=(my-ry)*.11;
+    ring.style.left=rx+'px';ring.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button,.cp,.pill,.photo,.ov a').forEach(function(el){
+    el.addEventListener('mouseenter',function(){cur.classList.add('big');ring.classList.add('big')});
+    el.addEventListener('mouseleave',function(){cur.classList.remove('big');ring.classList.remove('big')});
+  });
 })();
 </script>
