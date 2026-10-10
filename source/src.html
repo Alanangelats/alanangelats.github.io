@@ -110,6 +110,12 @@ html.touch .spot,html.touch .sec.bone,html.touch .panel.eggs{--sa:0;transition:-
 .track span{font-family:var(--display);font-weight:700;letter-spacing:-.03em;text-transform:uppercase;font-size:clamp(1rem,1.7vw,1.6rem);padding:1.15em 0;white-space:nowrap;display:inline-flex;align-items:center}
 .track span::after{content:"";width:.5em;height:.5em;border:1.5px solid currentColor;border-radius:50%;margin-inline:1.6em}
 
+.mq2{padding-block:0}
+.mq2 .marq{margin:0;border-top:0}
+.mq2 .track{transform:translate3d(0,0,0)}
+.mq2 .track span:not(.bk){opacity:.42}
+.mq2 .track span.bk{opacity:1}
+
 /* intro */
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,90px)}
 .intro .lead{font-size:clamp(1.12rem,1.65vw,1.6rem);line-height:1.38;font-weight:300;max-width:34em;text-wrap:pretty}
@@ -304,6 +310,10 @@ body{cursor:none}
   </div>
 </section>
 
+<section class="sec bone mq2" data-tone="bone" id="clientes-mq" aria-label="Clientes">
+  <div class="marq" aria-hidden="true"><div class="track" id="ctrack"><span>Sanitas</span><span>Endesa</span><span>Repsol</span><span>Vodafone</span><span>Adif · Renfe · AVE</span><span>ABB · Enagás</span><span>esMadrid.com</span><span>Segittur</span><span>Vocento</span><span class="bk">BBVA</span><span class="bk">CaixaBank</span><span class="bk">Bankinter</span><span>Zed</span><span>Junta de Andalucía</span><span>Ministerio de Cultura</span><span>Ministerio de Justicia</span><span>Ministerio de Trabajo</span><span>Ministerio de Vivienda</span><span>Agencia Española de Protección de Datos</span><span>Instituto Cervantes</span></div></div>
+</section>
+
 <section class="sec bone" data-tone="bone" id="skills">
   <div class="wrap">
     <div class="tag"><b>02</b>Skills</div>
@@ -408,7 +418,7 @@ body{cursor:none}
     <ul class="grid clients">
       <li class="cl fill"><small>01</small><strong>BBVA</strong></li>
       <li class="cl fill"><small>02</small><strong>Bankinter</strong></li>
-      <li class="cl fill"><small>03</small><strong>La Caixa</strong></li>
+      <li class="cl fill"><small>03</small><strong>CaixaBank</strong></li>
       <li class="cl fill"><small>04</small><strong>Sanitas</strong></li>
       <li class="cl fill"><small>05</small><strong>Endesa</strong></li>
       <li class="cl fill"><small>06</small><strong>Repsol</strong></li>
@@ -485,6 +495,17 @@ body{cursor:none}
   /* WhatsApp flotante: solo al llegar al pie */
   (function(){var w=$('#wa'),c=$('#contacto');if(!w||!c||!('IntersectionObserver' in window))return;
     new IntersectionObserver(function(es){es.forEach(function(e){w.classList.toggle('on',e.isIntersecting)})},{rootMargin:'0px 0px -35% 0px',threshold:0}).observe(c)})();
+  /* carrusel de clientes: los bancos quedan centrados cuando la banda está en el centro de la pantalla */
+  (function(){var t=$('#ctrack'),box=t&&t.parentNode;if(!t)return;
+    var bk=$$('.bk',t),c0=0,ticking=0;
+    function measure(){var a=bk[0],b=bk[bk.length-1];c0=(a.offsetLeft+b.offsetLeft+b.offsetWidth)/2}
+    function place(){ticking=0;measure();var r=box.getBoundingClientRect(),off=rm?0:(r.top+r.height/2)-innerHeight/2;
+      t.style.transform='translate3d('+Math.round(box.clientWidth/2-c0+off*.55)+'px,0,0)'}
+    function req(){if(!ticking){ticking=1;requestAnimationFrame(place)}}
+    addEventListener('scroll',req,{passive:true});addEventListener('resize',req);
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(req);
+    if(window.ResizeObserver)new ResizeObserver(req).observe(t);
+    place()})();
   /* efectos de scroll: © gira, foto con parallax, marquesina por velocidad */
   var cp=$('#copy'),ph=$('#ph'),last=scrollY,vel=0,raf=0,anim=null;
   var track=$('#track');
