@@ -33,6 +33,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <title>Alan Angelats | Lead Product Designer in Madrid · Digital Banking &amp; AI</title>
+<script>(function(d){d.classList.add("js");try{if(sessionStorage.getItem("ld")||matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("ld-skip")}catch(e){}})(document.documentElement)</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300..800&family=Space+Grotesk:wght@300..700&display=swap">
@@ -116,6 +117,37 @@ html.touch .spot,html.touch .sec.bone,html.touch .panel.eggs{--sa:0;transition:-
 .lang.nt .th{transition:none}
 .lang .o{position:relative;z-index:1;flex:1;padding:1em .95em;text-align:center;transition:color .4s}
 .lang[data-lang=en] .o:nth-child(2),.lang[data-lang=es] .o:nth-child(3){color:var(--hueso)}
+
+
+/* loader */
+.ld{position:fixed;inset:0;z-index:10000;display:none;flex-direction:column;justify-content:space-between;padding:clamp(18px,3vw,36px) clamp(24px,3.4vw,52px) 0;background:radial-gradient(circle 55vmax at 78% 8%,rgba(240,233,223,.09),transparent 70%),var(--oxblood);color:var(--hueso);overflow:hidden;cursor:default;clip-path:inset(0 0 0 0);transition:clip-path .75s cubic-bezier(.76,0,.2,1)}
+.js:not(.ld-skip) .ld{display:flex;animation:ldfail 0s 9s forwards}
+@keyframes ldfail{to{visibility:hidden;pointer-events:none}}
+html.ldg{overflow:hidden}
+html.ldg .cur,html.ldg .cur-ring{display:none}html.ldg body{cursor:auto}
+html.ldg .ln>span,html.ldg .photo{animation-play-state:paused}
+.ld.out{clip-path:inset(0 0 100% 0)}
+.ld::before,.ld::after{content:"";position:absolute;top:0;bottom:0;width:1px;background:color-mix(in srgb,var(--hueso) 22%,transparent)}
+.ld::before{left:clamp(14px,2.4vw,40px)}.ld::after{right:clamp(14px,2.4vw,40px)}
+.ld-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;opacity:0;animation:ldin .5s var(--ease) 0s forwards}
+.ld-tag{display:inline-flex;gap:.7em;align-items:center;border:1px solid currentColor;border-radius:99px;padding:.45em 1.1em;font:500 .74rem var(--body);letter-spacing:.14em;text-transform:uppercase}
+.ld-tag b{font-weight:700}
+.ld-brand{font-family:var(--display);font-weight:700;letter-spacing:-.04em;font-size:1.05rem;text-transform:lowercase}
+.ld-mid{flex:1;display:flex;align-items:center;justify-content:flex-end;padding-right:clamp(0px,1vw,16px)}
+.ld-words{position:relative;display:block;height:1.2em;width:100%;text-align:right;font:500 .8rem/1.2 var(--body);letter-spacing:.16em;text-transform:uppercase;overflow:hidden}
+.ld-words span{position:absolute;right:0;top:0;white-space:nowrap;transform:translateY(120%);animation:ldw 1.2s var(--ease) infinite}
+.ld-words span:nth-child(2){animation-delay:.4s}.ld-words span:nth-child(3){animation-delay:.8s}
+.ld-words .sp{width:.9em;height:.9em;margin-left:.35em;vertical-align:-.1em;fill:currentColor}
+@keyframes ldw{0%{transform:translateY(120%)}10%,30%{transform:none}40%,100%{transform:translateY(-120%)}}
+.ld-num{display:flex;align-items:flex-end;gap:.04em;font-family:var(--display);font-weight:700;letter-spacing:-.06em;line-height:.8;font-size:clamp(7.5rem,30vw,30rem);margin:0 0 clamp(14px,2.6vw,36px) -.04em;overflow:hidden;padding:.08em 0 .1em;opacity:0;animation:ldin .55s var(--ease) .05s forwards}
+.ld-num>span{display:inline-block;transition:transform .45s cubic-bezier(.76,0,.2,1)}
+.ld-num em{font-style:normal;font-size:.34em;letter-spacing:-.03em;line-height:1;align-self:flex-start;margin:.12em 0 0 .08em}
+.ld-num .ldcc{width:.2em;height:.2em;margin:0 0 .1em .08em;display:block;fill:none;stroke:currentColor;flex:none}
+.ld.done .ld-num>span,.ld.done .ld-num em{transform:translateY(-110%)}
+.ld-bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:color-mix(in srgb,var(--hueso) 18%,transparent)}
+.ld-bar i{position:absolute;inset:0;background:var(--hueso);transform:scaleX(0);transform-origin:0 50%}
+@keyframes ldin{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
 
 /* hero */
 .hero{padding-top:clamp(96px,11vw,150px);padding-bottom:0;overflow:hidden}
@@ -278,6 +310,12 @@ body{cursor:none}
 @media(hover:none){.cur,.cur-ring{display:none}body{cursor:auto}}
 </style>
 
+<div class="ld" id="ld" aria-hidden="true">
+  <div class="ld-top"><span class="ld-tag"><b>00</b>Cargando</span><span class="ld-brand">alan angelats</span></div>
+  <div class="ld-mid"><span class="ld-words"><span>Product Design</span><span>Banca digital</span><span>AI Design <svg class="sp" viewBox="0 0 100 100" aria-hidden="true"><use href="#spark"/></svg></span></span></div>
+  <div class="ld-num"><span id="ldn">0</span><em>%</em><svg class="ldcc" id="ldcc" viewBox="0 0 100 100"><use href="#cc"/></svg></div>
+  <div class="ld-bar"><i id="ldb"></i></div>
+</div>
 <div class="cur" id="cur"></div>
 <div class="cur-ring" id="ring"></div>
 </head>
@@ -530,6 +568,26 @@ body{cursor:none}
     hd.classList.toggle('show',scrollY>$('#name').getBoundingClientRect().height+80);
   }
 
+  /* loader: progreso real (fuentes + foto + carga) con mínimo de duración; se salta en la misma sesión */
+  (function(){var html=document.documentElement,ld=$('#ld');if(!ld)return;
+    if(!html.classList.contains('js')||html.classList.contains('ld-skip')){ld.remove();return}
+    html.classList.add('ldg');
+    var num=$('#ldn'),bar=$('#ldb'),cc=$('#ldcc'),tag=$('.ld-tag b',ld),t0=performance.now(),MIN=900,r={f:0,i:0,l:0},shown=0,fin=false;
+    function ok(k){return function(){r[k]=1}}
+    (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(ok('f'),ok('f'));setTimeout(ok('f'),3500);
+    var im=$('#ph');if(!im||im.complete)r.i=1;else{im.addEventListener('load',ok('i'));im.addEventListener('error',ok('i'));setTimeout(ok('i'),4500)}
+    if(document.readyState==='complete')r.l=1;else{addEventListener('load',ok('l'));setTimeout(ok('l'),5000)}
+    function ease(x){return 1-Math.pow(1-x,3)}
+    function done(){if(fin)return;fin=true;shown=1;paint();
+      ld.classList.add('done');
+      setTimeout(function(){ld.classList.add('out');setTimeout(function(){html.classList.remove('ldg')},220)},180);
+      setTimeout(function(){ld.remove();try{sessionStorage.setItem('ld','1')}catch(e){}dispatchEvent(new Event('ldone'))},1000)}
+    function paint(){var n=Math.round(shown*100);num.textContent=n;tag.textContent=('0'+Math.min(9,Math.floor(n/10))).slice(-2);bar.style.transform='scaleX('+shown+')';cc.style.transform='rotate('+(shown*1080)+'deg)'}
+    function tick(){if(fin)return;
+      var el=performance.now()-t0,target=.12+.34*r.f+.34*r.i+.2*r.l,time=ease(Math.min(el/MIN,1)),p=Math.min(time,target);
+      shown+=(p-shown)*.35;if(p-shown<.002)shown=p;paint();
+      if(shown>=.999&&r.f&&r.i&&r.l&&el>=MIN)done();else requestAnimationFrame(tick)}
+    requestAnimationFrame(tick);setTimeout(done,7500)})();
   /* WhatsApp flotante: solo al llegar al pie */
   (function(){var w=$('#wa'),c=$('#contacto');if(!w||!c||!('IntersectionObserver' in window))return;
     new IntersectionObserver(function(es){es.forEach(function(e){w.classList.toggle('on',e.isIntersecting)})},{rootMargin:'0px 0px -35% 0px',threshold:0}).observe(c)})();
@@ -648,7 +706,7 @@ body{cursor:none}
    'He liderado iniciativas de salud financiera, gestión de la economía doméstica y coaching financiero digital, cubriendo todo el ciclo de vida del producto. Incorporo analítica de producto e':'I have led initiatives in financial health, household money management and digital financial coaching, covering the whole product lifecycle. I bring product analytics and',
    'inteligencia artificial':'artificial'+NB+'intelligence',
    'a mi proceso de diseño y defiendo los Design Systems como aceleradores de calidad, consistencia y accesibilidad.':'into my design process, and I champion Design Systems as accelerators of quality, consistency and accessibility.',
-   'Skills':'Skills','Idiomas':'Languages','Inglés':'English','Certificación Global CEFR Level C':'Global Certification CEFR Level C','Español':'Spanish','Catalán':'Catalan','Nativo o bilingüe':'Native or bilingual',
+   'Cargando':'Loading','Skills':'Skills','Idiomas':'Languages','Inglés':'English','Certificación Global CEFR Level C':'Global Certification CEFR Level C','Español':'Spanish','Catalán':'Catalan','Nativo o bilingüe':'Native or bilingual',
    'IA Generativa':'Generative AI','Prototipado':'Prototyping','Diseño de Interacción':'Interaction Design','Tipografía':'Typography','Accesibilidad':'Accessibility','Liderazgo de Diseño':'Design Leadership','Banca Digital':'Digital Banking',
    'Experiencia':'Experience','experiencia.':'experience.','ago 2016 – Actualidad':'Aug 2016 – Present','nov 2023 – Actualidad':'Nov 2023 – Present',
    'Como Senior Product Designer en BBVA, participo en la definición y diseño de productos digitales globales enfocados en la gestión de las finanzas personales, la salud financiera y la toma de decisiones económicas. Trabajo junto a equipos de Producto, Negocio, Datos y Tecnología para transformar información financiera compleja en experiencias simples, intuitivas y escalables que aporten valor a millones de clientes.':'As a Senior Product Designer at BBVA, I take part in defining and designing global digital products focused on personal finance management, financial health and economic decision-making. I work alongside Product, Business, Data and Technology teams to turn complex financial information into simple, intuitive and scalable experiences that bring value to millions of customers.',
