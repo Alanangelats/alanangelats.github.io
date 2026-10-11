@@ -209,6 +209,8 @@ ul.skills,ul.clients{padding:0;margin-bottom:0}
 .row dd{margin:0;font-family:var(--display);font-weight:700;letter-spacing:-.045em;font-size:clamp(1.35rem,4.2vw,4rem);line-height:1.05;overflow-wrap:anywhere;user-select:all;min-width:0}
 .cp{font:500 .74rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:inherit;background:transparent;border:1px solid currentColor;border-radius:99px;padding:.9em 1.4em;cursor:pointer;transition:background .3s,color .3s;min-width:7.5em}
 .row .cp{width:100%;min-width:0;justify-self:end}
+.ln-a{color:inherit;text-decoration:none}
+a.cp{display:inline-block;text-align:center;text-decoration:none;box-sizing:border-box}
 .cp:hover{background:var(--hueso);color:var(--oxblood)}
 .wa{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 18px);z-index:60;width:58px;height:58px;border-radius:50%;background:var(--hueso);color:var(--oxblood);border:1px solid var(--hueso);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(240,233,223,.2),0 2px 10px rgba(240,233,223,.12);transform:scale(0);pointer-events:none;visibility:hidden;transition:transform .35s cubic-bezier(.5,0,.75,0),visibility 0s .35s,background .3s,color .3s}
 .wa.on{transform:scale(1);pointer-events:auto;visibility:visible;transition:transform .6s cubic-bezier(.34,1.56,.64,1),visibility 0s,background .3s,color .3s}
@@ -461,6 +463,7 @@ body{cursor:none}
     <h2 class="big" style="margin-top:clamp(20px,3vw,40px)">contacto.</h2>
     <dl class="ct" style="margin-bottom:0">
       <div class="row"><dt>Email</dt><dd id="v1">walan21@gmail.com</dd><button class="cp" type="button" data-t="v1">Copiar</button></div>
+      <div class="row"><dt>LinkedIn</dt><dd><a class="ln-a" href="https://www.linkedin.com/in/alanangelats" target="_blank" rel="noopener me">Alan Angelats</a></dd><a class="cp" href="https://www.linkedin.com/in/alanangelats" target="_blank" rel="noopener me">Abrir</a></div>
       <div class="row"><dt>Ubicación</dt><dd>Colmenar Viejo, Madrid, España</dd><span></span></div>
     </dl>
     <div class="foot">
@@ -657,7 +660,7 @@ body{cursor:none}
    'Cuando no estoy diseñando, estoy en la montaña.':'When I\'m not designing, I\'m in the mountains.','Educación':'Education','educación.':'education.',
    'Grado Universitario en Diseño y Creación Digital':'University Degree in Digital Design and Creation','Posgrado en Diseño de Experiencia de Usuario':'Postgraduate in User Experience Design','Máster en Diseño Web y Multimedia':'Master\'s in Web Design and Multimedia',
    'Clientes':'Clients','clientes.':'clients.','Junta de Andalucía':'Regional Government of Andalusia','Ministerio de Cultura':'Ministry of Culture','Ministerio de Justicia':'Ministry of Justice','Ministerio de Trabajo':'Ministry of Labour','Ministerio de Vivienda':'Ministry of Housing','Agencia Española de Protección de Datos':'Spanish Data Protection Agency',
-   'Contacto':'Contact','contacto.':'contact.','Móvil':'Mobile','Ubicación':'Location','Colmenar Viejo, Madrid, España':'Colmenar Viejo, Madrid, Spain','Copiar':'Copy','Volver arriba ↑':'Back to top ↑'
+   'Contacto':'Contact','contacto.':'contact.','Móvil':'Mobile','Ubicación':'Location','Colmenar Viejo, Madrid, España':'Colmenar Viejo, Madrid, Spain','Copiar':'Copy','Abrir':'Open','Volver arriba ↑':'Back to top ↑'
   };
   var A={'#ph':['alt','Retrato de Alan Angelats','Portrait of Alan Angelats'],'#ph2':['alt','Alan Angelats en la montaña al atardecer, con gorra, chaqueta y chaleco de trail','Alan Angelats in the mountains at sunset, wearing a cap, jacket and trail vest']};
   var nodes=[],wk=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null),n;
