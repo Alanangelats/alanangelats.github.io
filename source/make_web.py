@@ -17,15 +17,23 @@ os.remove(tmp)
 URL = 'https://alanangelats.github.io/'
 TITLE = 'Alan Angelats | Lead Product Designer in Madrid \u00b7 Digital Banking & AI'
 DESC = 'Lead Product Designer in Madrid with 20+ years designing digital banking and financial products, with AI and Design Systems. Experience, skills and clients.'
+LASTMOD = '2026-10-11'  # fecha del último cambio real; alimenta sitemap.xml y dateModified del JSON-LD
+LINKEDIN = 'https://www.linkedin.com/in/alanangelats'  # el mismo enlace que aparece en la sección Contacto
 LD = {"@context": "https://schema.org", "@graph": [
-  {"@type": "WebSite", "@id": URL + "#website", "url": URL, "name": "Alan Angelats", "inLanguage": ["en", "es"]},
+  {"@type": "WebSite", "@id": URL + "#website", "url": URL, "name": "Alan Angelats", "inLanguage": ["en", "es"],
+   "publisher": {"@id": URL + "#alan"}},
+  {"@type": "ProfilePage", "@id": URL + "#profile", "url": URL, "name": TITLE, "description": DESC,
+   "inLanguage": "en", "dateModified": LASTMOD,
+   "isPartOf": {"@id": URL + "#website"}, "mainEntity": {"@id": URL + "#alan"}},
   {"@type": "Person", "@id": URL + "#alan", "name": "Alan Angelats", "url": URL, "image": URL + "foto.jpg",
    "jobTitle": "Lead Product Designer", "description": DESC,
+   "mainEntityOfPage": {"@id": URL + "#profile"},
+   "sameAs": [LINKEDIN],
    "address": {"@type": "PostalAddress", "addressLocality": "Madrid", "addressCountry": "ES"},
    "worksFor": {"@type": "Organization", "name": "EGGS, Part of Sopra Steria"},
    "alumniOf": {"@type": "CollegeOrUniversity", "name": "Universitat Oberta de Catalunya"},
    "knowsLanguage": ["English", "Spanish", "Catalan"],
-   "knowsAbout": ["Product Design", "UX/UI", "Design Systems", "AI Product Design", "UX Research", "Service Design", "Digital Banking", "Accessibility"]}]}
+   "knowsAbout": ["Product Design", "UX/UI", "Design Systems", "AI Product Design", "UX Research", "Service Design", "Digital Banking", "Financial Services", "Personal Finance", "Financial Health", "Financial Coaching", "Accessibility"]}]}
 i = s.index('<svg width="0"')
 head, body = s[:i], s[i:]
 out = ('<!doctype html>\n<html lang="en" translate="no">\n<head>\n<meta charset="utf-8">\n'
@@ -33,6 +41,7 @@ out = ('<!doctype html>\n<html lang="en" translate="no">\n<head>\n<meta charset=
        '<meta name="google" content="notranslate">\n'
        '<meta name="color-scheme" content="light">\n'
        '<meta name="description" content="' + DESC + '">\n'
+       '<meta name="author" content="Alan Angelats">\n'
        '<meta name="robots" content="index,follow,max-image-preview:large">\n'
        '<link rel="canonical" href="' + URL + '">\n'
        '<meta property="og:type" content="website">\n<meta property="og:site_name" content="Alan Angelats">\n'
@@ -53,3 +62,7 @@ out = ('<!doctype html>\n<html lang="en" translate="no">\n<head>\n<meta charset=
        '<link rel="apple-touch-icon" href="apple-touch-icon.png">\n'
        '<link rel="manifest" href="manifest.webmanifest">\n' + head + '</head>\n<body>\n' + body + '\n</body>\n</html>\n')
 open(os.path.join(d, '..', 'index.html'), 'w', encoding='utf-8').write(out)
+# sitemap.xml: una sola URL canónica e indexable; lastmod = LASTMOD
+open(os.path.join(d, '..', 'sitemap.xml'), 'w', encoding='utf-8').write(
+    '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    '  <url>\n    <loc>' + URL + '</loc>\n    <lastmod>' + LASTMOD + '</lastmod>\n  </url>\n</urlset>\n')
