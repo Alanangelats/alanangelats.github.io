@@ -732,15 +732,20 @@ body{cursor:none}
   var cur=document.getElementById('cur'),ring=document.getElementById('ring');
   if(!cur||!ring)return;
   var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+  function upd(){
+    var ovEl=document.getElementById('ov'),open=ovEl&&ovEl.classList.contains('open');
+    var el=document.elementFromPoint(mx,my);
+    var onRed=open||(el&&!!el.closest('.red'));
+    cur.classList.toggle('onred',onRed);
+    ring.classList.toggle('onred',onRed);
+  }
   document.addEventListener('mousemove',function(e){
     mx=e.clientX;my=e.clientY;
     cur.style.left=mx+'px';cur.style.top=my+'px';
-    /* detect red sections for color swap */
-    var el=document.elementFromPoint(mx,my);
-    var onRed=el&&!!el.closest('.red');
-    cur.classList.toggle('onred',onRed);
-    ring.classList.toggle('onred',onRed);
+    upd();
   });
+  var ovn=document.getElementById('ov');
+  if(ovn&&window.MutationObserver)new MutationObserver(function(){upd();setTimeout(upd,900)}).observe(ovn,{attributes:true,attributeFilter:['class']});
   (function loop(){
     rx+=(mx-rx)*.11;ry+=(my-ry)*.11;
     ring.style.left=rx+'px';ring.style.top=ry+'px';
