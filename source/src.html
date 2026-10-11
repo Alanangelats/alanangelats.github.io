@@ -83,7 +83,6 @@ html.touch .spot,html.touch .sec.bone,html.touch .panel.eggs{--sa:0;transition:-
 .lang .o{position:relative;z-index:1;flex:1;padding:1em .95em;text-align:center;transition:color .4s}
 .lang[data-lang=en] .o:nth-child(2),.lang[data-lang=es] .o:nth-child(3){color:var(--hueso)}
 
-
 /* hero */
 .hero{padding-top:clamp(96px,11vw,150px);padding-bottom:0;overflow:hidden}
 .hello{display:flex;gap:1rem;justify-content:space-between;flex-wrap:wrap;margin-bottom:clamp(8px,1.5vw,20px)}
@@ -91,15 +90,9 @@ html.touch .spot,html.touch .sec.bone,html.touch .panel.eggs{--sa:0;transition:-
 .name h1{font-size:22.5cqi;line-height:.68;white-space:nowrap}
 .ln{display:block;overflow:hidden;padding:.16em 0 .34em;margin:-.16em 0 -.34em}
 .ln+.ln{margin-top:-.26em}
-.ln>span{display:inline-block}
-.ch{position:relative;display:inline-block;animation:chin .001s steps(1) both;animation-delay:var(--cd,0s)}
-.ch::after{content:"";position:absolute;left:100%;top:.1em;bottom:.04em;width:.05em;margin-left:-.01em;background:currentColor;opacity:0;pointer-events:none;animation:chcr .034s steps(1) var(--cd,0s)}
-.ch.last::after{animation:chblink .8s steps(1) var(--cd,0s)}
-@keyframes chin{from{opacity:0}to{opacity:1}}
-@keyframes chcr{from,to{opacity:1}}
-@keyframes chblink{0%,24%,50%,74%{opacity:1}25%,49%,75%,100%{opacity:0}}
-.copy{display:inline-block;width:.31em;height:.31em;vertical-align:baseline;margin-left:.05em;transform:rotate(var(--r,0deg));animation:ccin .45s cubic-bezier(.34,1.56,.64,1) .62s backwards}
-@keyframes ccin{from{scale:.2;opacity:0}to{scale:1;opacity:1}}
+.ln>span{display:inline-block;animation:up 1.2s var(--ease) both;animation-delay:var(--d,.1s)}
+@keyframes up{from{transform:translateY(105%)}to{transform:none}}
+.copy{display:inline-block;width:.31em;height:.31em;vertical-align:baseline;margin-left:.05em;transform:rotate(var(--r,0deg))}
 .copy svg{width:100%;height:100%;display:block;fill:none;stroke:currentColor}
 .hero-row{display:grid;grid-template-columns:1fr minmax(240px,27vw);gap:clamp(24px,4vw,64px);align-items:end}
 .hero-main{display:flex;flex-direction:column;gap:clamp(28px,4vw,56px);min-width:0}
@@ -288,8 +281,8 @@ body{cursor:none}
       <div class="hero-main">
         <div class="name" id="name">
           <h1 aria-label="Alan Angelats">
-            <span class="ln" aria-hidden="true"><span><span class="ch" style="--cd:0.120s">a</span><span class="ch" style="--cd:0.154s">l</span><span class="ch" style="--cd:0.188s">a</span><span class="ch" style="--cd:0.222s">n</span></span></span>
-            <span class="ln" aria-hidden="true"><span><span class="ch" style="--cd:0.326s">a</span><span class="ch" style="--cd:0.360s">n</span><span class="ch" style="--cd:0.394s">g</span><span class="ch" style="--cd:0.428s">e</span><span class="ch" style="--cd:0.462s">l</span><span class="ch" style="--cd:0.496s">a</span><span class="ch" style="--cd:0.530s">t</span><span class="ch last" style="--cd:0.564s">s</span><span class="copy" id="copy"><svg viewBox="0 0 100 100"><use href="#cc"/></svg></span></span></span>
+            <span class="ln" aria-hidden="true"><span>alan</span></span>
+            <span class="ln" aria-hidden="true"><span style="--d:.25s">angelats<span class="copy" id="copy"><svg viewBox="0 0 100 100"><use href="#cc"/></svg></span></span></span>
           </h1>
         </div>
         <div class="role rv" data-rv>
