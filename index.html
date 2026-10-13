@@ -742,7 +742,7 @@ body{cursor:none}
   function upd(){
     var ovEl=document.getElementById('ov'),open=ovEl&&ovEl.classList.contains('open');
     var el=document.elementFromPoint(mx,my);
-    var onRed=open||(el&&!!el.closest('.red'));
+    var onRed=open||(el&&!!el.closest('.red,.hd[data-tone=red]'));
     cur.classList.toggle('onred',onRed);
     ring.classList.toggle('onred',onRed);
   }
@@ -751,6 +751,7 @@ body{cursor:none}
     cur.style.left=mx+'px';cur.style.top=my+'px';
     upd();
   });
+  window.addEventListener('scroll',upd,{passive:true});
   var ovn=document.getElementById('ov');
   if(ovn&&window.MutationObserver)new MutationObserver(function(){upd();setTimeout(upd,900)}).observe(ovn,{attributes:true,attributeFilter:['class']});
   (function loop(){
