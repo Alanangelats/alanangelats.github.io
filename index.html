@@ -194,12 +194,12 @@ b.ai{font-weight:700;white-space:nowrap}
 .skills strong{font-family:var(--display);font-weight:400;letter-spacing:-.04em;font-size:clamp(1rem,1.68vw,1.6rem);line-height:1}
 @property --x{syntax:'<length-percentage>';inherits:false;initial-value:-120px}
 @property --d{syntax:'<length>';inherits:false;initial-value:120px}
-.wv{position:absolute;inset:0;background:radial-gradient(circle 260px at var(--mx,50%) var(--my,50%),rgba(240,233,223,.16),transparent 70%),var(--oxblood);pointer-events:none;z-index:2;user-select:none;
+.wv{position:absolute;inset:0;background:rgba(98,23,14,.10);pointer-events:none;z-index:2;user-select:none;
   --x:-120px;--d:120px;
   clip-path:polygon(0 0,var(--x) 0,calc(var(--x) + var(--d)) 100%,0 100%);
   transition:--x .5s cubic-bezier(.5,.05,.25,1),--d .5s cubic-bezier(.5,.05,.25,1)}
-.wc{position:absolute;inset:0;color:var(--hueso)}
-.wc>*{position:absolute!important;inset:0;margin:0!important;background:none!important;border-color:transparent!important;color:var(--hueso)!important;transform:none!important;opacity:1!important;transition:none!important}
+.wc{position:absolute;inset:0;color:var(--oxblood)}
+.wc>*{position:absolute!important;inset:0;margin:0!important;background:none!important;border-color:transparent!important;color:var(--oxblood)!important;transform:none!important;opacity:1!important;transition:none!important}
 .fill:hover>.wv,.roles li:hover>.wv{--x:calc(100% + 1px);--d:0px}
 ul.skills,ul.clients{padding:0;margin-bottom:0}
 
