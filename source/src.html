@@ -341,6 +341,16 @@ html.th-anim,html.th-anim *,html.th-anim *::before,html.th-anim *::after{transit
 .sh.done .ok{opacity:1;transform:translateY(-50%)}
 .sh[data-tone=red]{border-color:color-mix(in srgb,var(--hueso) 24%,transparent);color:var(--hueso);background:rgba(98,23,14,.72)}
 html[data-theme=dark] .sh{border-color:color-mix(in srgb,var(--hueso) 24%,transparent);color:var(--hueso);background:rgba(20,11,9,.72)}
+/* sello giratorio freelance */
+.avail{position:relative;width:150px;height:150px;margin:clamp(40px,6vw,90px) auto 0;border-radius:50%;overflow:hidden;background:var(--bone)}
+.avail picture,.avail img{object-fit:cover;object-position:50% 52%;transform:translateY(-8%) scale(1.07);transform-origin:50% 52%}
+.avail img{object-fit:cover;object-position:50% 52%;transform:translateY(-8%) scale(1.07);transform-origin:50% 52%}
+.avail svg{position:absolute;inset:0;width:100%;height:100%;animation:avspin 22s linear infinite}
+.avail text{font:600 12px/1 var(--body);fill:var(--hueso)}
+.avail .t-es{display:none}
+html[lang=es] .avail .t-en{display:none}html[lang=es] .avail .t-es{display:inline}
+@keyframes avspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.avail svg{animation:none}}
 </style>
 
 <div class="cur" id="cur"></div>
@@ -501,7 +511,7 @@ html[data-theme=dark] .sh{border-color:color-mix(in srgb,var(--hueso) 24%,transp
   </div>
 </section>
 
-<section class="sec bone" data-tone="bone" id="clientes">
+<section class="sec bone" data-tone="bone" id="clientes" style="padding-bottom:clamp(40px,6vw,90px)">
   <div class="wrap">
     <div class="tag"><b>06</b>Clientes</div>
     <h2 class="big" style="margin-top:clamp(20px,3vw,40px)">clientes.</h2>
@@ -527,6 +537,12 @@ html[data-theme=dark] .sh{border-color:color-mix(in srgb,var(--hueso) 24%,transp
       <li class="cl fill"><small>19</small><strong>Ministerio de Vivienda</strong></li>
       <li class="cl fill"><small>20</small><strong>Instituto Cervantes</strong></li>
     </ul>
+    <div class="avail" role="img" aria-label="Available for freelance inquiries">
+      <picture><source srcset="avail.webp" type="image/webp"><img src="avail.jpg" alt="" width="150" height="168" decoding="async" loading="lazy"></picture>
+      <svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><defs><path id="avp" d="M75,75 m-59,0 a59,59 0 1,1 118,0 a59,59 0 1,1 -118,0"/></defs>
+        <text class="t-en"><textPath href="#avp" textLength="368" lengthAdjust="spacing">AVAILABLE FOR FREELANCE INQUIRIES · </textPath></text>
+        <text class="t-es"><textPath href="#avp" textLength="368" lengthAdjust="spacing">DISPONIBLE PARA PROYECTOS FREELANCE · </textPath></text></svg>
+    </div>
   </div>
 </section>
 
