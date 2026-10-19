@@ -386,6 +386,10 @@ html[lang=es] .avail .t-en{display:none}html[lang=es] .avail .t-es{display:inlin
 @media (prefers-reduced-motion:reduce){.avail svg{animation:none}}
 .role-top{display:flex;align-items:center;justify-content:space-between;gap:1rem}
 @media (max-width:900px){.sh{display:grid}}
+/* hover de los enlaces del menu en Libre Caslon cursiva */
+@font-face{font-family:"Libre Caslon Text";src:url(libre-caslon-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+.ov a:not(.ov-wa):hover{font-family:"Libre Caslon Text",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.02em}
+.ov a:not(.ov-wa):hover small{font-style:normal}
 </style>
 
 <div class="cur" id="cur"></div>
