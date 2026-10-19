@@ -404,13 +404,11 @@ html[data-theme=dark] .lc{background:rgba(255,255,255,.2);box-shadow:none}
 @media (prefers-reduced-motion:reduce){.wring{transform:none!important}}
 .name h1 .ln+.ln>span{font-family:"Libre Caslon Text",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.035em}
 .name h1 .ln+.ln{margin-top:-.42em;margin-bottom:-.06em}
-/* parallax: el contacto queda fijo detras y las secciones superiores lo descubren al hacer scroll (solo escritorio) */
-@media (min-width:901px) and (hover:hover){
-.sec{z-index:1}
+/* parallax: el contacto queda fijo detras y todo lo anterior (capa .cover) lo descubre al hacer scroll; el degradado va en un pseudo fijo recortado con clip-path para que funcione tambien en movil */
+.cover{position:relative;z-index:1;background:var(--bone);clip-path:inset(0)}
+.cover::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 55vw 60vh at 10% 22%,rgba(236,150,172,.25),transparent 70%),radial-gradient(ellipse 50vw 62vh at 92% 48%,rgba(205,228,110,.25),transparent 70%)}
+html[data-theme=dark] .cover::before{background:radial-gradient(ellipse 55vw 60vh at 10% 22%,rgba(150,40,30,.22),transparent 70%),radial-gradient(ellipse 50vw 62vh at 92% 48%,rgba(98,23,14,.28),transparent 70%)}
 #contacto{position:sticky;bottom:0;z-index:0}
-.sec.bone{background-color:var(--bone);background-image:radial-gradient(circle 420px at var(--mx,-999px) var(--my,-999px),rgba(255,237,217,calc(.42*var(--sa))),transparent 70%),radial-gradient(ellipse 55vw 60vh at 10% 22%,rgba(236,150,172,.25),transparent 70%),radial-gradient(ellipse 50vw 62vh at 92% 48%,rgba(205,228,110,.25),transparent 70%);background-attachment:scroll,fixed,fixed}
-html[data-theme=dark] .sec.bone{background-image:radial-gradient(circle 420px at var(--mx,-999px) var(--my,-999px),rgba(240,233,223,calc(.06*var(--sa))),transparent 70%),radial-gradient(ellipse 55vw 60vh at 10% 22%,rgba(150,40,30,.22),transparent 70%),radial-gradient(ellipse 50vw 62vh at 92% 48%,rgba(98,23,14,.28),transparent 70%)}
-}
 </style>
 
 <div class="cur" id="cur"></div>
@@ -440,6 +438,7 @@ html[data-theme=dark] .sec.bone{background-image:radial-gradient(circle 420px at
 </nav>
 
 <main id="top">
+<div class="cover">
 <section class="sec hero bone" data-tone="bone" id="hero">
   <div class="wrap">
     <div class="hello"><span class="tag"><b>¡Hola! Soy</b></span><span class="tag">Madrid · España</span></div>
@@ -615,6 +614,7 @@ html[data-theme=dark] .sec.bone{background-image:radial-gradient(circle 420px at
   </div>
 </section>
 
+</div>
 <section class="sec red spot" data-tone="red" id="contacto" style="padding-bottom:clamp(96px,9vw,120px)">
   <div class="wrap">
     <div class="tag"><b>07</b>Contacto</div>
@@ -639,12 +639,13 @@ html[data-theme=dark] .sec.bone{background-image:radial-gradient(circle 420px at
   var $=function(s,c){return (c||document).querySelector(s)},$$=function(s,c){return [].slice.call((c||document).querySelectorAll(s))};
 
   (function(){var sec=$('#confianza');if(!sec)return;var st=$('.wstage',sec),box=$('.wrings',sec),tk=0,lw=0,lu=0,rs=[],K=[];
-    var names=['bbva','sanitas','santander','endesa','caixabank','repsol','bankinter','vodafone','renfe','adif','junta','enagas','abb','mcd','trabajo','cervantes','justicia'];
+    function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+    var banks=sh(['bbva','santander','caixabank','bankinter']),names=sh(['sanitas','endesa','repsol','vodafone','renfe','adif','junta','enagas','abb','mcd','trabajo','cervantes','justicia']);
     function build(){var W=innerWidth,h=st.offsetHeight,u=h/68,cw=9.35*u,gap=W<600?1.5:W<1000?1.6:2.1,mx=Math.hypot(W/2,h/2)+cw,k=0,i=0,sv='http://www.w3.org/2000/svg';
       lw=W;lu=u;box.innerHTML='';rs=[];K=[];
       for(var R=24*u;R<mx;R+=12*u,i++){
         var n=Math.max(6,Math.floor(2*Math.PI*R/(cw*gap))),r=document.createElement('div');r.className='wring';r.style.setProperty('--R',R.toFixed(1)+'px');
-        for(var j=0;j<n;j++){var nm=names[k++%names.length],sy=document.getElementById('lg-'+nm),vb=sy?sy.getAttribute('viewBox').split(/\s+/):[0,0,100,40],c=document.createElement('i');c.className='lc';c.style.setProperty('--c',(i*13+j*360/n).toFixed(2)+'deg');
+        for(var j=0;j<n;j++){var nm=i===0?banks[j%banks.length]:names[k++%names.length],sy=document.getElementById('lg-'+nm),vb=sy?sy.getAttribute('viewBox').split(/\s+/):[0,0,100,40],c=document.createElement('i');c.className='lc';c.style.setProperty('--c',(i*13+j*360/n).toFixed(2)+'deg');
           c.innerHTML='<svg viewBox="0 0 '+vb[2]+' '+vb[3]+'" aria-hidden="true"><use href="#lg-'+nm+'"/></svg>';r.appendChild(c)}
         box.appendChild(r);rs.push(r);K.push((i%2?-1:1)*Math.max(.04,.12-.017*i))}
       f()}
