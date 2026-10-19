@@ -355,6 +355,20 @@ html[lang=es] .avail .t-en{display:none}html[lang=es] .avail .t-es{display:inlin
 @font-face{font-family:"Libre Caslon Text";src:url(libre-caslon-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
 .ov a:not(.ov-wa):hover{font-family:"Libre Caslon Text",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.02em}
 .ov a:not(.ov-wa):hover small{font-style:normal}
+/* rueda de clientes: anillos concentricos que giran con el scroll */
+.wheel{padding:0;--u:1vh}
+.wstage{position:relative;height:115vh;overflow:hidden;display:grid;place-items:center;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 24%,#000 76%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 24%,#000 76%,transparent 100%)}
+.wring{position:absolute;left:50%;top:50%;width:0;height:0;transform:rotate(var(--ra,0deg));will-change:transform}
+.wr1{--R:calc(var(--u)*28)}.wr2{--R:calc(var(--u)*42)}.wr3{--R:calc(var(--u)*56)}
+.lc{position:absolute;left:calc(var(--u)*-4.675);top:calc(var(--u)*-2.975);width:calc(var(--u)*9.35);height:calc(var(--u)*5.95);box-sizing:border-box;padding:calc(var(--u)*1.49) calc(var(--u)*2.34);border-radius:calc(var(--u)*1.28);background:rgba(255,255,255,.5);box-shadow:0 6px 18px -8px rgba(98,23,14,.18);display:flex;align-items:center;justify-content:center;transform:rotate(var(--c)) translateY(calc(var(--R)*-1))}
+.lc svg{width:100%;height:100%;fill:currentColor;display:block;overflow:visible}
+.wt{position:relative;z-index:2;margin:0;max-width:calc(var(--u)*40);padding-inline:16px;text-align:center;font-family:var(--display);font-weight:500;font-size:calc(var(--u)*3.9);line-height:1;letter-spacing:-.04em;text-wrap:balance;text-transform:none}
+.wt em{font-family:"Libre Caslon Text",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.03em}
+.wt .t-es{display:none}html[lang=es] .wt .t-en{display:none}html[lang=es] .wt .t-es{display:inline}
+html[data-theme=dark] .lc{background:rgba(255,255,255,.5);color:var(--bone);box-shadow:none}
+@media (prefers-reduced-motion:reduce){.wring{transform:none!important}}
+.name h1 .ln+.ln>span{font-family:"Libre Caslon Text",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.035em}
+.name h1 .ln+.ln{margin-top:-.42em;margin-bottom:-.06em}
 </style>
 
 <div class="cur" id="cur"></div>
@@ -484,7 +498,7 @@ html[lang=es] .avail .t-en{display:none}html[lang=es] .avail .t-es{display:inlin
   </div>
 </section>
 
-<section class="sec bone" data-tone="bone" id="previas">
+<section class="sec bone" data-tone="bone" id="previas" style="padding-bottom:clamp(40px,6vw,90px)">
   <div class="wrap">
     <div class="tag"><b>04</b>Trayectoria</div>
     <h2 class="big" style="margin-top:clamp(20px,3vw,40px)">antes.</h2>
@@ -500,6 +514,12 @@ html[lang=es] .avail .t-en{display:none}html[lang=es] .avail .t-es{display:inlin
       <li><span class="dt">ene 2005 – ene 2006</span><h3>UI Dev<span>Ministerio de Cultura y Deporte [Indra] · Madrid</span></h3><p>Diseñé y maqueté (HTML y CSS) el nuevo sitio web, con más de cien páginas.</p></li>
       <li><span class="dt">2004</span><h3>Junior Programmer<span>Cap Gemini · Madrid</span></h3><p>Con una beca, programé en web (J2EE) y maqueté (XHTML, CSS, JavaScript) para definir, diseñar y desarrollar portales web. Mis clientes fueron Grupo Recoletos y Farmaindustria.</p></li>
     </ul>
+    <div class="avail" role="img" aria-label="Available for freelance inquiries">
+      <picture><source srcset="avail.webp" type="image/webp"><img src="avail.jpg" alt="" width="150" height="168" decoding="async" loading="lazy"></picture>
+      <svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><defs><path id="avp" d="M75,75 m-59,0 a59,59 0 1,1 118,0 a59,59 0 1,1 -118,0"/></defs>
+        <text class="t-en"><textPath href="#avp" textLength="368" lengthAdjust="spacing">AVAILABLE FOR FREELANCE INQUIRIES · </textPath></text>
+        <text class="t-es"><textPath href="#avp" textLength="368" lengthAdjust="spacing">DISPONIBLE PARA PROYECTOS FREELANCE · </textPath></text></svg>
+    </div>
   </div>
 </section>
 
@@ -515,7 +535,7 @@ html[lang=es] .avail .t-en{display:none}html[lang=es] .avail .t-es{display:inlin
   </div>
 </section>
 
-<section class="sec bone" data-tone="bone" id="clientes" style="padding-bottom:clamp(40px,6vw,90px)">
+<section class="sec bone" data-tone="bone" id="clientes">
   <div class="wrap">
     <div class="tag"><b>06</b>Clientes</div>
     <h2 class="big" style="margin-top:clamp(20px,3vw,40px)">clientes.</h2>
@@ -541,12 +561,15 @@ html[lang=es] .avail .t-en{display:none}html[lang=es] .avail .t-es{display:inlin
       <li class="cl fill"><small>19</small><strong>Ministerio de Vivienda</strong></li>
       <li class="cl fill"><small>20</small><strong>Instituto Cervantes</strong></li>
     </ul>
-    <div class="avail" role="img" aria-label="Available for freelance inquiries">
-      <picture><source srcset="avail.webp" type="image/webp"><img src="avail.jpg" alt="" width="150" height="168" decoding="async" loading="lazy"></picture>
-      <svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><defs><path id="avp" d="M75,75 m-59,0 a59,59 0 1,1 118,0 a59,59 0 1,1 -118,0"/></defs>
-        <text class="t-en"><textPath href="#avp" textLength="368" lengthAdjust="spacing">AVAILABLE FOR FREELANCE INQUIRIES · </textPath></text>
-        <text class="t-es"><textPath href="#avp" textLength="368" lengthAdjust="spacing">DISPONIBLE PARA PROYECTOS FREELANCE · </textPath></text></svg>
-    </div>
+  </div>
+</section>
+
+<section class="sec bone wheel" data-tone="bone" id="confianza" aria-label="Clientes">
+  <div class="wstage">
+    <div class="wring wr1" aria-hidden="true"><i class="lc" style="--c:0.00deg"><svg viewBox="0 0 1279.84 383.1" aria-hidden="true"><use href="#lg-bbva"/></svg></i><i class="lc" style="--c:51.43deg"><svg viewBox="0 0 1423.1 515.89" aria-hidden="true"><use href="#lg-sanitas"/></svg></i><i class="lc" style="--c:102.86deg"><svg viewBox="0 0 238.2 41.5" aria-hidden="true"><use href="#lg-santander"/></svg></i><i class="lc" style="--c:154.29deg"><svg viewBox="0 0 1279.68 257.05" aria-hidden="true"><use href="#lg-endesa"/></svg></i><i class="lc" style="--c:205.71deg"><svg viewBox="0 0 1592.5 320.55" aria-hidden="true"><use href="#lg-caixabank"/></svg></i><i class="lc" style="--c:257.14deg"><svg viewBox="0 0 1600 374.5" aria-hidden="true"><use href="#lg-repsol"/></svg></i><i class="lc" style="--c:308.57deg"><svg viewBox="0 0 912 136.07" aria-hidden="true"><use href="#lg-bankinter"/></svg></i></div>
+    <div class="wring wr2" aria-hidden="true"><i class="lc" style="--c:14.00deg"><svg viewBox="0 0 1600 396.75" aria-hidden="true"><use href="#lg-vodafone"/></svg></i><i class="lc" style="--c:46.73deg"><svg viewBox="0 0 1099.6 421.04" aria-hidden="true"><use href="#lg-renfe"/></svg></i><i class="lc" style="--c:79.45deg"><svg viewBox="0 0 1207.42 367.29" aria-hidden="true"><use href="#lg-adif"/></svg></i><i class="lc" style="--c:112.18deg"><svg viewBox="0 0 1000.08 121" aria-hidden="true"><use href="#lg-junta"/></svg></i><i class="lc" style="--c:144.91deg"><svg viewBox="0 0 799.16 623.72" aria-hidden="true"><use href="#lg-enagas"/></svg></i><i class="lc" style="--c:177.64deg"><svg viewBox="0 0 24 9.19" aria-hidden="true"><use href="#lg-abb"/></svg></i><i class="lc" style="--c:210.36deg"><svg viewBox="0 0 797 265" aria-hidden="true"><use href="#lg-mcd"/></svg></i><i class="lc" style="--c:243.09deg"><svg viewBox="0 0 800 242" aria-hidden="true"><use href="#lg-trabajo"/></svg></i><i class="lc" style="--c:275.82deg"><svg viewBox="0 0 478 533.87" aria-hidden="true"><use href="#lg-cervantes"/></svg></i><i class="lc" style="--c:308.55deg"><svg viewBox="0 0 800 208" aria-hidden="true"><use href="#lg-justicia"/></svg></i><i class="lc" style="--c:341.27deg"><svg viewBox="0 0 1279.84 383.1" aria-hidden="true"><use href="#lg-bbva"/></svg></i></div>
+    <div class="wring wr3" aria-hidden="true"><i class="lc" style="--c:5.00deg"><svg viewBox="0 0 1423.1 515.89" aria-hidden="true"><use href="#lg-sanitas"/></svg></i><i class="lc" style="--c:29.00deg"><svg viewBox="0 0 238.2 41.5" aria-hidden="true"><use href="#lg-santander"/></svg></i><i class="lc" style="--c:53.00deg"><svg viewBox="0 0 1279.68 257.05" aria-hidden="true"><use href="#lg-endesa"/></svg></i><i class="lc" style="--c:77.00deg"><svg viewBox="0 0 1592.5 320.55" aria-hidden="true"><use href="#lg-caixabank"/></svg></i><i class="lc" style="--c:101.00deg"><svg viewBox="0 0 1600 374.5" aria-hidden="true"><use href="#lg-repsol"/></svg></i><i class="lc" style="--c:125.00deg"><svg viewBox="0 0 912 136.07" aria-hidden="true"><use href="#lg-bankinter"/></svg></i><i class="lc" style="--c:149.00deg"><svg viewBox="0 0 1600 396.75" aria-hidden="true"><use href="#lg-vodafone"/></svg></i><i class="lc" style="--c:173.00deg"><svg viewBox="0 0 1099.6 421.04" aria-hidden="true"><use href="#lg-renfe"/></svg></i><i class="lc" style="--c:197.00deg"><svg viewBox="0 0 1207.42 367.29" aria-hidden="true"><use href="#lg-adif"/></svg></i><i class="lc" style="--c:221.00deg"><svg viewBox="0 0 1000.08 121" aria-hidden="true"><use href="#lg-junta"/></svg></i><i class="lc" style="--c:245.00deg"><svg viewBox="0 0 799.16 623.72" aria-hidden="true"><use href="#lg-enagas"/></svg></i><i class="lc" style="--c:269.00deg"><svg viewBox="0 0 24 9.19" aria-hidden="true"><use href="#lg-abb"/></svg></i><i class="lc" style="--c:293.00deg"><svg viewBox="0 0 797 265" aria-hidden="true"><use href="#lg-mcd"/></svg></i><i class="lc" style="--c:317.00deg"><svg viewBox="0 0 800 242" aria-hidden="true"><use href="#lg-trabajo"/></svg></i><i class="lc" style="--c:341.00deg"><svg viewBox="0 0 478 533.87" aria-hidden="true"><use href="#lg-cervantes"/></svg></i></div>
+    <p class="wt"><span class="t-en">Designing for <em>large companies</em> for <em>over 20 years</em>.</span><span class="t-es">Diseñando para <em>grandes compañías</em> durante <em>más de 20 años</em>.</span></p>
   </div>
 </section>
 
@@ -572,6 +595,11 @@ html[lang=es] .avail .t-en{display:none}html[lang=es] .avail .t-es{display:inlin
 (function(){
   var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $=function(s,c){return (c||document).querySelector(s)},$$=function(s,c){return [].slice.call((c||document).querySelectorAll(s))};
+
+  (function(){var sec=$('#confianza');if(!sec)return;var rs=$$('.wring',sec),k=[.12,-.09,.07],tk=0;
+    function f(){tk=0;var r=sec.getBoundingClientRect();if(r.bottom<-200||r.top>innerHeight+200)return;rs.forEach(function(e,i){e.style.setProperty('--ra',(-r.top*k[i]).toFixed(2)+'deg')})}
+    function q(){if(!tk){tk=1;requestAnimationFrame(f)}}
+    addEventListener('scroll',q,{passive:true});addEventListener('resize',q);f()})();
 
   /* reveals: solo se ocultan los elementos que están bajo el pliegue */
   var targets=$$('[data-rv],.grid>li,.grid.edu>div,.roles li,.row,.panel,.rule,h2.big');
