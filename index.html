@@ -410,6 +410,19 @@ html[data-theme=dark] .lc{background:rgba(255,255,255,.2);box-shadow:none}
 html[data-theme=dark] .cover::before{background:radial-gradient(ellipse 55vw 60vh at 10% 22%,rgba(150,40,30,.22),transparent 70%),radial-gradient(ellipse 50vw 62vh at 92% 48%,rgba(98,23,14,.28),transparent 70%)}
 #contacto{position:sticky;bottom:0;z-index:0}
 .ct .row dd{font-family:"Libre Caslon Text",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.02em}
+/* selector de vista de clientes: rueda / tabla */
+.vt{position:relative;display:inline-flex;padding:3px;margin-top:clamp(20px,3vw,36px);border:1px solid color-mix(in srgb,currentColor 24%,transparent);border-radius:99px;background:transparent;color:var(--oxblood);cursor:pointer;font:inherit}
+.vt .th{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);background:var(--oxblood);border-radius:99px;transition:transform .55s var(--ease)}
+.vt[data-view=table] .th{transform:translateX(100%)}
+.vt .o{position:relative;z-index:1;display:grid;place-items:center;width:40px;height:35px;transition:color .4s}
+.vt svg{width:17px;height:17px;display:block;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.vt[data-view=wheel] .o:nth-child(2),.vt[data-view=table] .o:nth-child(3){color:var(--hueso)}
+html[data-theme=dark] .vt{color:var(--hueso)}
+html[data-theme=dark] .vt .th{background:var(--hueso)}
+html[data-theme=dark] .vt[data-view=wheel] .o:nth-child(2),html[data-theme=dark] .vt[data-view=table] .o:nth-child(3){color:var(--bone)}
+#clientes[data-view=wheel] .grid.clients{display:none}
+#clientes[data-view=wheel]{padding-bottom:clamp(48px,7vw,110px)}
+#clientes[data-view=table]~#confianza{display:none}
 </style>
 
 <div class="cur" id="cur"></div>
@@ -579,10 +592,11 @@ html[data-theme=dark] .cover::before{background:radial-gradient(ellipse 55vw 60v
   </div>
 </section>
 
-<section class="sec bone" data-tone="bone" id="clientes">
+<section class="sec bone" data-tone="bone" id="clientes" data-view="wheel">
   <div class="wrap">
     <div class="tag"><b>06</b>Clientes</div>
     <h2 class="big" style="margin-top:clamp(20px,3vw,40px)">clientes.</h2>
+    <button class="vt" id="vt" type="button" role="switch" aria-checked="false" data-view="wheel"><span class="th"></span><span class="o" data-v="wheel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.3"/><circle cx="19.4" cy="7.6" r="1.1" fill="currentColor"/><circle cx="9.9" cy="8.3" r="1" fill="currentColor"/></svg></span><span class="o" data-v="table"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 10h17M3.5 15h17M9.5 10v9.5"/></svg></span></button>
     <ul class="grid clients">
       <li class="cl fill"><small>01</small><strong>BBVA</strong></li>
       <li class="cl fill"><small>02</small><strong>Bankinter</strong></li>
@@ -642,7 +656,7 @@ html[data-theme=dark] .cover::before{background:radial-gradient(ellipse 55vw 60v
   (function(){var sec=$('#confianza');if(!sec)return;var st=$('.wstage',sec),box=$('.wrings',sec),tk=0,lw=0,lu=0,rs=[],K=[];
     function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
     var banks=sh(['bbva','santander','caixabank','bankinter']),names=sh(['sanitas','endesa','repsol','vodafone','renfe','adif','junta','enagas','abb','mcd','trabajo','cervantes','justicia']);
-    function build(){var W=innerWidth,h=st.offsetHeight,u=h/68,cw=9.35*u,gap=W<600?1.5:W<1000?1.6:2.1,mx=Math.hypot(W/2,h/2)+cw,k=0,i=0,sv='http://www.w3.org/2000/svg';
+    function build(){if(!st.offsetHeight)return;var W=innerWidth,h=st.offsetHeight,u=h/68,cw=9.35*u,gap=W<600?1.5:W<1000?1.6:2.1,mx=Math.hypot(W/2,h/2)+cw,k=0,i=0,sv='http://www.w3.org/2000/svg';
       lw=W;lu=u;box.innerHTML='';rs=[];K=[];
       for(var R=24*u;R<mx;R+=12*u,i++){
         var n=Math.max(6,Math.floor(2*Math.PI*R/(cw*gap))),r=document.createElement('div');r.className='wring';r.style.setProperty('--R',R.toFixed(1)+'px');
@@ -652,7 +666,7 @@ html[data-theme=dark] .cover::before{background:radial-gradient(ellipse 55vw 60v
       f()}
     function f(){tk=0;var r=sec.getBoundingClientRect();if(r.bottom<-200||r.top>innerHeight+200)return;rs.forEach(function(e,i){e.style.setProperty('--ra',(-r.top*K[i]).toFixed(2)+'deg')})}
     function q(){if(!tk){tk=1;requestAnimationFrame(f)}}
-    var rt;addEventListener('resize',function(){q();clearTimeout(rt);rt=setTimeout(function(){var u=st.offsetHeight/68;if(innerWidth!==lw||Math.abs(u-lu)/lu>.08)build()},150)});
+    var rt;addEventListener('resize',function(){q();clearTimeout(rt);rt=setTimeout(function(){if(!st.offsetHeight)return;var u=st.offsetHeight/68;if(innerWidth!==lw||Math.abs(u-lu)/lu>.08)build()},150)});
     addEventListener('scroll',q,{passive:true});build()})();
 
   /* reveals: solo se ocultan los elementos que están bajo el pliegue */
@@ -697,6 +711,13 @@ html[data-theme=dark] .cover::before{background:radial-gradient(ellipse 55vw 60v
     try{matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(e){var st=null;try{st=localStorage.getItem('theme')}catch(x){}if(!st)go(e.matches)})}catch(e){}
     var sb=$('#sh');
     addEventListener('scroll',tn,{passive:true});addEventListener('resize',tn);sync();tn()})();
+  /* selector de vista de clientes */
+  (function(){var b=$('#vt'),c=$('#clientes');if(!b||!c)return;
+    function es(){return document.documentElement.lang==='es'}
+    function lab(){b.setAttribute('aria-label',es()?'Vista de clientes: rueda o tabla':'Clients view: wheel or table')}
+    function set(v){c.dataset.view=v;b.dataset.view=v;b.setAttribute('aria-checked',v==='table');lab();setTimeout(function(){dispatchEvent(new Event('resize'))},30)}
+    b.addEventListener('click',function(e){var o=e.target.closest&&e.target.closest('.o');set(o?o.dataset.v:(b.dataset.view==='wheel'?'table':'wheel'))});
+    lab()})();
   /* compartir nativo */
   (function(){var b=$('#sh'),o=$('#shok');if(!b)return;
     function msg(t){o.textContent=t;b.classList.add('done');setTimeout(function(){b.classList.remove('done')},1800)}
