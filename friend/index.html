@@ -119,6 +119,16 @@
   .names input::placeholder { color: #a39da8; font-weight: 500; }
   .names input:focus { box-shadow: 0 4px 0 var(--purple); }
   .names input.bad { background: #fbe3ee; box-shadow: 0 4px 0 var(--danger); }
+  #s-setup { padding-bottom: 130px; }
+  .dock {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    padding: 28px max(20px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+    background: linear-gradient(to top, var(--bg) 62%, rgba(252,251,247,0));
+    pointer-events: none;
+  }
+  .dock > * { pointer-events: auto; width: 100%; max-width: 440px; }
+  @media (min-width: 700px) { .dock > * { max-width: 500px; } }
   .error { min-height: 22px; color: var(--danger); font-size: 15px; font-weight: 700; text-align: center; }
 
   /* Dado y resultado */
@@ -182,8 +192,10 @@
 
     <form id="form" class="screen" style="animation:none;max-width:none;gap:14px" novalidate autocomplete="off">
       <div class="names" id="names"></div>
-      <div class="error" id="error" role="alert"></div>
-      <button class="btn" type="submit">Empezar sorteo</button>
+      <div class="dock">
+        <div class="error" id="error" role="alert"></div>
+        <button class="btn" type="submit">Empezar sorteo</button>
+      </div>
     </form>
   </section>
 
@@ -301,7 +313,6 @@
     if (n > draft.length) { while (draft.length < n) draft.push(''); }
     else draft.length = n;
     renderInputs();
-    if (delta > 0) $('names').lastElementChild.focus();
   }
   const norm = (s) => s.normalize('NFC').trim().replace(/\s+/g, ' ');
   const key = (s) => norm(s).toLocaleLowerCase('es');
