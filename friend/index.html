@@ -61,6 +61,7 @@
   @keyframes enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
   h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; text-transform: uppercase; overflow-wrap: anywhere; }
+  .gift { font-size: clamp(96px, 30vw, 128px); line-height: 1; margin-bottom: 4px; }
   h1 { font-size: clamp(22px, 7vw, 30px); line-height: 1.5; }
   h2 { font-size: clamp(18px, 5.6vw, 24px); line-height: 1.55; }
   p { margin: 0; color: var(--muted); font-weight: 500; }
@@ -165,7 +166,8 @@
   <!-- 1. Configuración -->
   <section id="s-setup" class="screen">
     <div class="center" style="display:flex;flex-direction:column;gap:12px;align-items:center">
-      <h1>🎁 Amigo Invisible</h1>
+      <div class="gift" aria-hidden="true">🎁</div>
+      <h1>Amigo Invisible</h1>
       <p>Organiza tu amigo invisible en segundos.</p>
     </div>
 
@@ -438,6 +440,7 @@
   });
   // Si la página vuelve desde la caché del navegador (bfcache), se reinicia limpia.
   window.addEventListener('pageshow', (e) => { if (e.persisted) location.reload(); });
+  draft = ['', '', ''];
 
   renderInputs();
   show('s-setup');
