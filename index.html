@@ -315,6 +315,13 @@ body{cursor:none}
 .red .cur,.cur.onred{background:var(--hueso)}
 .red .cur-ring,.cur-ring.onred{border-color:rgba(240,233,223,.4)}
 @media(hover:none){.cur,.cur-ring{display:none}body{cursor:auto}}
+/* toggle de cursor (solo escritorio): data-lang="es" = cursor personalizado (2a opcion), "en" = cursor normal; reutiliza el estilo de .lang */
+.cm .o{display:grid;place-items:center;width:42px;height:35px;padding:0}
+.cm svg{width:15px;height:15px;display:block;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+html[data-cursor=normal] body{cursor:auto}
+html[data-cursor=normal] .cur,html[data-cursor=normal] .cur-ring{display:none}
+@media(hover:none){.cm{display:none}}
+
 
 /* modo oscuro */
 html[data-theme=dark]{--bone:#140B09;color-scheme:dark}
@@ -436,6 +443,7 @@ html[data-theme=dark] .vt[data-view=wheel] .o:nth-child(2),html[data-theme=dark]
 <header class="hd" id="hd" data-tone="bone">
   <a class="brand" href="#top" aria-label="Alan Angelats">A—A</a>
   <div class="hd-r">
+    <button class="lang cm" id="cm" type="button" role="switch" aria-checked="true" aria-label="Use normal cursor" data-lang="es" title="Cursor"><span class="th"></span><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5l12 6.8-5.2 1.5-2.4 5.4z"/></svg></span><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg></span></button>
     <button class="lang" id="lg" type="button" role="switch" aria-checked="true" aria-label="Switch language to Spanish" data-lang="en"><span class="th"></span><span class="o">EN</span><span class="o">ES</span></button>
     <button class="menu-btn" id="mb" type="button" aria-expanded="false" aria-controls="ov"><i></i>Menu</button>
   </div>
@@ -913,6 +921,12 @@ html[data-theme=dark] .vt[data-view=wheel] .o:nth-child(2),html[data-theme=dark]
 
 /* custom cursor */
 (function(){
+  (function(){var b=document.getElementById('cm');if(!b)return;
+    function go(n,save){document.documentElement.dataset.cursor=n?'normal':'custom';b.dataset.lang=n?'en':'es';b.setAttribute('aria-checked',!n);
+      b.setAttribute('aria-label',n?'Use custom cursor':'Use normal cursor');if(save){try{localStorage.setItem('cursor',n?'normal':'custom')}catch(e){}}}
+    var n=false;try{n=localStorage.getItem('cursor')==='normal'}catch(e){}
+    go(n,false);
+    b.addEventListener('click',function(){go(document.documentElement.dataset.cursor!=='normal',true)})})();
   var cur=document.getElementById('cur'),ring=document.getElementById('ring');
   if(!cur||!ring)return;
   var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
