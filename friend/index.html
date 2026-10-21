@@ -18,8 +18,8 @@
     --ink: #0a0a0a;
     --muted: #5f5a63;
     --line: #0a0a0a;
-    --accent: #c76296;       /* rosa: acción principal */
-    --accent-ink: #ffffff;
+    --accent: #8ef989;       /* verde: botones */
+    --accent-ink: #0a0a0a;
     --purple: #7c5ee8;       /* morado: resultado y acción secundaria */
     --yellow: #e8d04c;       /* amarillo: etiquetas y foco */
     --danger: #b3265a;
@@ -85,7 +85,6 @@
   }
   .btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--ink); }
   .btn:disabled { opacity: .55; cursor: default; transform: translateY(4px); box-shadow: 0 1px 0 var(--ink); }
-  .btn.dark { background: var(--purple); }
 
   /* Configuración */
   .stepper {
@@ -99,7 +98,7 @@
   .stepper .ctrl { display: flex; align-items: center; gap: 6px; }
   .stepper button {
     width: 46px; height: 46px; border-radius: 50%; border: 3px solid var(--ink); cursor: pointer;
-    background: var(--yellow); color: var(--ink); font: inherit; font-size: 22px; font-weight: 800; line-height: 1;
+    background: var(--accent); color: var(--ink); font: inherit; font-size: 22px; font-weight: 800; line-height: 1;
     box-shadow: 0 3px 0 var(--ink); transition: transform .1s, box-shadow .1s;
   }
   .stepper button:active { transform: translateY(3px); box-shadow: 0 0 0 var(--ink); }
