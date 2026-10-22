@@ -428,6 +428,16 @@ html[data-theme=dark] .vt[data-view=wheel] .o:nth-child(2),html[data-theme=dark]
 #clientes[data-view=table]~#confianza{display:none}
 /* liquid glass: refraccion real (Chromium). Resto de navegadores: desenfoque normal */
 .hd.lg.show{-webkit-backdrop-filter:url(#lgf) blur(1.5px) saturate(180%);backdrop-filter:url(#lgf) blur(1.5px) saturate(180%);background:rgba(0,0,0,.10);border-color:rgba(255,255,255,.3);box-shadow:0 12px 32px -12px rgba(0,0,0,.28)}
+/* color del texto de la cabecera por zona (data-t lo pone el JS segun lo que hay detras): red = fondo oscuro -> texto claro; bone = fondo claro -> texto oscuro */
+html:not(#x) .hd [data-t=red]{color:var(--hueso)}
+html:not(#x) .hd [data-t=bone]{color:var(--oxblood)}
+html:not(#x) .hd [data-t=red] .lang{border-color:color-mix(in srgb,var(--hueso) 24%,transparent);color:var(--hueso)}
+html:not(#x) .hd [data-t=red] .lang .th{background:var(--hueso)}
+html:not(#x) .hd [data-t=red] .lang[data-lang=en] .o:nth-child(2),html:not(#x) .hd [data-t=red] .lang[data-lang=es] .o:nth-child(3){color:var(--oxblood)}
+html[data-theme=dark]:not(#x) .hd [data-t=red] .lang[data-lang=en] .o:nth-child(2),html[data-theme=dark]:not(#x) .hd [data-t=red] .lang[data-lang=es] .o:nth-child(3){color:#140B09}
+html:not(#x) .hd [data-t=bone] .lang{border-color:color-mix(in srgb,var(--oxblood) 24%,transparent);color:var(--oxblood)}
+html:not(#x) .hd [data-t=bone] .lang .th{background:var(--oxblood)}
+html:not(#x) .hd [data-t=bone] .lang[data-lang=en] .o:nth-child(2),html:not(#x) .hd [data-t=bone] .lang[data-lang=es] .o:nth-child(3){color:var(--hueso)}
 </style>
 
 <div class="cur" id="cur"></div>
@@ -699,10 +709,37 @@ html[data-theme=dark] .vt[data-view=wheel] .o:nth-child(2),html[data-theme=dark]
 
   /* cabecera: tono por sección, marca tras el hero */
   var hd=$('#hd'),secs=$$('.sec[data-tone]'),hero=$('#hero');
+  /* tono bajo la cabecera: mira que hay realmente detras (tarjetas, paneles, fotos, secciones) y decide el color del texto
+     por separado para el logo (izquierda) y los controles (derecha), porque pueden estar sobre fondos distintos */
+  var brandEl=hd.querySelector('.brand'),ctrlEl=hd.querySelector('.hd-r');
+  function imgTone(im){
+    if(im._t===undefined){im._t=null;try{if(im.complete&&im.naturalWidth){var c=document.createElement('canvas');c.width=c.height=12;var x=c.getContext('2d');x.drawImage(im,0,0,12,12);var d=x.getImageData(0,0,12,12).data,l=0;for(var i=0;i<d.length;i+=4)l+=.2126*d[i]+.7152*d[i+1]+.0722*d[i+2];im._t=l/(d.length/4)/255<.5?'red':'bone'}}catch(e){}}
+    return im._t;
+  }
+  function bgTone(el){
+    for(;el&&el!==document.documentElement;el=el.parentElement){
+      if(el.tagName==='IMG'){var it=imgTone(el);if(it)return it}
+      var m=getComputedStyle(el).backgroundColor.match(/[\d.]+/g);
+      if(m&&(m.length<4||+m[3]>.6))return (.2126*m[0]+.7152*m[1]+.0722*m[2])/255<.45?'red':'bone';
+      if(el.dataset&&el.dataset.tone==='red')return 'red';/* las secciones 'bone' no tienen fondo propio: sigue hasta .cover, que cambia con el tema */
+    }
+    return null;
+  }
+  function zoneTone(el,fallback){
+    var r=el.getBoundingClientRect(),y=r.top+r.height*.5,votes={red:0,bone:0},xs=[r.left+r.width*.1,r.left+r.width*.5,r.right-r.width*.1];
+    for(var k=0;k<xs.length;k++){
+      var els=document.elementsFromPoint(xs[k],y),v=null;
+      for(var e=0;e<els.length;e++){if(hd.contains(els[e]))continue;v=bgTone(els[e]);break}
+      if(v)votes[v]++;
+    }
+    return votes.red+votes.bone?(votes.red>votes.bone?'red':'bone'):fallback;
+  }
   function tone(){
     var hr=hd.getBoundingClientRect(),y=hr.top+hr.height*.5,t='bone';
     for(var i=0;i<secs.length;i++){var r=secs[i].getBoundingClientRect();if(r.top<=y&&r.bottom>y){t=secs[i].dataset.tone;break}}
-    hd.dataset.tone=t;
+    var tc=zoneTone(ctrlEl,t),tb=zoneTone(brandEl,t);
+    ctrlEl.dataset.t=tc;brandEl.dataset.t=tb;
+    hd.dataset.tone=tc;
     hd.classList.toggle('show',scrollY>$('#name').getBoundingClientRect().height+80);
   }
 
