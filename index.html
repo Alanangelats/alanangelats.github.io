@@ -92,7 +92,7 @@ html.touch .ov.spot{--sa:0}
 /* header */
 .hd{position:fixed;top:calc(env(safe-area-inset-top,0px) + 16px);left:16px;right:16px;z-index:92;display:flex;justify-content:space-between;align-items:center;
   padding:9px 22px;border-radius:20px;border:1px solid transparent;color:var(--oxblood);background:rgba(231,224,218,0);transition:color .4s,background .4s,backdrop-filter .4s,border-color .4s,box-shadow .4s}
-.hd.show{background:rgba(0,0,0,.10);border-color:rgba(255,255,255,.3);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 12px 32px -12px rgba(0,0,0,.28)}
+.hd.show{background:transparent;border-color:rgba(255,255,255,.3);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 12px 32px -12px rgba(0,0,0,.28)}
 .hd[data-tone=red]{color:var(--hueso)}
 .brand{font-family:var(--display);font-weight:400;letter-spacing:.08em;font-size:1.25rem;text-decoration:none;text-transform:none;opacity:0;transform:translateY(-6px);transition:.5s var(--ease)}
 .hd.show .brand{opacity:1;transform:none}
@@ -427,7 +427,7 @@ html[data-theme=dark] .vt[data-view=wheel] .o:nth-child(2),html[data-theme=dark]
 #clientes[data-view=wheel]{padding-bottom:clamp(48px,7vw,110px)}
 #clientes[data-view=table]~#confianza{display:none}
 /* liquid glass: refraccion real (Chromium). Resto de navegadores: desenfoque normal */
-.hd.lg.show{-webkit-backdrop-filter:url(#lgf) blur(1.5px) saturate(180%);backdrop-filter:url(#lgf) blur(1.5px) saturate(180%);background:rgba(0,0,0,.10);border-color:rgba(255,255,255,.3);box-shadow:0 12px 32px -12px rgba(0,0,0,.28)}
+.hd.lg.show{-webkit-backdrop-filter:url(#lgf) blur(1.5px);backdrop-filter:url(#lgf) blur(1.5px);background:transparent;border-color:rgba(255,255,255,.3);box-shadow:0 12px 32px -12px rgba(0,0,0,.28)}
 /* color del texto de la cabecera por zona (data-t lo pone el JS segun lo que hay detras): red = fondo oscuro -> texto claro; bone = fondo claro -> texto oscuro */
 html:not(#x) .hd [data-t=red]{color:var(--hueso)}
 html:not(#x) .hd [data-t=bone]{color:var(--oxblood)}
