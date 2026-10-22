@@ -700,7 +700,7 @@ html[data-theme=dark] .vt[data-view=wheel] .o:nth-child(2),html[data-theme=dark]
   /* cabecera: tono por sección, marca tras el hero */
   var hd=$('#hd'),secs=$$('.sec[data-tone]'),hero=$('#hero');
   function tone(){
-    var y=hd.offsetHeight*.5,t='bone';
+    var hr=hd.getBoundingClientRect(),y=hr.top+hr.height*.5,t='bone';
     for(var i=0;i<secs.length;i++){var r=secs[i].getBoundingClientRect();if(r.top<=y&&r.bottom>y){t=secs[i].dataset.tone;break}}
     hd.dataset.tone=t;
     hd.classList.toggle('show',scrollY>$('#name').getBoundingClientRect().height+80);
