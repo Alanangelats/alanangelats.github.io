@@ -55,11 +55,10 @@ html.touch .ov.spot{--sa:0}
 .rv.in{opacity:1;transform:none}
 
 /* header */
-.hd{position:fixed;top:0;left:0;right:0;z-index:92;display:flex;justify-content:space-between;align-items:center;
-  padding:calc(env(safe-area-inset-top,0px) + 12px) var(--wp) 12px;color:var(--oxblood);background:rgba(231,224,218,0);transition:color .4s,background .4s,backdrop-filter .4s}
-.hd.show{background:rgba(231,224,218,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.hd{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:10px;right:10px;z-index:92;display:flex;justify-content:space-between;align-items:center;
+  padding:9px 22px;border-radius:20px;border:1px solid transparent;color:var(--oxblood);background:rgba(231,224,218,0);transition:color .4s,background .4s,backdrop-filter .4s,border-color .4s,box-shadow .4s}
+.hd.show{background:transparent;border-color:transparent;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 12px 32px -12px rgba(0,0,0,.28)}
 .hd[data-tone=red]{color:var(--hueso)}
-.hd.show[data-tone=red]{background:rgba(98,23,14,.84)}
 .brand{font-family:var(--display);font-weight:400;letter-spacing:.08em;font-size:1.25rem;text-decoration:none;text-transform:none;opacity:0;transform:translateY(-6px);transition:.5s var(--ease)}
 .hd.show .brand{opacity:1;transform:none}
 .menu-btn{font:500 .78rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;background:transparent;color:inherit;border:1px solid color-mix(in srgb,currentColor 24%,transparent);border-radius:99px;padding:1.16em 1.3em;cursor:pointer;display:inline-flex;gap:.7em;align-items:center;transition:transform .3s var(--ease),background .3s}
@@ -296,7 +295,6 @@ html[data-theme=dark] body::after{mix-blend-mode:screen;opacity:.05}
 html[data-theme=dark] body::before{background:radial-gradient(ellipse 55vw 60vh at 10% 22%,rgba(150,40,30,.22),transparent 70%),radial-gradient(ellipse 50vw 62vh at 92% 48%,rgba(98,23,14,.28),transparent 70%),var(--bone)}
 html[data-theme=dark] .sec.bone{background-image:radial-gradient(circle 420px at var(--mx,-999px) var(--my,-999px),rgba(240,233,223,calc(.06*var(--sa))),transparent 70%)}
 html[data-theme=dark] .hd{color:var(--hueso);background:rgba(20,11,9,0)}
-html[data-theme=dark] .hd.show{background:rgba(20,11,9,.82)}
 html[data-theme=dark] .hd[data-tone=red]{color:var(--hueso)}
 html[data-theme=dark] .lang{border-color:color-mix(in srgb,var(--hueso) 24%,transparent);color:var(--hueso)}
 html[data-theme=dark] .lang .th{background:var(--hueso)}
@@ -313,7 +311,6 @@ html[data-theme=dark] .ov{background-color:var(--bone)}
 html[data-theme=dark] .red .grid>*{background:transparent}
 html[data-theme=dark] .red.spot,html[data-theme=dark] .ov.spot{background-image:radial-gradient(circle 420px at var(--mx,70%) var(--my,30%),rgba(240,233,223,calc(.06*var(--sa))),transparent 70%)}
 html[data-theme=dark] .panel.eggs{background:radial-gradient(circle 420px at var(--mx,-999px) var(--my,-999px),rgba(240,233,223,calc(.06*var(--sa))),transparent 70%)}
-html[data-theme=dark] .hd.show[data-tone=red]{background:rgba(20,11,9,.82)}
 html[data-theme=dark] .hd[data-tone=red] .lang .th{background:var(--hueso)}
 html[data-theme=dark] .hd[data-tone=red] .lang[data-lang=en] .o:nth-child(2),html[data-theme=dark] .hd[data-tone=red] .lang[data-lang=es] .o:nth-child(3){color:var(--bone)}
 html[data-theme=dark] .cp:hover,html[data-theme=dark] .ov .ov-wa:hover{color:var(--bone)}
@@ -404,6 +401,18 @@ html[data-theme=dark] .vt[data-view=wheel] .o:nth-child(2),html[data-theme=dark]
 #clientes[data-view=wheel] .grid.clients{display:none}
 #clientes[data-view=wheel]{padding-bottom:clamp(48px,7vw,110px)}
 #clientes[data-view=table]~#confianza{display:none}
+/* liquid glass: refraccion real (Chromium). Resto de navegadores: desenfoque normal */
+.hd.lg.show{-webkit-backdrop-filter:url(#lgf) blur(1.5px);backdrop-filter:url(#lgf) blur(1.5px);background:transparent;border-color:transparent;box-shadow:0 12px 32px -12px rgba(0,0,0,.28)}
+/* color del texto de la cabecera por zona (data-t lo pone el JS segun lo que hay detras): red = fondo oscuro -> texto claro; bone = fondo claro -> texto oscuro */
+html:not(#x) .hd [data-t=red]{color:var(--hueso)}
+html:not(#x) .hd [data-t=bone]{color:var(--oxblood)}
+html:not(#x) .hd [data-t=red] .lang{border-color:color-mix(in srgb,var(--hueso) 24%,transparent);color:var(--hueso)}
+html:not(#x) .hd [data-t=red] .lang .th{background:var(--hueso)}
+html:not(#x) .hd [data-t=red] .lang[data-lang=en] .o:nth-child(2),html:not(#x) .hd [data-t=red] .lang[data-lang=es] .o:nth-child(3){color:var(--oxblood)}
+html[data-theme=dark]:not(#x) .hd [data-t=red] .lang[data-lang=en] .o:nth-child(2),html[data-theme=dark]:not(#x) .hd [data-t=red] .lang[data-lang=es] .o:nth-child(3){color:#140B09}
+html:not(#x) .hd [data-t=bone] .lang{border-color:color-mix(in srgb,var(--oxblood) 24%,transparent);color:var(--oxblood)}
+html:not(#x) .hd [data-t=bone] .lang .th{background:var(--oxblood)}
+html:not(#x) .hd [data-t=bone] .lang[data-lang=en] .o:nth-child(2),html:not(#x) .hd [data-t=bone] .lang[data-lang=es] .o:nth-child(3){color:var(--hueso)}
 </style>
 
 <div class="cur" id="cur"></div>
@@ -412,6 +421,7 @@ html[data-theme=dark] .vt[data-view=wheel] .o:nth-child(2),html[data-theme=dark]
 <button class="tm" id="tm" type="button" aria-label="Switch to dark mode" data-mode="light" data-tone="bone"><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg></span><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></span></button>
 <a class="tm up" id="up" href="#top" aria-label="Back to top"><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/></svg></span></a>
 <header class="hd" id="hd" data-tone="bone">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="lgf" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feImage id="lgm" x="0" y="0" width="300" height="60" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="40" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
   <a class="brand" href="#top" aria-label="Alan Angelats">A—A</a>
   <div class="hd-r">
     <button class="lang cm" id="cm" type="button" role="switch" aria-checked="true" aria-label="Use normal cursor" data-lang="es" title="Cursor"><span class="th"></span><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5l12 6.8-5.2 1.5-2.4 5.4z"/></svg></span><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg></span></button>
@@ -674,10 +684,37 @@ html[data-theme=dark] .vt[data-view=wheel] .o:nth-child(2),html[data-theme=dark]
 
   /* cabecera: tono por sección, marca tras el hero */
   var hd=$('#hd'),secs=$$('.sec[data-tone]'),hero=$('#hero');
+  /* tono bajo la cabecera: mira que hay realmente detras (tarjetas, paneles, fotos, secciones) y decide el color del texto
+     por separado para el logo (izquierda) y los controles (derecha), porque pueden estar sobre fondos distintos */
+  var brandEl=hd.querySelector('.brand'),ctrlEl=hd.querySelector('.hd-r');
+  function imgTone(im){
+    if(im._t===undefined){im._t=null;try{if(im.complete&&im.naturalWidth){var c=document.createElement('canvas');c.width=c.height=12;var x=c.getContext('2d');x.drawImage(im,0,0,12,12);var d=x.getImageData(0,0,12,12).data,l=0;for(var i=0;i<d.length;i+=4)l+=.2126*d[i]+.7152*d[i+1]+.0722*d[i+2];im._t=l/(d.length/4)/255<.5?'red':'bone'}}catch(e){}}
+    return im._t;
+  }
+  function bgTone(el){
+    for(;el&&el!==document.documentElement;el=el.parentElement){
+      if(el.tagName==='IMG'){var it=imgTone(el);if(it)return it}
+      var m=getComputedStyle(el).backgroundColor.match(/[\d.]+/g);
+      if(m&&(m.length<4||+m[3]>.6))return (.2126*m[0]+.7152*m[1]+.0722*m[2])/255<.45?'red':'bone';
+      if(el.dataset&&el.dataset.tone==='red')return 'red';/* las secciones 'bone' no tienen fondo propio: sigue hasta .cover, que cambia con el tema */
+    }
+    return null;
+  }
+  function zoneTone(el,fallback){
+    var r=el.getBoundingClientRect(),y=r.top+r.height*.5,votes={red:0,bone:0},xs=[r.left+r.width*.1,r.left+r.width*.5,r.right-r.width*.1];
+    for(var k=0;k<xs.length;k++){
+      var els=document.elementsFromPoint(xs[k],y),v=null;
+      for(var e=0;e<els.length;e++){if(hd.contains(els[e]))continue;v=bgTone(els[e]);break}
+      if(v)votes[v]++;
+    }
+    return votes.red+votes.bone?(votes.red>votes.bone?'red':'bone'):fallback;
+  }
   function tone(){
-    var y=hd.offsetHeight*.5,t='bone';
+    var hr=hd.getBoundingClientRect(),y=hr.top+hr.height*.5,t='bone';
     for(var i=0;i<secs.length;i++){var r=secs[i].getBoundingClientRect();if(r.top<=y&&r.bottom>y){t=secs[i].dataset.tone;break}}
-    hd.dataset.tone=t;
+    var tc=zoneTone(ctrlEl,t),tb=zoneTone(brandEl,t);
+    ctrlEl.dataset.t=tc;brandEl.dataset.t=tb;
+    hd.dataset.tone=tc;
     hd.classList.toggle('show',scrollY>$('#name').getBoundingClientRect().height+80);
   }
 
@@ -928,5 +965,35 @@ html[data-theme=dark] .vt[data-view=wheel] .o:nth-child(2),html[data-theme=dark]
     el.addEventListener('mouseenter',function(){cur.classList.add('big');ring.classList.add('big')});
     el.addEventListener('mouseleave',function(){cur.classList.remove('big');ring.classList.remove('big')});
   });
+})();
+</script>
+
+<script>
+/* mapa de desplazamiento para el efecto liquid glass (solo Chromium; en Safari/Firefox se queda el desenfoque normal) */
+(function(){
+  var ch=!!(navigator.userAgentData&&navigator.userAgentData.brands&&navigator.userAgentData.brands.some(function(b){return /Chromium/.test(b.brand)}));
+  if(!ch||!window.CSS||!CSS.supports('backdrop-filter','url(#lgf)'))return;
+  function glass(el,im,rad,bez){
+    if(!el||!im)return;var W=0,H=0,t;
+    function build(){
+      var r=el.getBoundingClientRect(),w=Math.round(r.width),h=Math.round(r.height);
+      if(!w||!h||(w===W&&h===H))return;W=w;H=h;
+      var c=document.createElement('canvas');c.width=w;c.height=h;var x=c.getContext('2d'),d=x.createImageData(w,h),R=Math.min(rad,w/2,h/2),bz=Math.min(bez,h/2);
+      for(var j=0;j<h;j++)for(var i=0;i<w;i++){
+        var px=i+.5-w/2,py=j+.5-h/2,qx=Math.abs(px)-(w/2-R),qy=Math.abs(py)-(h/2-R),
+            ox=Math.max(qx,0),oy=Math.max(qy,0),l=Math.hypot(ox,oy),sd=l+Math.min(Math.max(qx,qy),0)-R,dist=-sd,nx,ny;
+        if(l>0){nx=ox/l*(px<0?-1:1);ny=oy/l*(py<0?-1:1)}else if(qx>qy){nx=px<0?-1:1;ny=0}else{nx=0;ny=py<0?-1:1}
+        var u=Math.max(0,1-dist/bz),m=u*u*(3-2*u);m=m*m;/* curva de lente: fuerte en el borde, nula en el centro */
+        var k=(j*w+i)*4;d.data[k]=Math.round(128-nx*m*127);d.data[k+1]=Math.round(128-ny*m*127);d.data[k+2]=128;d.data[k+3]=255;
+      }
+      x.putImageData(d,0,0);
+      im.setAttribute('width',w);im.setAttribute('height',h);im.setAttribute('href',c.toDataURL());
+      el.classList.add('lg');
+    }
+    function sched(){clearTimeout(t);t=setTimeout(build,60)}
+    if(window.ResizeObserver)new ResizeObserver(sched).observe(el);
+    addEventListener('resize',sched);build();
+  }
+  glass(document.getElementById('hd'),document.getElementById('lgm'),20,26);
 })();
 </script>
