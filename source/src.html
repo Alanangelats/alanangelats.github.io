@@ -340,6 +340,10 @@ html[data-theme=dark] .tm{border-color:color-mix(in srgb,var(--hueso) 24%,transp
 .tm2[data-mode=light] .o:nth-child(2){opacity:0;transform:rotate(-90deg) scale(.5)}
 .tm2[data-mode=dark] .o:nth-child(1){opacity:0;transform:rotate(90deg) scale(.5)}
 .tm.up .o{opacity:1;transform:none}
+/* movil / ventana estrecha: tema tambien en la cabecera, con la cabecera mas pegada a los bordes */
+@media(max-width:900px){.tm2{display:grid;order:1;border-color:transparent;width:36px}.lang{order:0}.menu-btn{order:2}#tm{display:none}.wa{bottom:calc(env(safe-area-inset-bottom,0px) + 18px)}.hd{padding:9px 8px}.hd-r{gap:6px}}
+@media(max-width:350px){.hd-r{gap:4px}.menu-btn{padding:1.16em 1em}.brand{font-size:1.1rem}}
+.brand{white-space:nowrap}
 @media(min-width:901px) and (hover:hover){.tm2{display:grid}.tm.up{display:grid;text-decoration:none}#tm{display:none}.top{display:none}}
 /* transicion suave de tema + sin flash */
 html{background:var(--bone)}
