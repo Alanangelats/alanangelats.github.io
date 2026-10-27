@@ -82,7 +82,13 @@
   h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; letter-spacing: -.025em; overflow-wrap: anywhere; }
   h1 { font-size: clamp(54px, 17vw, 84px); line-height: .9; }
   h1 .hl { color: var(--accent); font-style: italic; }
-  h1 span { display: block; }
+  h1 > span { display: block; }
+  /* Efecto glitch del titular (port del componente «Glitch Text», MIT) */
+  .gl-wrap { position: relative; display: inline-grid; }
+  .gl-layer { grid-area: 1 / 1; display: grid; }
+  .gl-layer > span { grid-area: 1 / 1; }
+  .gl-ghost { opacity: 0; pointer-events: none; user-select: none; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
   h2 { font-size: clamp(36px, 11vw, 52px); line-height: .98; }
   p { margin: 0; color: var(--muted); font-weight: 500; }
   .big-emoji { font-size: 60px; line-height: 1; }
@@ -493,6 +499,82 @@
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const m = $('mascot'); m.src = m.dataset.static;
   }
+
+
+  /* ---------- Glitch del titular (port a JS del componente «Glitch Text», MIT) ---------- */
+  function glitchText(root, { shift = 0.12, split = 2, bands = 4, frames = 6, frame = 55 } = {}) {
+    const text = root.textContent;
+    root.textContent = '';
+    const sr = document.createElement('span'); sr.className = 'sr-only'; sr.textContent = text;
+    const wrap = document.createElement('span'); wrap.className = 'gl-wrap'; wrap.setAttribute('aria-hidden', 'true');
+    const layer = (kind, ghost, color) => {
+      const l = document.createElement('span');
+      l.className = 'gl-layer' + (ghost ? ' gl-ghost' : ''); l.dataset.layer = kind;
+      if (color) l.style.color = color;
+      const t = document.createElement('span'); t.textContent = text; l.appendChild(t);
+      wrap.appendChild(l); return l;
+    };
+    const chan = [layer('channel', true, 'oklch(0.63 0.24 25)'), layer('channel', true, 'oklch(0.78 0.14 205)')];
+    const base = layer('base', false);
+    const bandEls = Array.from({ length: 5 }, () => layer('band', true));
+    root.append(sr, wrap);
+
+    const rnd = (n) => Math.round(n * 1000) / 1000;
+    const held = (fr) => [...fr.map((k, i) => ({ ...k, offset: i / fr.length, easing: 'steps(1, end)' })), { ...fr[fr.length - 1], offset: 1 }];
+    const jump = (max) => Math.random() < 0.3 ? 0 : rnd((Math.random() < 0.5 ? -1 : 1) * (0.25 + 0.75 * Math.random()) * max);
+    let anims = [], running = false;
+    const stop = () => { anims.forEach((a) => a.cancel()); anims = []; running = false; };
+
+    function burst() {
+      stop();
+      const opts = { duration: frames * frame, fill: 'none' };
+      const run = (el, fr) => anims.push(el.animate(held(fr), opts));
+      run(base, [{ opacity: 0 }]);
+      const w = Array.from({ length: bands }, () => 0.55 + Math.random());
+      const tot = w.reduce((a, b) => a + b, 0);
+      const cuts = [0]; w.forEach((x) => cuts.push(rnd(cuts[cuts.length - 1] + (x / tot) * 100)));
+      const mover = Math.floor(Math.random() * bands);
+      bandEls.forEach((band, i) => {
+        if (i >= bands) return;
+        const top = i === 0 ? -50 : cuts[i];
+        const bottom = i === bands - 1 ? -50 : rnd(100 - cuts[i + 1]);
+        band.style.clipPath = `inset(${top}% -25% ${bottom}% -25%)`;
+        const path = Array.from({ length: frames }, (_, f) => {
+          if (f === frames - 1) return 0;
+          const x = jump(shift);
+          return f === 0 && i === mover && x === 0 ? rnd(shift * 0.6) : x;
+        });
+        run(band, path.map((x) => ({ opacity: 1, transform: `translate3d(${x}em, 0, 0)` })));
+      });
+      const offs = Array.from({ length: frames }, () => Math.max(1, Math.ceil(Math.random() * split)));
+      chan.forEach((c, k) => run(c, offs.map((d, f) => ({ opacity: f === frames - 1 ? 0 : 1, transform: `translate3d(${(k === 0 ? -1 : 1) * d}px, 0, 0)` }))));
+      running = true;
+      anims[anims.length - 1].onfinish = () => { anims = []; running = false; };
+    }
+
+    const reduced = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Una ráfaga cada 4-9 s mientras el titular está en pantalla y la pestaña visible.
+    let visible = false, timer;
+    const schedule = (delay) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        if (!(document.hidden || running || reduced())) burst();
+        schedule(4000 + Math.random() * 5000);
+      }, delay);
+    };
+    const update = () => {
+      if (visible && !document.hidden) { if (timer === undefined) schedule(1200); }
+      else { clearTimeout(timer); timer = undefined; }
+    };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => { visible = !!(e && e.isIntersecting); update(); }).observe(wrap);
+    }
+    document.addEventListener('visibilitychange', update);
+    // Un toque sobre el titular también lanza una ráfaga.
+    root.addEventListener('pointerdown', () => { if (!(running || reduced())) burst(); });
+    return { burst };
+  }
+  document.querySelectorAll('#title > span').forEach((el) => glitchText(el));
 
   renderInputs();
   show('s-setup');
