@@ -18,13 +18,12 @@
     --ink: #0a0a0a;
     --muted: #5f5a63;
     --line: #0a0a0a;
-    --accent: #dd5a98;       /* rosa: botones */
-    --accent-ink: #ffffff;
-    --green: #8ef989;        /* verde: «AMEGO» */
-    --purple: #7763ed;       /* morado: titulares y resultado */
-    --orange: #ef9749;       /* naranja: etiquetas y destacados */
-    --pink: #dd5a98;         /* rosa: detalles */
-    --danger: #dd5a98;
+    --accent: #4dff5e;       /* verde: botones */
+    --accent-ink: #0a0a0a;
+    --purple: #6a45ff;       /* morado: titulares y resultado */
+    --orange: #ff8a14;       /* naranja: etiquetas y destacados */
+    --pink: #ff2e93;         /* rosa: detalles */
+    --danger: #ff2e93;
     --radius: 999px;
     --radius-box: 22px;
     --shadow: 0 5px 0 var(--ink);
@@ -75,7 +74,7 @@
   @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-6px) rotate(1.5deg); } }
   h1 { font-size: clamp(48px, 15.75vw, 66px); line-height: 1.1; }
   .center h1 { position: relative; z-index: 1; }
-  h1 .hl { color: var(--green); }
+  h1 .hl { color: var(--purple); }
   #title { display: flex; flex-direction: column; align-items: center; line-height: .98; font-size: clamp(48px, 15.75vw, 66px); }
   #title span { display: block; white-space: nowrap; width: max-content; }
   #title .w1 { font-size: 1.7em; }
@@ -112,7 +111,7 @@
   .ctrl { display: flex; align-items: center; justify-content: center; gap: 22px; }
   .ctrl button {
     width: 52px; height: 52px; border-radius: 16px; border: 3px solid var(--ink); cursor: pointer;
-    background: var(--accent); color: #fff; font: inherit; font-size: 26px; font-weight: 800; line-height: 1;
+    background: var(--accent); color: var(--ink); font: inherit; font-size: 26px; font-weight: 800; line-height: 1;
     box-shadow: 0 4px 0 var(--ink); transition: transform .1s, box-shadow .1s;
   }
   .ctrl button:active { transform: translateY(4px); box-shadow: 0 0 0 var(--ink); }
