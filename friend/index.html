@@ -151,6 +151,14 @@
     pointer-events: none;
   }
   .dock[hidden] { display: none; }
+  /* Fondo blanco fundido, discreto, detrás del botón fijo */
+  .dock { padding-top: 34px; }
+  .dock::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: linear-gradient(to top, rgba(255,255,255,.92) 0%, rgba(255,255,255,.7) 45%, rgba(255,255,255,0) 100%);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    -webkit-mask-image: linear-gradient(to top, #000 55%, transparent 100%); mask-image: linear-gradient(to top, #000 55%, transparent 100%);
+  }
   .dock > * { pointer-events: auto; width: 100%; max-width: 460px; }
 
   /* Dado y resultado */
