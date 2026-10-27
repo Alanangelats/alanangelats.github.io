@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fcfaf7">
 <meta name="robots" content="noindex">
-<title>Amigo Invisible</title>
+<title>Amego Invisible</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
 <style>
   /* Fuentes incrustadas: Sugra (destacada), Boldonse (solo ¡ ¿) e Inter */
@@ -18,8 +18,9 @@
     --ink: #0a0a0a;
     --muted: #5f5a63;
     --line: #0a0a0a;
-    --accent: #8ef989;       /* verde: botones */
-    --accent-ink: #0a0a0a;
+    --accent: #dd5a98;       /* rosa: botones */
+    --accent-ink: #ffffff;
+    --green: #8ef989;        /* verde: «AMEGO» */
     --purple: #7763ed;       /* morado: titulares y resultado */
     --orange: #ef9749;       /* naranja: etiquetas y destacados */
     --pink: #dd5a98;         /* rosa: detalles */
@@ -52,6 +53,7 @@
     padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right))
              max(28px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
   }
+  main.top { align-items: flex-start; }
   .screen {
     width: 100%; max-width: 440px;
     display: flex; flex-direction: column; gap: 20px;
@@ -73,11 +75,11 @@
   @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-6px) rotate(1.5deg); } }
   h1 { font-size: clamp(48px, 15.75vw, 66px); line-height: 1.1; }
   .center h1 { position: relative; z-index: 1; }
-  h1 .hl { color: var(--purple); }
+  h1 .hl { color: var(--green); }
   #title { display: flex; flex-direction: column; align-items: center; line-height: .98; font-size: clamp(48px, 15.75vw, 66px); }
   #title span { display: block; white-space: nowrap; width: max-content; }
   #title .w1 { font-size: 1.7em; }
-  #title .w2 { margin-top: -.07em; }
+  #title .w2 { margin-top: -.16em; }
   h2 { font-size: clamp(26px, 8vw, 34px); line-height: 1.2; }
   p { margin: 0; color: var(--muted); font-weight: 500; }
   .big-emoji { font-size: 64px; line-height: 1; }
@@ -110,7 +112,7 @@
   .ctrl { display: flex; align-items: center; justify-content: center; gap: 22px; }
   .ctrl button {
     width: 52px; height: 52px; border-radius: 16px; border: 3px solid var(--ink); cursor: pointer;
-    background: var(--accent); color: var(--ink); font: inherit; font-size: 26px; font-weight: 800; line-height: 1;
+    background: var(--accent); color: #fff; font: inherit; font-size: 26px; font-weight: 800; line-height: 1;
     box-shadow: 0 4px 0 var(--ink); transition: transform .1s, box-shadow .1s;
   }
   .ctrl button:active { transform: translateY(4px); box-shadow: 0 0 0 var(--ink); }
@@ -135,6 +137,7 @@
     pointer-events: none;
   }
   .dock[hidden] { display: none; }
+  .dock .btn { font-size: 15px; letter-spacing: .03em; }
   .dock > * { pointer-events: auto; width: 100%; max-width: 440px; }
   @media (min-width: 700px) { .dock > * { max-width: 500px; } }
   .error { min-height: 22px; color: var(--danger); font-size: 15px; font-weight: 700; text-align: center; }
@@ -228,7 +231,7 @@
   <!-- 5. Fin -->
   <section id="s-done" class="screen center" hidden>
     <div class="big-emoji">🎉</div>
-    <h2>¡Amigo Invisible organizado!</h2>
+    <h2>¡Amego Invisible organizado!</h2>
     <p>Todos tienen ya a quién hacer su regalo.</p>
     <p>Ahora solo queda mantener el secreto y preparar los regalos.</p>
     <button class="btn" id="again" type="button">Crear otro sorteo</button>
@@ -239,7 +242,7 @@
 <!-- Botón fijo: fuera de las pantallas animadas para que position:fixed funcione -->
 <div class="dock" id="dock">
   <div class="error" id="error" role="alert"></div>
-  <button class="btn" type="submit" form="form">Empezar sorteo</button>
+  <button class="btn" type="submit" form="form">¡Que empiece el sorteo!</button>
 </div>
 
 <script>
@@ -289,6 +292,7 @@
   function show(id) {
     screens.forEach((s) => { $(s).hidden = s !== id; });
     $('dock').hidden = id !== 's-setup';
+    document.querySelector('main').classList.toggle('top', id === 's-setup');
   }
 
   /* ---------- Configuración ---------- */
@@ -298,7 +302,7 @@
     draft.forEach((v, i) => {
       const inp = document.createElement('input');
       inp.type = 'text'; inp.value = v; inp.maxLength = MAXLEN;
-      inp.placeholder = 'Nombre ' + (i + 1);
+      inp.placeholder = 'Amego ' + (i + 1);
       inp.setAttribute('aria-label', 'Nombre del participante ' + (i + 1));
       inp.autocomplete = 'off'; inp.autocapitalize = 'words'; inp.spellcheck = false;
       inp.enterKeyHint = i === draft.length - 1 ? 'done' : 'next';
@@ -366,7 +370,7 @@
     $('turn-text').textContent = turn === 0
       ? 'Pásale el móvil a ' + name + ' para que descubra a quién tiene que hacer su regalo.'
       : 'Pásale el móvil a ' + name + '.';
-    $('roll').textContent = turn === 0 ? '🎲 Descubrir mi amigo invisible' : 'Soy ' + name + ' — descubrir 🎲';
+    $('roll').textContent = turn === 0 ? '🎲 Descubrir mi amego invisible' : 'Soy ' + name + ' — descubrir 🎲';
     $('roll').disabled = false;
     readyAt = Date.now() + 700;
     const p = $('progress'); p.textContent = '';
