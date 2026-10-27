@@ -102,6 +102,15 @@
   }
   @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-6px) rotate(1.5deg); } }
 
+  .turn-count { margin-top: -6px; font-size: 13px; font-weight: 600; letter-spacing: .04em; color: #9a9eab; }
+  #turn-title strong { font-weight: 400; -webkit-text-stroke: .035em currentColor; }
+  #turn-text strong { font-weight: 800; color: var(--ink); }
+  #roll { display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+  .dice-chip {
+    flex: none; display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 50%; background: #fff; font-size: 20px; line-height: 1;
+    box-shadow: 0 2px 8px -2px rgba(120, 40, 20, .35);
+  }
   .kicker {
     display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px;
     font-size: 14px; font-weight: 700; letter-spacing: .02em;
@@ -234,12 +243,11 @@
 
   <!-- 2. Turno -->
   <section id="s-turn" class="screen center" hidden>
-    <div class="kicker" id="turn-count"></div>
-    <div class="big-emoji">📱</div>
     <h2 id="turn-title"></h2>
     <p id="turn-text"></p>
     <button class="btn" id="roll" type="button"></button>
     <div class="progress" id="progress" aria-hidden="true"></div>
+    <div class="turn-count" id="turn-count"></div>
   </section>
 
   <!-- 3. Descubrimiento -->
@@ -405,11 +413,17 @@
     phase = 'turn';
     const n = names.length, name = names[turn];
     $('turn-count').textContent = 'Turno ' + (turn + 1) + ' de ' + n;
-    $('turn-title').textContent = turn === 0 ? 'Es el turno de ' + name : 'Ahora le toca a ' + name;
-    $('turn-text').textContent = turn === 0
-      ? 'Pásale el móvil a ' + name + ' para que descubra a quién tiene que hacer su regalo.'
-      : 'Pásale el móvil a ' + name + '.';
-    $('roll').textContent = turn === 0 ? '🎲 Descubrir mi amego invisible' : 'Soy ' + name + ' — descubrir 🎲';
+    // El nombre va en negrita; se construye con nodos de texto (nunca innerHTML) por ser texto escrito por el usuario.
+    const strong = (n) => { const b = document.createElement('strong'); b.textContent = n; return b; };
+    $('turn-title').replaceChildren(turn === 0 ? 'Es el turno de ' : 'Ahora le toca a ', strong(name));
+    $('turn-text').replaceChildren(
+      'Pásale el móvil a ', strong(name),
+      turn === 0 ? ' para que descubra a quién tiene que hacer su regalo.' : '.'
+    );
+    const chip = () => { const c = document.createElement('span'); c.className = 'dice-chip'; c.setAttribute('aria-hidden', 'true'); c.textContent = '🎲'; return c; };
+    $('roll').replaceChildren(...(turn === 0
+      ? [chip(), 'Descubrir mi amego invisible']
+      : ['Soy ', name, ' — descubrir', chip()]));
     $('roll').disabled = false;
     readyAt = Date.now() + 700;
     const p = $('progress'); p.textContent = '';
