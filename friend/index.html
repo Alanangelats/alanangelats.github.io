@@ -105,12 +105,33 @@
   .turn-count { margin-top: -6px; font-size: 13px; font-weight: 600; letter-spacing: .04em; color: #9a9eab; }
   #turn-title strong { font-weight: 400; -webkit-text-stroke: .035em currentColor; }
   #turn-text strong { font-weight: 800; color: var(--ink); }
-  #roll { display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
-  .dice-chip {
-    flex: none; display: inline-flex; align-items: center; justify-content: center;
-    width: 34px; height: 34px; border-radius: 50%; background: #fff; font-size: 20px; line-height: 1;
-    box-shadow: 0 2px 8px -2px rgba(120, 40, 20, .35);
+  /* Slider «desliza para descubrir» */
+  .slide {
+    --knob: 54px; --pad: 6px;
+    position: relative; width: 100%; min-height: calc(var(--knob) + var(--pad) * 2); overflow: hidden;
+    border-radius: 999px; user-select: none; -webkit-user-select: none;
+    background: linear-gradient(180deg, var(--accent-2), var(--accent));
+    box-shadow: 0 10px 24px -8px rgba(226, 86, 43, .65), inset 0 1px 0 rgba(255,255,255,.35);
+    display: flex; align-items: center;
   }
+  .slide-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 999px; background: rgba(255,255,255,.22); pointer-events: none; }
+  .slide-label {
+    position: relative; flex: 1; text-align: center; color: #fff; font-weight: 700; font-size: 17px; line-height: 1.2;
+    padding: 12px 18px 12px calc(var(--knob) + var(--pad) * 2 + 4px); pointer-events: none; overflow-wrap: anywhere;
+  }
+  .slide-label .chev { display: inline-block; margin-left: 6px; letter-spacing: -.1em; animation: chev 1.6s ease-in-out infinite; }
+  @keyframes chev { 0%, 100% { opacity: .35; transform: translateX(0); } 50% { opacity: 1; transform: translateX(3px); } }
+  .slide-knob {
+    position: absolute; left: var(--pad); top: var(--pad); width: var(--knob); height: var(--knob);
+    border: 0; border-radius: 50%; background: #fff; font-size: 28px; line-height: 1; padding: 0;
+    display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none;
+    box-shadow: 0 4px 12px -2px rgba(120, 40, 20, .45);
+  }
+  .slide.dragging .slide-knob { cursor: grabbing; }
+  .slide-knob:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  .slide-knob:disabled { opacity: .6; cursor: default; }
+  .slide-knob.nudge { animation: nudge .5s ease; }
+  @keyframes nudge { 0%, 100% { transform: translateX(0); } 40% { transform: translateX(18px); } }
   .kicker {
     display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px;
     font-size: 14px; font-weight: 700; letter-spacing: .02em;
@@ -213,7 +234,7 @@
   @media (max-height: 560px) { .big-emoji { font-size: 44px; } .dice { font-size: 60px; } .screen { gap: 12px; } }
   @media (prefers-reduced-motion: reduce) {
     .screen, .result-name { animation: none; }
-    .blob, .mascot { animation: none; }
+    .blob, .mascot, .slide-label .chev, .slide-knob.nudge { animation: none; }
     .dice.roll { animation-duration: 1.6s; }
   }
 </style>
@@ -245,7 +266,11 @@
   <section id="s-turn" class="screen center" hidden>
     <h2 id="turn-title"></h2>
     <p id="turn-text"></p>
-    <button class="btn" id="roll" type="button"></button>
+    <div class="slide" id="roll" role="group" aria-label="Deslizar para descubrir">
+      <div class="slide-fill"></div>
+      <span class="slide-label" id="roll-label"></span>
+      <button type="button" class="slide-knob" id="knob" aria-label="Deslizar hacia la derecha para descubrir">🎲</button>
+    </div>
     <div class="progress" id="progress" aria-hidden="true"></div>
     <div class="turn-count" id="turn-count"></div>
   </section>
@@ -420,11 +445,11 @@
       'Pásale el móvil a ', strong(name),
       turn === 0 ? ' para que descubra a quién tiene que hacer su regalo.' : '.'
     );
-    const chip = () => { const c = document.createElement('span'); c.className = 'dice-chip'; c.setAttribute('aria-hidden', 'true'); c.textContent = '🎲'; return c; };
-    $('roll').replaceChildren(...(turn === 0
-      ? [chip(), 'Descubrir mi amego invisible']
-      : ['Soy ', name, ' — descubrir', chip()]));
-    $('roll').disabled = false;
+    const label = $('roll-label');
+    label.replaceChildren(...(turn === 0 ? ['Descubrir mi amego invisible'] : ['Soy ', name, ' — descubrir']));
+    const chev = document.createElement('span'); chev.className = 'chev'; chev.setAttribute('aria-hidden', 'true'); chev.textContent = '›››';
+    label.appendChild(chev);
+    resetSlide();
     readyAt = Date.now() + 700;
     const p = $('progress'); p.textContent = '';
     for (let i = 0; i < n; i++) { const d = document.createElement('i'); if (i <= turn) d.className = 'on'; p.appendChild(d); }
@@ -443,10 +468,55 @@
     $('rolling').hidden = false;
   }
 
+  /* ---------- Slider: desliza el dado hacia la derecha para descubrir ---------- */
+  const track = $('roll'), knob = $('knob'), fill = track.querySelector('.slide-fill'), slideLabel = $('roll-label');
+  let drag = null;
+  const maxX = () => Math.max(1, track.clientWidth - knob.offsetWidth - 12);
+  function setX(x, animate) {
+    knob.style.transition = animate ? 'transform .25s ease' : 'none';
+    fill.style.transition = animate ? 'width .25s ease' : 'none';
+    slideLabel.style.transition = animate ? 'opacity .25s ease' : 'none';
+    knob.style.transform = 'translateX(' + x + 'px)';
+    fill.style.width = x > 0 ? (x + knob.offsetWidth + 6) + 'px' : '0';
+    slideLabel.style.opacity = String(Math.max(0, 1 - (x / maxX()) * 1.6));
+  }
+  function resetSlide() { drag = null; track.classList.remove('dragging'); knob.disabled = false; setX(0, false); }
+  function finishSlide() {
+    setX(maxX(), true);
+    if (Date.now() < readyAt || phase !== 'turn') { setTimeout(() => setX(0, true), 200); return; }
+    roll();
+  }
+  knob.addEventListener('pointerdown', (e) => {
+    if (phase !== 'turn' || knob.disabled) return;
+    drag = { x0: e.clientX, x: 0 };
+    try { knob.setPointerCapture(e.pointerId); } catch (_) {}
+    track.classList.add('dragging'); setX(0, false);
+  });
+  knob.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    drag.x = Math.min(maxX(), Math.max(0, e.clientX - drag.x0));
+    setX(drag.x, false);
+  });
+  const endDrag = () => {
+    if (!drag) return;
+    const x = drag.x; drag = null; track.classList.remove('dragging');
+    if (x >= maxX() * 0.85) finishSlide();
+    else {
+      setX(0, true);
+      if (x < 6) { knob.classList.remove('nudge'); void knob.offsetWidth; knob.classList.add('nudge'); }  // un toque sin arrastrar: pista visual
+    }
+  };
+  knob.addEventListener('pointerup', endDrag);
+  knob.addEventListener('pointercancel', endDrag);
+  knob.addEventListener('keydown', (e) => {
+    if (['Enter', ' ', 'ArrowRight'].includes(e.key)) { e.preventDefault(); if (phase === 'turn') finishSlide(); }
+  });
+  window.addEventListener('resize', () => { if (phase === 'turn') setX(0, false); });
+
   function roll() {
     if (phase !== 'turn' || Date.now() < readyAt) return;   // ignora pulsaciones repetidas
     phase = 'rolling';
-    $('roll').disabled = true;
+    $('knob').disabled = true;
     $('result').hidden = true; $('rolling').hidden = false;
     show('s-reveal');
     const sh = $('shuffle');
@@ -500,7 +570,6 @@
   $('minus').addEventListener('click', () => resize(-1));
   $('plus').addEventListener('click', () => resize(1));
   $('go').addEventListener('click', start);
-  $('roll').addEventListener('click', roll);
   $('hide').addEventListener('click', hideResult);
   $('again').addEventListener('click', reset);
 
