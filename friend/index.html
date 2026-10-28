@@ -122,10 +122,10 @@
     position: relative; flex: 1; text-align: center; color: #fff; font-weight: 700; font-size: 17px; line-height: 1.2;
     padding: 12px 18px 12px calc(var(--knob) + var(--pad) * 2 + 4px); pointer-events: none; overflow-wrap: anywhere;
   }
-    .slide-label { padding-right: 62px; }
+    .slide-label { padding-right: 76px; }
   /* flecha que se «dibuja» de izquierda a derecha, tipo cortinilla */
-  .slide-arrow { position: absolute; right: 22px; top: 50%; margin-top: -8px; width: 30px; height: 16px; color: #fff; pointer-events: none; }
-  .slide-arrow svg { display: block; animation: wipe 2s cubic-bezier(.65, 0, .35, 1) infinite; }
+  .slide-arrow { position: absolute; right: 18px; top: 50%; margin-top: -12px; width: 46px; height: 24px; color: #fff; pointer-events: none; }
+  .slide-arrow svg { display: block; width: 100%; height: 100%; opacity: .75; animation: wipe 2s cubic-bezier(.65, 0, .35, 1) infinite; }
   @keyframes wipe {
     0%   { clip-path: inset(0 100% 0 0); }
     45%  { clip-path: inset(0 0 0 0); }
@@ -187,15 +187,27 @@
   .names { margin-top: 6px; display: flex; flex-direction: column; gap: 12px; }
   .names input {
     width: 100%; height: 58px; padding: 0 24px;
-    border: 1.5px solid rgba(255,255,255,.9); border-radius: 999px;
+    border: 2px solid rgba(255,255,255,.9); border-radius: 999px;
     background: rgba(255,255,255,.72); color: var(--ink); font: inherit; font-size: 17px; font-weight: 600;
     box-shadow: 0 8px 22px -14px rgba(60,40,90,.45);
     outline: none; transition: box-shadow .2s, border-color .2s, background .2s;
   }
   .names input::placeholder { color: #9a9eab; font-weight: 500; }
+  .names input:hover { border-color: var(--accent); }
   .names input:focus { background: #fff; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(226,86,43,.16), 0 10px 26px -14px rgba(226,86,43,.5); }
   .names input.bad { border-color: #e23d5a; box-shadow: 0 0 0 4px rgba(226,61,90,.16); }
-  .error { min-height: 22px; color: #d63a55; font-size: 15px; font-weight: 700; text-align: center; text-shadow: 0 1px 8px rgba(255,255,255,.9); }
+  .error { min-height: 22px; text-align: center; }
+  .error:not(:empty) {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px; align-self: center; max-width: 100%;
+    padding: 10px 18px 10px 12px; border-radius: 14px; background: #d63a55; color: #fff;
+    font-size: 15px; font-weight: 800; line-height: 1.2; text-align: center;
+    box-shadow: 0 10px 22px -8px rgba(214, 58, 85, .6); animation: shake .4s ease;
+  }
+  .error:not(:empty)::before {
+    content: "!"; flex: none; display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%; background: #fff; color: #d63a55; font-weight: 900;
+  }
+  @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-7px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(3px); } }
 
   .dock {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;
@@ -308,7 +320,7 @@
     <div id="result" class="screen center" style="animation:none;max-width:none" hidden>
       <p id="result-lead"></p>
       <div class="result-name" id="result-name"></div>
-      <div class="secret">¡Es un secreto! 🤫 No se lo digas a nadie.</div>
+      <div class="secret">¡Es un secreto! 🤫 No se lo digas a nadie</div>
       <div class="slide light" id="hide" role="group" aria-label="Deslizar para ocultar el resultado">
         <div class="slide-fill"></div>
         <span class="slide-label">Desliza para ocultar</span>
@@ -407,7 +419,11 @@
       inp.setAttribute('data-form-type', 'other');
       inp.autocapitalize = 'words'; inp.spellcheck = false;
       inp.enterKeyHint = i === draft.length - 1 ? 'done' : 'next';
-      inp.addEventListener('input', () => {
+      inp.addEventListener('input', (e) => {
+        if (!e.isComposing) {
+          const pos = inp.selectionStart, nv = nameCase(inp.value);
+          if (nv !== inp.value) { inp.value = nv; try { inp.setSelectionRange(pos, pos); } catch (_) {} }
+        }
         draft[i] = inp.value; inp.classList.remove('bad'); $('error').textContent = '';
       });
       inp.addEventListener('keydown', (e) => {
@@ -431,21 +447,21 @@
   }
   const norm = (s) => s.normalize('NFC').trim().replace(/\s+/g, ' ');
   // Mayúscula inicial en cada palabra del nombre («juan» → «Juan», «maría josé» → «María José»).
-  const cap = (s) => s.replace(/(^|\s)(\S)/gu, (_, sp, ch) => sp + ch.toLocaleUpperCase('es'));
+  const nameCase = (s) => s.replace(/\S+/gu, (w) => { const [f, ...r] = [...w]; return f.toLocaleUpperCase('es') + r.join('').toLocaleLowerCase('es'); });
   const key = (s) => norm(s).toLocaleLowerCase('es');
 
   function validate() {
     const inputs = [...$('names').children];
     inputs.forEach((i) => i.classList.remove('bad'));
-    if (draft.length < MIN) return 'Se necesitan al menos 3 participantes.';
+    if (draft.length < MIN) return 'Se necesitan al menos 3 participantes';
     const empty = draft.findIndex((v) => !norm(v));
-    if (empty >= 0) { inputs[empty].classList.add('bad'); inputs[empty].focus(); return 'Falta algún nombre.'; }
+    if (empty >= 0) { inputs[empty].classList.add('bad'); inputs[empty].focus(); return 'Falta algún nombre'; }
     const seen = new Map();
     for (let i = 0; i < draft.length; i++) {
       const k = key(draft[i]);
       if (seen.has(k)) {
         inputs[i].classList.add('bad'); inputs[seen.get(k)].classList.add('bad'); inputs[i].focus();
-        return 'Hay nombres repetidos: «' + norm(draft[i]) + '».';
+        return 'Hay nombres repetidos: «' + nameCase(norm(draft[i])) + '»';
       }
       seen.set(k, i);
     }
@@ -458,7 +474,7 @@
     const err = validate();
     $('error').textContent = err;
     if (err) return;
-    names = draft.map((v) => cap(norm(v)));
+    names = draft.map((v) => nameCase(norm(v)));
     assign = derangement(names.length);   // todo el sorteo se decide aquí, una sola vez
     turn = 0;
     document.activeElement && document.activeElement.blur();
@@ -475,7 +491,7 @@
     $('turn-title').replaceChildren(turn === 0 ? 'Es el turno de ' : 'Ahora le toca a ', strong(name));
     $('turn-text').replaceChildren(
       'Pásale el móvil a ', strong(name),
-      turn === 0 ? ' para que descubra a quién tiene que hacer su regalo.' : '.'
+      turn === 0 ? ' para que descubra su amego.' : '.'
     );
     const label = $('roll-label');
     label.textContent = 'Desliza para descubrir';
