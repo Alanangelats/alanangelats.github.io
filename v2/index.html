@@ -135,7 +135,7 @@ html.touch .ov.spot{--sa:0}
 @keyframes up{from{transform:translateY(105%)}to{transform:none}}
 .copy{display:inline-block;width:.31em;height:.31em;vertical-align:baseline;margin-left:.05em;transform:rotate(var(--r,0deg))}
 .copy svg{width:100%;height:100%;display:block;fill:none;stroke:currentColor}
-.hero-row{display:grid;grid-template-columns:1fr minmax(240px,27vw);gap:clamp(24px,4vw,64px);align-items:center}
+.hero-row{display:grid;grid-template-columns:1fr;gap:clamp(24px,4vw,64px);align-items:center}
 .hero-main{display:flex;flex-direction:column;gap:clamp(28px,4vw,56px);min-width:0}
 .role{max-width:none}
 .pills{max-width:none}
@@ -636,10 +636,12 @@ html[data-theme=dark] .cover>.sec:not(.hero){background-color:rgba(255,255,255,.
 .avail{background:transparent}
 .avail svg{filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
 /* hover de las cajas: cristal traslucido coral/rosa */
-.wv,html[data-theme=dark] .wv{background:linear-gradient(135deg,rgba(255,150,128,.30),rgba(246,95,150,.22) 55%,rgba(228,95,200,.2));-webkit-backdrop-filter:blur(9px) saturate(1.9) brightness(1.08);backdrop-filter:blur(9px) saturate(1.9) brightness(1.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),inset 0 0 0 1px rgba(255,255,255,.45),inset 0 -14px 24px -16px rgba(255,255,255,.55);border-radius:inherit}
-html[data-theme=dark] .wv{background:linear-gradient(135deg,rgba(255,150,128,.22),rgba(246,95,150,.16) 55%,rgba(228,95,200,.14));box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 0 0 1px rgba(255,255,255,.22)}
-html.lgw .wv{-webkit-backdrop-filter:url(#lgw) blur(2px) saturate(1.9) brightness(1.08);backdrop-filter:url(#lgw) blur(2px) saturate(1.9) brightness(1.08)}
-html.lgw .roles li>.wv{-webkit-backdrop-filter:url(#lgr) blur(2px) saturate(1.9) brightness(1.08);backdrop-filter:url(#lgr) blur(2px) saturate(1.9) brightness(1.08)}
+.wv,html[data-theme=dark] .wv{background:linear-gradient(135deg,rgba(255,255,255,.30),rgba(255,255,255,.12));-webkit-backdrop-filter:blur(9px) saturate(1.15) brightness(1.08);backdrop-filter:blur(9px) saturate(1.15) brightness(1.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 0 0 1px rgba(255,255,255,.5),inset 0 -14px 24px -16px rgba(255,255,255,.55);border-radius:inherit}
+html[data-theme=dark] .wv{background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.05));box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 0 0 1px rgba(255,255,255,.22)}
+@media (min-width:901px){.hero-main{max-width:min(100%,58vw)}}
+.photo img{transform:none!important}
+html.lgw .wv{-webkit-backdrop-filter:url(#lgw) blur(2px) saturate(1.15) brightness(1.08);backdrop-filter:url(#lgw) blur(2px) saturate(1.15) brightness(1.08)}
+html.lgw .roles li>.wv{-webkit-backdrop-filter:url(#lgr) blur(2px) saturate(1.15) brightness(1.08);backdrop-filter:url(#lgr) blur(2px) saturate(1.15) brightness(1.08)}
 .grid>.fill:hover,.roles li:hover{background:rgba(255,255,255,.14)!important;transition:background .35s}
 html[data-theme=dark] .grid>.fill:hover,html[data-theme=dark] .roles li:hover{background:rgba(255,255,255,.03)!important}
 /* al pasar el raton el original se oculta tras el barrido; solo se ve la copia nitida sobre el cristal (sin duplicado borroso) */
@@ -653,6 +655,8 @@ html[data-theme=dark] .sec.bone,html[data-theme=dark] .red.spot{background-image
 #clientes[data-view=table] #confianza{display:none}
 /* estrellitas de IA con degradado aurora */
 .sp,.sp path{fill:url(#aig)}
+/* secciones principales sin caja: se quitan las tarjetas de cristal (fondo, borde, sombra y radio) */
+.cover>.sec:not(.hero),html[data-theme=dark] .cover>.sec:not(.hero),.red,html[data-theme=dark] .red{background-color:transparent!important;border:0;box-shadow:none;border-radius:0;overflow:visible}
 /* glitch del titular (port de Amego Invisible) */
 .gl-wrap{position:relative;display:inline-grid}
 .gl-layer{grid-area:1/1;display:grid}
@@ -712,7 +716,7 @@ html[data-theme=dark] .sec.bone,html[data-theme=dark] .red.spot{background-image
           <div class="pills"><span class="pill">+20 años de experiencia</span><span class="pill">Banca digital</span><span class="pill">IA <svg class="sp" viewBox="0 0 100 100" aria-hidden="true"><path class="s1" d="M33 31C35.56 52.76 43.24 60.44 65 63C43.24 65.56 35.56 73.24 33 95C30.44 73.24 22.76 65.56 1 63C22.76 60.44 30.44 52.76 33 31Z"/><path class="s2" d="M75 7C76.6 20.6 81.4 25.4 95 27C81.4 28.6 76.6 33.4 75 47C73.4 33.4 68.6 28.6 55 27C68.6 25.4 73.4 20.6 75 7Z"/><path class="s3" d="M79 65C79.96 73.16 82.84 76.04 91 77C82.84 77.96 79.96 80.84 79 89C78.04 80.84 75.16 77.96 67 77C75.16 76.04 78.04 73.16 79 65Z"/></svg></span></div>
         </div>
       </div>
-      <div class="photo" id="flip"><div class="flip"><div class="pf"><picture><source srcset="foto.webp" type="image/webp"><img src="foto.jpg" alt="Retrato de Alan Angelats, Lead Product Designer en Madrid" id="ph" width="1122" height="1402" fetchpriority="high" decoding="async"></picture></div><div class="pf pb"><picture><source srcset="foto-trail.webp" type="image/webp"><img src="foto-trail.jpg" alt="Alan Angelats en la montaña al atardecer, con gorra, chaqueta y chaleco de trail" id="ph2" width="1120" height="1049" loading="lazy" decoding="async"></picture></div></div><p class="pcap">Cuando no estoy diseñando, estoy corriendo en las montañas.</p></div>
+      
     </div>
   </div>
   <div class="mq2" id="clientes-mq" aria-label="Clientes">
@@ -729,7 +733,7 @@ html[data-theme=dark] .sec.bone,html[data-theme=dark] .red.spot{background-image
       <p class="lead rv" data-rv>Llevo más de 20 años diseñando productos y servicios digitales en entornos complejos, sobre todo en el sector financiero y bancario. Combino visión estratégica, conocimiento del negocio y atención al detalle para convertir necesidades de negocio, datos y comportamiento de los usuarios en experiencias simples, intuitivas y escalables.</p>
       <p class="lead rv" data-rv style="--d:.15s">He liderado iniciativas de salud financiera, gestión de la economía doméstica y coaching financiero digital, cubriendo todo el ciclo de vida del producto. Incorporo analítica de producto e <b class="ai">inteligencia&nbsp;artificial<svg class="sp" viewBox="0 0 100 100" aria-hidden="true"><path class="s1" d="M33 31C35.56 52.76 43.24 60.44 65 63C43.24 65.56 35.56 73.24 33 95C30.44 73.24 22.76 65.56 1 63C22.76 60.44 30.44 52.76 33 31Z"/><path class="s2" d="M75 7C76.6 20.6 81.4 25.4 95 27C81.4 28.6 76.6 33.4 75 47C73.4 33.4 68.6 28.6 55 27C68.6 25.4 73.4 20.6 75 7Z"/><path class="s3" d="M79 65C79.96 73.16 82.84 76.04 91 77C82.84 77.96 79.96 80.84 79 89C78.04 80.84 75.16 77.96 67 77C75.16 76.04 78.04 73.16 79 65Z"/></svg></b> a mi proceso de diseño y defiendo los Design Systems como aceleradores de calidad, consistencia y accesibilidad.</p>
       </div>
-      <figure class="about-ph rv" data-rv><picture><source srcset="foto-trail.webp" type="image/webp"><img src="foto-trail.jpg" alt="Alan Angelats en la montaña al atardecer, con gorra, chaqueta y chaleco de trail" width="1120" height="1049" loading="lazy" decoding="async"></picture></figure>
+      <div class="about-photo rv" data-rv><div class="photo" id="flip"><div class="flip"><div class="pf"><picture><source srcset="foto.webp" type="image/webp"><img src="foto.jpg" alt="Retrato de Alan Angelats, Lead Product Designer en Madrid" id="ph" width="1122" height="1402" loading="lazy" decoding="async"></picture></div><div class="pf pb"><picture><source srcset="foto-trail.webp" type="image/webp"><img src="foto-trail.jpg" alt="Alan Angelats en la montaña al atardecer, con gorra, chaqueta y chaleco de trail" id="ph2" width="1120" height="1049" loading="lazy" decoding="async"></picture></div></div><p class="pcap">Cuando no estoy diseñando, estoy corriendo en las montañas.</p></div></div>
     </div>
   </div>
 </section>
@@ -1342,7 +1346,7 @@ html[data-theme=dark] .sec.bone,html[data-theme=dark] .red.spot{background-image
     document.querySelectorAll('.lgmw').forEach(function(im){im.setAttribute('href',url)});
     document.documentElement.classList.add('lgw');
   })();
-  document.querySelectorAll('.name h1 .ln:first-child>span').forEach(function(el){glitchText(el)});
+  document.querySelectorAll('.name h1 .ln>span').forEach(function(el){var cp=el.querySelector('.copy');if(cp)el.removeChild(cp);glitchText(el);if(cp)el.appendChild(cp)});
 })();
 </script>
 </body>
