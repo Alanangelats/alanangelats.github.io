@@ -640,6 +640,11 @@ html[data-theme=dark] .wa svg,html[data-theme=dark] .ov .ov-wa svg{fill:none!imp
 .btn-close i::before,.btn-close i::after{transition-delay:.12s}
 .ov.open .btn-close i::before{top:3.75px;transform:rotate(45deg)}
 .ov.open .btn-close i::after{top:3.75px;transform:rotate(-45deg)}
+/* WhatsApp: el hover se mantiene en negro */
+.wa:hover,.wa:active,.ov .ov-wa:hover,.ov .ov-wa:active{background:#191816!important;color:#fff!important;border-color:#191816!important}
+.wa:hover svg,.wa:active svg,.ov .ov-wa:hover svg{stroke:#fff!important;fill:none!important}
+html[data-theme=dark] .wa:hover,html[data-theme=dark] .wa:active,html[data-theme=dark] .ov .ov-wa:hover{background:#191816!important;border-color:rgba(243,242,234,.55)!important}
+.wa[data-tone=red]:hover,.hd[data-tone=red]~.wa:hover{border-color:rgba(243,242,234,.55)!important}
 
 </style>
 
