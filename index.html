@@ -620,6 +620,11 @@ html[data-theme=dark] .wa:hover svg,html[data-theme=dark] .wa:active svg,html[da
 /* WhatsApp: icono de línea fina como el resto */
 .wa svg,.ov-wa svg{fill:none!important;stroke:currentColor;stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round}
 html[data-theme=dark] .wa svg,html[data-theme=dark] .ov .ov-wa svg{fill:none!important;stroke:#fff}
+/* equilibrio de tamaños */
+:root{--h:clamp(2.8rem,9.5vw,10rem)}
+.intro .lead{font-size:clamp(1.1rem,1.75vw,1.8rem)}
+.name h1{font-size:18.5cqi}
+@media (min-width:901px){.name h1{font-size:16.5cqi}}
 
 </style>
 
