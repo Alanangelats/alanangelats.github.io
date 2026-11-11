@@ -38,7 +38,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <script>(function(){var r=document.documentElement,d=false;try{var t=localStorage.getItem("theme");d=t?t=="dark":matchMedia("(prefers-color-scheme:dark)").matches}catch(e){}
-if(d)r.dataset.theme="dark";window.__tc=function(){var x=r.dataset.theme==="dark",m=document.getElementById("mtc");if(m)m.setAttribute("content",x?"#140B09":"#F3F2EA")};document.addEventListener("DOMContentLoaded",window.__tc)})()</script>
+if(d)r.dataset.theme="dark";window.__tc=function(){var x=r.dataset.theme==="dark",m=document.getElementById("mtc");if(m)m.setAttribute("content",x?"#191816":"#F3F2EA")};document.addEventListener("DOMContentLoaded",window.__tc)})()</script>
 <style>
 /* Concepto: editorial de retícula fina. Hueso y rojo oxblood alternan por secciones, titulares gigantes en minúscula, líneas de 1px, grano sutil. */
 :root{
@@ -323,7 +323,7 @@ html[data-cursor=normal] .cur,html[data-cursor=normal] .cur-ring{display:none}
 
 
 /* modo oscuro */
-html[data-theme=dark]{--bone:#140B09;color-scheme:dark}
+html[data-theme=dark]{--bone:#191816;color-scheme:dark}
 html[data-theme=dark] body{color:var(--hueso)}
 html[data-theme=dark] .bone{color:var(--hueso)}
 html[data-theme=dark] body::after{mix-blend-mode:screen;opacity:.05}
@@ -448,7 +448,7 @@ html:not(#x) .hd [data-t=bone]{color:var(--oxblood)}
 html:not(#x) .hd [data-t=red] .lang{border-color:color-mix(in srgb,var(--hueso) 24%,transparent);color:var(--hueso)}
 html:not(#x) .hd [data-t=red] .lang .th{background:var(--hueso)}
 html:not(#x) .hd [data-t=red] .lang[data-lang=en] .o:nth-child(2),html:not(#x) .hd [data-t=red] .lang[data-lang=es] .o:nth-child(3){color:var(--oxblood)}
-html[data-theme=dark]:not(#x) .hd [data-t=red] .lang[data-lang=en] .o:nth-child(2),html[data-theme=dark]:not(#x) .hd [data-t=red] .lang[data-lang=es] .o:nth-child(3){color:#140B09}
+html[data-theme=dark]:not(#x) .hd [data-t=red] .lang[data-lang=en] .o:nth-child(2),html[data-theme=dark]:not(#x) .hd [data-t=red] .lang[data-lang=es] .o:nth-child(3){color:#191816}
 html:not(#x) .hd [data-t=bone] .lang{border-color:color-mix(in srgb,var(--oxblood) 24%,transparent);color:var(--oxblood)}
 html:not(#x) .hd [data-t=bone] .lang .th{background:var(--oxblood)}
 html:not(#x) .hd [data-t=bone] .lang[data-lang=en] .o:nth-child(2),html:not(#x) .hd [data-t=bone] .lang[data-lang=es] .o:nth-child(3){color:var(--hueso)}
@@ -645,6 +645,10 @@ html[data-theme=dark] .wa svg,html[data-theme=dark] .ov .ov-wa svg{fill:none!imp
 .wa:hover svg,.wa:active svg,.ov .ov-wa:hover svg{stroke:#fff!important;fill:none!important}
 html[data-theme=dark] .wa:hover,html[data-theme=dark] .wa:active,html[data-theme=dark] .ov .ov-wa:hover{background:#191816!important;border-color:rgba(243,242,234,.55)!important}
 .wa[data-tone=red]:hover,.hd[data-tone=red]~.wa:hover{border-color:rgba(243,242,234,.55)!important}
+/* modo oscuro en negro neutro (sin marrón rojizo) */
+html[data-theme=dark]{--bone:#191816}
+html[data-theme=dark] body::before{background:none!important}
+html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
 
 </style>
 
