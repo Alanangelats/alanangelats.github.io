@@ -933,6 +933,7 @@ html[data-theme=dark] .wa:hover,html[data-theme=dark] .wa:active,html[data-theme
       if(m&&(m.length<4||+m[3]>.6))return (.2126*m[0]+.7152*m[1]+.0722*m[2])/255<.45?'red':'bone';
       if(el.dataset&&el.dataset.tone==='red')return 'red';/* las secciones 'bone' no tienen fondo propio: sigue hasta .cover, que cambia con el tema */
     }
+    var hm=getComputedStyle(document.documentElement).backgroundColor.match(/[\d.]+/g);if(hm&&(hm.length<4||+hm[3]>.6))return (.2126*hm[0]+.7152*hm[1]+.0722*hm[2])/255<.45?'red':'bone';
     return null;
   }
   function zoneTone(el,fallback){
@@ -953,11 +954,12 @@ html[data-theme=dark] .wa:hover,html[data-theme=dark] .wa:active,html[data-theme
     hd.classList.toggle('show',scrollY>$('#name').getBoundingClientRect().height+80);
   }
 
+  window.__tone=function(){tone()};
   /* toggle claro/oscuro */
   (function(){var b=$('#tm'),b2=$('#tm2'),u=$('#up'),r=document.documentElement,ss=$$('.sec[data-tone]');if(!b)return;
     function sync(){var d=r.dataset.theme==='dark';[b,b2].forEach(function(x){if(!x)return;x.dataset.mode=d?'dark':'light';x.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode')})}
     function tn(){var y=innerHeight-40,t='bone';for(var i=0;i<ss.length;i++){var q=ss[i].getBoundingClientRect();if(q.top<=y&&q.bottom>y){t=ss[i].dataset.tone;break}}b.dataset.tone=t;if(u)u.dataset.tone=t}
-    function apply(d){if(d)r.dataset.theme='dark';else delete r.dataset.theme;sync();if(window.__tc)window.__tc()}
+    function apply(d){if(d)r.dataset.theme='dark';else delete r.dataset.theme;sync();if(window.__tc)window.__tc();if(window.__tone){window.__tone();setTimeout(window.__tone,80);setTimeout(window.__tone,400);setTimeout(window.__tone,700);setTimeout(window.__tone,1000);setTimeout(window.__tone,1500)}}
     function go(d){var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
       if(document.startViewTransition&&!rm){document.startViewTransition(function(){apply(d)});return}
       r.classList.add('th-anim');apply(d);setTimeout(function(){r.classList.remove('th-anim')},700)}
@@ -1059,7 +1061,7 @@ html[data-theme=dark] .wa:hover,html[data-theme=dark] .wa:active,html[data-theme
     ov.style.setProperty('--r',Math.ceil(Math.hypot(Math.max(x,w-x),Math.max(y,h-y))+2)+'px')}
   geo();addEventListener('resize',geo);
   function setMenu(o){
-    if(o)geo();
+    if(o){geo();if(window.__tone)window.__tone()}
     ov.classList.toggle('open',o);document.documentElement.classList.toggle('lock',o);
     mb.setAttribute('aria-expanded',o);
     if(o){ov.removeAttribute('inert');mc.focus()}else{ov.setAttribute('inert','');mb.focus({preventScroll:true})}
