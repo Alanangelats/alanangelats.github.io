@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" translate="no">
-<head><meta name="build" content="2026-11-11-2210-tema">
+<head><meta name="build" content="2026-11-11-2215-menu">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="google" content="notranslate">
@@ -649,6 +649,8 @@ html[data-theme=dark] .wa:hover,html[data-theme=dark] .wa:active,html[data-theme
 html[data-theme=dark]{--bone:#191816}
 html[data-theme=dark] body::before{background:none!important}
 html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
+/* ancho fijo del botón Menu en ES y EN (reserva "Cerrar" sin traducir) */
+.lbl .alt::before{content:"Cerrar"}
 
 </style>
 
@@ -666,12 +668,12 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
     <button class="lang cm" id="cm" type="button" role="switch" aria-checked="true" aria-label="Use normal cursor" data-lang="es" title="Cursor"><span class="th"></span><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5l12 6.8-5.2 1.5-2.4 5.4z"/></svg></span><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg></span></button>
     <button class="tm2" id="tm2" type="button" aria-label="Switch to dark mode" data-mode="light"><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg></span><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></span></button>
     <button class="lang" id="lg" type="button" role="switch" aria-checked="true" aria-label="Switch language to Spanish" data-lang="en"><span class="th"></span><span class="o">EN</span><span class="o">ES</span></button>
-    <button class="menu-btn" id="mb" type="button" aria-expanded="false" aria-controls="ov"><i></i><span class="lbl"><span>Menu</span><span class="alt" aria-hidden="true">Cerrar</span></span></button>
+    <button class="menu-btn" id="mb" type="button" aria-expanded="false" aria-controls="ov"><i></i><span class="lbl"><span>Menu</span><span class="alt" aria-hidden="true"></span></span></button>
   </div>
 </header>
 
 <nav class="ov spot" id="ov" aria-label="Menu" inert>
-  <button class="menu-btn btn-close" id="mc" type="button" aria-label="Cerrar menú"><i></i><span class="lbl"><span>Menu</span><span class="alt" aria-hidden="true">Cerrar</span></span></button>
+  <button class="menu-btn btn-close" id="mc" type="button" aria-label="Cerrar menú"><i></i><span class="lbl"><span>Menu</span><span class="alt" aria-hidden="true"></span></span></button>
   <a href="#sobre"><small>01</small>sobre mí</a>
   <a href="#skills"><small>02</small>skills</a>
   <a href="#experiencia"><small>03</small>experiencia</a>
