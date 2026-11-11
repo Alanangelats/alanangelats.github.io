@@ -632,6 +632,14 @@ html[data-theme=dark] .wa svg,html[data-theme=dark] .ov .ov-wa svg{fill:none!imp
 .row,.roles li{border-bottom-width:1px;border-bottom-style:solid;border-image:repeating-linear-gradient(90deg,currentColor 0 1px,transparent 1px 5px) 0 0 1 0/0 0 1px 0 stretch}
 .langs div,.arrows li{border-top-width:1px;border-top-style:solid;border-image:repeating-linear-gradient(90deg,currentColor 0 1px,transparent 1px 5px) 1 0 0 0/1px 0 0 0 stretch}
 #cm{display:none!important}
+/* menú ⇄ cerrar: mismo sitio, rayitas que se cruzan en aspa */
+.lbl{display:inline-grid}.lbl>span{grid-area:1/1;white-space:nowrap}.lbl .alt{visibility:hidden}
+.menu-btn i{width:14px;height:9px;border:0!important;position:relative;display:block;flex:none}
+.menu-btn i::before,.menu-btn i::after{content:"";position:absolute;left:0;width:100%;height:1.5px;background:currentColor;transition:transform .55s var(--ease),top .55s var(--ease)}
+.menu-btn i::before{top:0}.menu-btn i::after{top:calc(100% - 1.5px)}
+.btn-close i::before,.btn-close i::after{transition-delay:.12s}
+.ov.open .btn-close i::before{top:3.75px;transform:rotate(45deg)}
+.ov.open .btn-close i::after{top:3.75px;transform:rotate(-45deg)}
 
 </style>
 
@@ -649,12 +657,12 @@ html[data-theme=dark] .wa svg,html[data-theme=dark] .ov .ov-wa svg{fill:none!imp
     <button class="lang cm" id="cm" type="button" role="switch" aria-checked="true" aria-label="Use normal cursor" data-lang="es" title="Cursor"><span class="th"></span><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5l12 6.8-5.2 1.5-2.4 5.4z"/></svg></span><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg></span></button>
     <button class="tm2" id="tm2" type="button" aria-label="Switch to dark mode" data-mode="light"><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg></span><span class="o"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></span></button>
     <button class="lang" id="lg" type="button" role="switch" aria-checked="true" aria-label="Switch language to Spanish" data-lang="en"><span class="th"></span><span class="o">EN</span><span class="o">ES</span></button>
-    <button class="menu-btn" id="mb" type="button" aria-expanded="false" aria-controls="ov"><i></i>Menu</button>
+    <button class="menu-btn" id="mb" type="button" aria-expanded="false" aria-controls="ov"><i></i><span class="lbl"><span>Menu</span><span class="alt" aria-hidden="true">Cerrar</span></span></button>
   </div>
 </header>
 
 <nav class="ov spot" id="ov" aria-label="Menu" inert>
-  <button class="menu-btn btn-close" id="mc" type="button">Cerrar</button>
+  <button class="menu-btn btn-close" id="mc" type="button"><i></i><span class="lbl"><span class="alt" aria-hidden="true">Menu</span><span>Cerrar</span></span></button>
   <a href="#sobre"><small>01</small>sobre mí</a>
   <a href="#skills"><small>02</small>skills</a>
   <a href="#experiencia"><small>03</small>experiencia</a>
@@ -1041,7 +1049,7 @@ html[data-theme=dark] .wa svg,html[data-theme=dark] .ov .ov-wa svg{fill:none!imp
 
   /* menú */
   var ov=$('#ov'),mb=$('#mb'),mc=$('#mc');
-  function geo(){var b=mb.getBoundingClientRect(),w=innerWidth,h=innerHeight,x=b.left+b.width/2,y=b.top+b.height/2;
+  function geo(){var b=mb.getBoundingClientRect();mc.style.cssText+=';position:fixed;top:'+b.top+'px;left:'+b.left+'px;right:auto;width:'+b.width+'px;height:'+b.height+'px;box-sizing:border-box;justify-content:flex-start;';var w=innerWidth,h=innerHeight,x=b.left+b.width/2,y=b.top+b.height/2;
     ov.style.setProperty('--ox',x+'px');ov.style.setProperty('--oy',y+'px');
     ov.style.setProperty('--r',Math.ceil(Math.hypot(Math.max(x,w-x),Math.max(y,h-y))+2)+'px')}
   geo();addEventListener('resize',geo);
