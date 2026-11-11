@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" translate="no">
-<head>
+<head><meta name="build" content="2026-11-11-2210-tema">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="google" content="notranslate">
@@ -963,12 +963,12 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
   (function(){var b=$('#tm'),b2=$('#tm2'),u=$('#up'),r=document.documentElement,ss=$$('.sec[data-tone]');if(!b)return;
     function sync(){var d=r.dataset.theme==='dark';[b,b2].forEach(function(x){if(!x)return;x.dataset.mode=d?'dark':'light';x.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode')})}
     function tn(){var y=innerHeight-40,t='bone';for(var i=0;i<ss.length;i++){var q=ss[i].getBoundingClientRect();if(q.top<=y&&q.bottom>y){t=ss[i].dataset.tone;break}}b.dataset.tone=t;if(u)u.dataset.tone=t}
-    function apply(d){if(d)r.dataset.theme='dark';else delete r.dataset.theme;sync();if(window.__tc)window.__tc();if(window.__tone){var t0=performance.now();(function lp(){window.__tone();if(performance.now()-t0<2000)requestAnimationFrame(lp)})()}}
+    function apply(d){if(d)r.dataset.theme='dark';else delete r.dataset.theme;sync();if(window.__tc)window.__tc();if(window.__tone){var t0=performance.now();(function lp(){window.__tone();dispatchEvent(new Event('scroll'));if(performance.now()-t0<2200)requestAnimationFrame(lp)})()}}
     function go(d){var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
       if(document.startViewTransition&&!rm){document.startViewTransition(function(){apply(d)});return}
       r.classList.add('th-anim');apply(d);setTimeout(function(){r.classList.remove('th-anim')},700)}
     function tg(){var d=r.dataset.theme!=='dark';try{localStorage.setItem('theme',d?'dark':'light')}catch(e){}go(d)}
-    new MutationObserver(function(){if(window.__tone){window.__tone();setTimeout(window.__tone,120);setTimeout(window.__tone,600)}}).observe(r,{attributes:true,attributeFilter:['data-theme']});
+    new MutationObserver(function(){if(window.__tone){window.__tone();dispatchEvent(new Event('scroll'));setTimeout(function(){dispatchEvent(new Event('scroll'))},150);setTimeout(function(){dispatchEvent(new Event('scroll'))},700)}}).observe(r,{attributes:true,attributeFilter:['data-theme']});
     b.addEventListener('click',tg);if(b2)b2.addEventListener('click',tg);
     try{matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(e){var st=null;try{st=localStorage.getItem('theme')}catch(x){}if(!st)go(e.matches)})}catch(e){}
     var sb=$('#sh');
