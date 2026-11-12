@@ -667,8 +667,14 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
 /* foto -20% */
 .hero-row{grid-template-columns:minmax(0,42vw) minmax(192px,21.6vw);justify-content:start;column-gap:clamp(28px,4vw,64px)}
 .photo{justify-self:start;width:100%}
-@media (max-width:900px){.hero-row{display:contents}#hero .photo{width:75vw!important;max-width:none!important;justify-self:center;margin-left:auto!important;margin-right:auto!important}}
+@media (max-width:900px){.hero-row{display:contents}#hero .photo{width:auto!important;max-width:none!important;justify-self:stretch;margin-left:var(--wp)!important;margin-right:var(--wp)!important}}
 .sh{display:none!important}
+/* móvil: mismos márgenes laterales (--wp) en todos los bloques */
+@media (max-width:900px){
+.cover>.red{margin-left:var(--wp);margin-right:var(--wp)}
+.cover>.red .wrap{padding-inline:clamp(16px,5vw,24px)}
+.panel.eggs{margin-left:0!important;margin-right:0!important;padding-inline:clamp(16px,5vw,24px)!important;border-radius:22px}
+}
 
 </style>
 
