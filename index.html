@@ -678,6 +678,14 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
 @media (min-width:901px){:root{--h:clamp(2.24rem,7.6vw,8rem)}}
 @media (max-width:900px){.hero-main .role{margin-top:-9px}}
 
+/* trayectoria: ver todas */
+.roles.col li:nth-child(n+5){display:none}
+.more{display:inline-flex;align-items:center;gap:10px;margin-top:clamp(20px,2.4vw,32px);padding:12px 20px;border:1px solid currentColor;border-radius:999px;background:none;color:inherit;font:500 .8rem/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background .25s,color .25s}
+.more:hover{background:var(--ink,currentColor);color:var(--bone,#F3F2EA)}
+.more i{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);transition:transform .3s}
+.more.open i{transform:rotate(-135deg) translate(-2px,-2px)}
+.more .m-less,.more.open .m-all{display:none}.more.open .m-less{display:inline}
+
 </style>
 
 <div class="cur" id="cur"></div>
@@ -813,7 +821,7 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
   <div class="wrap">
     <div class="tag"><b>04</b>Trayectoria</div>
     <h2 class="big" style="margin-top:clamp(20px,3vw,40px)">antes.</h2>
-    <ul class="roles">
+    <ul class="roles col" id="rlist">
       <li><span class="dt">2014 – nov 2023</span><h3>Lead Product Designer<span>Sopra Steria · España</span></h3><p>Me encargué del desarrollo conceptual, la dirección y la entrega del diseño visual y de la experiencia de usuario de productos digitales para clientes de banca, salud, transporte, energía y administración pública.</p></li>
       <li><span class="dt">oct 2007 – 2014</span><h3>UI/UX Designer<span>Sopra Steria</span></h3><p>Diseñé desde la arquitectura de la información y los patrones de interacción hasta el detalle visual pixel perfect, para múltiples clientes.</p></li>
       <li><span class="dt">nov 2016 – may 2017</span><h3>UI/UX Consultant<span>Endesa [Sopra Steria] · Madrid</span></h3><p>Mejoré la experiencia de usuario del canal online y definí nuevos procesos y servicios: apoyé en Service Design y me encargué del diseño de interacción y del diseño visual.</p></li>
@@ -825,6 +833,7 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
       <li><span class="dt">ene 2005 – ene 2006</span><h3>UI Dev<span>Ministerio de Cultura y Deporte [Indra] · Madrid</span></h3><p>Diseñé y maqueté (HTML y CSS) el nuevo sitio web, con más de cien páginas.</p></li>
       <li><span class="dt">2004</span><h3>Junior Programmer<span>Cap Gemini · Madrid</span></h3><p>Con una beca, programé en web (J2EE) y maqueté (XHTML, CSS, JavaScript) para definir, diseñar y desarrollar portales web. Mis clientes fueron Grupo Recoletos y Farmaindustria.</p></li>
     </ul>
+    <button class="more" id="rmore" type="button" aria-expanded="false"><span class="m-all">Ver todas</span><span class="m-less">Ver menos</span><i aria-hidden="true"></i></button>
     <div class="avail" role="img" aria-label="Available for freelance inquiries">
       <picture><source srcset="avail.webp" type="image/webp"><img src="avail.jpg" alt="" width="150" height="168" decoding="async" loading="lazy"></picture>
       <svg viewBox="0 0 150 150" aria-hidden="true" focusable="false"><defs><path id="avp" d="M75,75 m-59,0 a59,59 0 1,1 118,0 a59,59 0 1,1 -118,0"/></defs>
@@ -1151,7 +1160,7 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
    'Participo en todas las fases del ciclo de vida del producto, desde la investigación y la definición de la estrategia hasta la conceptualización, validación e implementación de soluciones digitales. Facilito la colaboración entre diferentes áreas, ayudando a transformar retos complejos en experiencias intuitivas, escalables y sostenibles.':'I take part in every phase of the product lifecycle, from research and strategy definition to the conceptualisation, validation and implementation of digital solutions. I foster collaboration across areas, helping turn complex challenges into intuitive, scalable and sustainable experiences.',
    'Impulso la innovación mediante metodologías de diseño, sistemas de diseño y la aplicación práctica de nuevas tecnologías, incluida la':'I drive innovation through design methodologies, design systems and the practical application of new technologies, including',
    ', para optimizar procesos, mejorar la toma de decisiones y acelerar la entrega de valor a clientes y usuarios.':', to optimise processes, improve decision-making and speed up the delivery of value to customers and users.',
-   'Trayectoria':'Career','antes.':'before.',
+   'Trayectoria':'Career','Ver todas':'View all','Ver menos':'View less','antes.':'before.',
    '2014 – nov 2023':'2014 – Nov 2023','oct 2007 – 2014':'Oct 2007 – 2014','nov 2016 – may 2017':'Nov 2016 – May 2017','ene 2016 – abr 2016':'Jan 2016 – Apr 2016','ene 2012 – jun 2012':'Jan 2012 – Jun 2012','ene 2007 – ene 2009':'Jan 2007 – Jan 2009','ene 2006 – oct 2007':'Jan 2006 – Oct 2007','ene 2005 – ene 2006':'Jan 2005 – Jan 2006',
    'Sopra Steria · España':'Sopra Steria · Spain','Ministerio de Cultura y Deporte [Indra] · Madrid':'Ministry of Culture and Sport [Indra] · Madrid',
    'Me encargué del desarrollo conceptual, la dirección y la entrega del diseño visual y de la experiencia de usuario de productos digitales para clientes de banca, salud, transporte, energía y administración pública.':'I was in charge of the conceptual development, direction and delivery of the visual design and user experience of digital products for clients in banking, healthcare, transport, energy and public administration.',
@@ -1263,5 +1272,5 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
 })();
 </script>
 
-</body>
+<script>(function(){var b=document.getElementById('rmore'),l=document.getElementById('rlist');if(!b||!l)return;b.addEventListener('click',function(){var c=l.classList.toggle('col');b.setAttribute('aria-expanded',String(!c));b.classList.toggle('open',!c)})})()</script></body>
 </html>
