@@ -669,11 +669,11 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
 .photo{justify-self:start;width:100%}
 @media (max-width:900px){.hero-row{display:contents}#hero .photo{width:auto!important;max-width:none!important;justify-self:stretch;margin-left:var(--wp)!important;margin-right:var(--wp)!important}}
 .sh{display:none!important}
-/* móvil: mismos márgenes laterales (--wp) en todos los bloques */
+/* móvil: bloques oscuros a sangre (como el pie); contenido con margen --wp */
 @media (max-width:900px){
-.cover>.red{margin-left:var(--wp);margin-right:var(--wp)}
-.cover>.red .wrap{padding-inline:clamp(16px,5vw,24px)}
-.panel.eggs{margin-left:0!important;margin-right:0!important;padding-inline:clamp(16px,5vw,24px)!important;border-radius:22px}
+.cover>.red{margin-left:0;margin-right:0;border-radius:0}
+.cover>.red .wrap{padding-inline:var(--wp)}
+.panel.eggs{margin-left:calc(var(--wp)*-1)!important;margin-right:calc(var(--wp)*-1)!important;padding-inline:var(--wp)!important;border-radius:0}
 }
 
 </style>
