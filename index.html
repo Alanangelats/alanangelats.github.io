@@ -665,8 +665,8 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
 /* intro: todo en negrita, sin cursivas */
 .ih h1 .nm,.ih h1 em{font-family:var(--display);font-style:normal;font-weight:400;font-size:1em;letter-spacing:-.04em;line-height:inherit;margin:0;padding:0}
 /* foto -20% */
-.hero-row{grid-template-columns:1fr minmax(192px,21.6vw)}
-.photo{justify-self:end;width:100%}
+.hero-row{grid-template-columns:minmax(0,42vw) minmax(192px,21.6vw);justify-content:start;column-gap:clamp(28px,4vw,64px)}
+.photo{justify-self:start;width:100%}
 @media (max-width:900px){.photo{max-width:336px}.hero-row{display:contents}.photo{width:auto;justify-self:auto}}
 
 </style>
