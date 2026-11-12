@@ -664,6 +664,10 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
 .ih h1 em{margin-right:0;padding-right:.05em}
 /* intro: todo en negrita, sin cursivas */
 .ih h1 .nm,.ih h1 em{font-family:var(--display);font-style:normal;font-weight:400;font-size:1em;letter-spacing:-.04em;line-height:inherit;margin:0;padding:0}
+/* foto -20% */
+.hero-row{grid-template-columns:1fr minmax(192px,21.6vw)}
+.photo{justify-self:end;width:100%}
+@media (max-width:900px){.photo{max-width:336px}.hero-row{display:contents}.photo{width:auto;justify-self:auto}}
 
 </style>
 
