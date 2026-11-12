@@ -686,6 +686,7 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
 .more i{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);transition:transform .3s}
 .more.open i{transform:rotate(-135deg) translate(-2px,-2px)}
 .more .m-less,.more.open .m-all{display:none}.more.open .m-less{display:inline}
+@media (max-width:900px){.wheel{--u:.68vh}}
 
 </style>
 
@@ -920,9 +921,9 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
   (function(){var sec=$('#confianza');if(!sec)return;var st=$('.wstage',sec),box=$('.wrings',sec),tk=0,lw=0,lu=0,rs=[],K=[];
     function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
     var banks=sh(['bbva','santander','caixabank','bankinter']),names=sh(['sanitas','endesa','repsol','vodafone','renfe','adif','junta','enagas','abb','mcd','trabajo','cervantes','justicia']);
-    function build(){if(!st.offsetHeight)return;var W=innerWidth,h=st.offsetHeight,u=h/68,cw=9.35*u,gap=W<600?1.5:W<1000?1.6:2.1,mx=Math.hypot(W/2,h/2)+cw,k=0,i=0,sv='http://www.w3.org/2000/svg';
+    function build(){if(!st.offsetHeight)return;var W=innerWidth,h=st.offsetHeight,u=h/68,S=W<=900?.68:1,cw=9.35*u*S,gap=W<600?1.5:W<1000?1.6:2.1,mx=Math.hypot(W/2,h/2)+cw,k=0,i=0,sv='http://www.w3.org/2000/svg';
       lw=W;lu=u;box.innerHTML='';rs=[];K=[];
-      for(var R=24*u;R<mx;R+=12*u,i++){
+      for(var R=(S<1?17:24)*u;R<mx;R+=12*u*S,i++){
         var n=Math.max(6,Math.floor(2*Math.PI*R/(cw*gap))),r=document.createElement('div');r.className='wring';r.style.setProperty('--R',R.toFixed(1)+'px');
         for(var j=0;j<n;j++){var nm=i===0?banks[j%banks.length]:names[k++%names.length],sy=document.getElementById('lg-'+nm),vb=sy?sy.getAttribute('viewBox').split(/\s+/):[0,0,100,40],c=document.createElement('i');c.className='lc';c.style.setProperty('--c',(i*13+j*360/n).toFixed(2)+'deg');
           c.innerHTML='<svg viewBox="0 0 '+vb[2]+' '+vb[3]+'" aria-hidden="true"><use href="#lg-'+nm+'"/></svg>';r.appendChild(c)}
