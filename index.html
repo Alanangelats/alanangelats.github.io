@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" translate="no">
-<head><meta name="build" content="2026-11-12-1545-intro">
+<head><meta name="build" content="2026-11-12-1600-intro2">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="google" content="notranslate">
@@ -651,8 +651,17 @@ html[data-theme=dark] body::before{background:none!important}
 html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
 /* ancho fijo del botón Menu en ES y EN (reserva "Cerrar" sin traducir) */
 .lbl .alt::before{content:"Cerrar"}
-/* intro: frase de presentación */
-.role p{max-width:25em;font-weight:500;font-size:clamp(1.15rem,1.65vw,1.65rem);line-height:1.22;letter-spacing:-.025em;text-wrap:pretty}
+/* intro: nombre integrado en la frase */
+.name.ih{container-type:normal}
+.ih h1{font-family:var(--display);font-weight:650;text-transform:none;white-space:normal;font-size:clamp(2rem,3.9vw,4.3rem);line-height:1.03;letter-spacing:-.045em;max-width:15.5em;text-wrap:balance}
+.ih h1 .ln{display:inline}
+.ih h1 .nm,.ih h1 em{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.1em;letter-spacing:-.025em;line-height:.9}
+.ih h1 em{opacity:1}
+.hero-main .role{margin-top:0}
+@media (max-width:900px){.ih h1{font-size:clamp(1.9rem,8.4vw,3.2rem);max-width:none}}
+.ih h1 em{margin-right:.14em;padding-right:.04em}
+@media (max-width:900px){.hero-main .role{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.hero-main .role-top{order:2;width:auto}.hero-main .pills{order:1}}
+.ih h1 em{margin-right:0;padding-right:.05em}
 
 </style>
 
@@ -693,14 +702,9 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
     <div class="hello"><span class="tag"><b>¡Hola! Soy</b></span><span class="tag">Madrid · España</span></div>
     <div class="hero-row">
       <div class="hero-main">
-        <div class="name" id="name">
-          <h1 aria-label="Alan Angelats">
-            <span class="ln" aria-hidden="true"><span>alan</span></span>
-            <span class="ln" aria-hidden="true"><span style="--d:.25s">angelats<span class="copy" id="copy"><svg viewBox="0 0 100 100"><use href="#cc"/></svg></span></span></span>
-          </h1>
-        </div>
+        <div class="name ih" id="name"><h1><span class="nm">Alan Angelats.</span> <span>Diseño experiencias digitales útiles, intuitivas y creativas, explorando cómo</span> <em>el diseño centrado en las personas y la IA</em> <span>pueden mejorar los servicios financieros.</span><span class="copy" id="copy" hidden><svg viewBox="0 0 100 100"><use href="#cc"/></svg></span></h1></div>
         <div class="role rv" data-rv>
-          <div class="role-top"><p>Diseño experiencias digitales útiles, intuitivas y creativas, explorando cómo el diseño centrado en las personas y la IA pueden mejorar los servicios financieros.</p>
+          <div class="role-top">
           <button class="sh" id="sh" type="button" aria-label="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 10.6 15.8 6.4M8.2 13.4l7.6 4.2"/><circle cx="6" cy="12" r="2.6" fill="currentColor"/><circle cx="18" cy="5.5" r="2.6" fill="currentColor"/><circle cx="18" cy="18.5" r="2.6" fill="currentColor"/></svg><span class="ok" id="shok" aria-live="polite"></span></button></div>
           <div class="pills"><span class="pill">+20 años de experiencia</span><span class="pill">Banca digital</span><span class="pill">IA <svg class="sp" viewBox="0 0 100 100" aria-hidden="true"><path class="s1" d="M33 31C35.56 52.76 43.24 60.44 65 63C43.24 65.56 35.56 73.24 33 95C30.44 73.24 22.76 65.56 1 63C22.76 60.44 30.44 52.76 33 31Z"/><path class="s2" d="M75 7C76.6 20.6 81.4 25.4 95 27C81.4 28.6 76.6 33.4 75 47C73.4 33.4 68.6 28.6 55 27C68.6 25.4 73.4 20.6 75 7Z"/><path class="s3" d="M79 65C79.96 73.16 82.84 76.04 91 77C82.84 77.96 79.96 80.84 79 89C78.04 80.84 75.16 77.96 67 77C75.16 76.04 78.04 73.16 79 65Z"/></svg></span></div>
         </div>
@@ -1115,7 +1119,7 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
   var D={
    'Diseño con Inteligencia Artificial':'Artificial Intelligence Design','Experiencia de usuario':'User Experience','Diseñador visual':'Visual Designer','Sistemas de diseño':'Design Systems','Tecnología e innovación':'Technology & Innovation',
    'Cerrar':'Close','sobre mí':'about me','skills':'skills','experiencia':'experience','trayectoria':'career','educación':'education','clientes':'clients','contacto':'contact',
-   'Diseño experiencias digitales útiles, intuitivas y creativas, explorando cómo el diseño centrado en las personas y la IA pueden mejorar los servicios financieros.':'I design useful, intuitive and creative digital experiences, exploring how human-centered design and AI can make financial services better.','¡Hola! Soy':"Hi! I'm",'Madrid · España':'Madrid · Spain','+20 años de experiencia':'+20 years of experience','Banca digital':'Digital banking','IA':'AI',
+   'Diseño experiencias digitales útiles, intuitivas y creativas, explorando cómo':'I design useful, intuitive and creative digital experiences, exploring how','el diseño centrado en las personas y la IA':'human-centered design and AI','pueden mejorar los servicios financieros.':'can make financial services better.','¡Hola! Soy':"Hi! I'm",'Madrid · España':'Madrid · Spain','+20 años de experiencia':'+20 years of experience','Banca digital':'Digital banking','IA':'AI',
    'Sobre mí':'About me',
    'Llevo más de 20 años diseñando productos y servicios digitales en entornos complejos, sobre todo en el sector financiero y bancario. Combino visión estratégica, conocimiento del negocio y atención al detalle para convertir necesidades de negocio, datos y comportamiento de los usuarios en experiencias simples, intuitivas y escalables.':'For more than 20 years I have designed digital products and services in complex environments, mostly in the financial and banking sector. I combine strategic vision, business knowledge and attention to detail to turn business needs, data and user behaviour into simple, intuitive and scalable experiences.',
    'He liderado iniciativas de salud financiera, gestión de la economía doméstica y coaching financiero digital, cubriendo todo el ciclo de vida del producto. Incorporo analítica de producto e':'I have led initiatives in financial health, household money management and digital financial coaching, covering the whole product lifecycle. I bring product analytics and',
