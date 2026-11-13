@@ -692,8 +692,61 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
 .arrows li:first-child{border-image:none;border-top:0}
 @media (max-width:900px){
 .panel.bbva{padding-right:clamp(16px,5vw,24px)}
-#contacto .ct dd,#contacto .ct dd a{font-size:1.4rem!important}
 }
+
+/* ==========================================================================
+   SISTEMA UNIFICADO · 12 estilos de texto + 3 componentes
+   Todo lo de arriba se mantiene como base; esta capa final fija un único valor
+   por nivel. Para cambiar un tamaño de toda la web, tocar solo estos tokens.
+   ========================================================================== */
+:root{
+  --t-title-l:clamp(2rem,3.8vw,3.4rem);
+  --t-statement:clamp(1.6rem,2.8vw,2.5rem);
+  --t-title-m:clamp(1.25rem,2.1vw,1.9rem);
+  --t-title-s:clamp(1.1rem,1.5vw,1.35rem);
+  --t-lead:clamp(1.1rem,1.65vw,1.5rem);
+  --t-body:1rem; --t-body-s:.9rem;
+  --t-mono-m:.78rem; --t-mono-s:.72rem;
+  --ls-display:-.055em; --ls-title:-.05em; --ls-text:-.035em; --ls-body:-.005em; --ls-mono:.04em;
+}
+/* Statement: H1 y frase de la espiral */
+html body .ih h1,html body .ih h1 .nm,html body .ih h1 span,html body .ih h1 em,
+html body .wt,html body .wt em{font-size:var(--t-statement)!important;letter-spacing:var(--ls-text)!important;line-height:1.05!important}
+html body .ih h1,html body .ih h1 span{font-weight:400!important}
+html body .wt em{font-size:1.04em!important;letter-spacing:-.02em!important}
+/* Title L: H3 del panel y año de educación */
+html body .panel h3{font-size:var(--t-title-l)!important;letter-spacing:var(--ls-title)!important;line-height:1!important;font-weight:500}
+html body .yr{font-size:var(--t-title-l)!important;letter-spacing:-.02em!important;line-height:1!important;font-weight:400}
+/* Title M: H3 de rol, skills, valores del pie */
+html body .roles h3,html body .skills strong,html body .skills li>strong{font-size:var(--t-title-m)!important;letter-spacing:var(--ls-title)!important;line-height:1!important;font-weight:500}
+html body .ct dd,html body .ct dd a{font-size:var(--t-title-m)!important;letter-spacing:-.02em!important;line-height:1.1!important;font-weight:400}
+/* Title S: H3 de educación y tag derecho del hero */
+html body .edu h3{font-size:var(--t-title-s)!important;letter-spacing:var(--ls-text)!important;line-height:1.1!important}
+html body .hello .tag:last-child{font-size:var(--t-title-s)!important;font-weight:400!important}
+/* Lead */
+html body p.lead{font-size:var(--t-lead)!important;letter-spacing:var(--ls-text)!important;line-height:1.25!important}
+html body p.lead .ai{font-size:1.12em!important;line-height:inherit!important;letter-spacing:-.01em!important}
+/* Body y Body S */
+html body .panel p,html body .roles p,html body .arrows li,html body .intro p:not(.lead){font-size:var(--t-body)!important;letter-spacing:var(--ls-body)!important;line-height:1.5!important}
+html body .edu p,html body .langs span,html body .skills span{font-size:var(--t-body-s)!important;letter-spacing:var(--ls-body)!important;line-height:1.5!important}
+/* Tag de sección: uno solo, también para «00 Intro» */
+html body .tag:not(:last-child),html body .tag:not(:last-child) b,html body .hello .tag:first-child,html body .hello .tag:first-child b{font:500 .95rem/1 var(--display)!important;letter-spacing:-.01em!important;text-transform:none!important}
+/* Mono M: pastillas, botones, fechas, empresas, firma, etiquetas */
+html body .pill,html body .meta,html body .meta span,html body .roles .dt,html body .dt,html body .co,html body .panel .co,html body .sig,html body .ct dt,html body p.lbl,
+html body .langs em,html body .cp,html body a.cp,html body .top,html body .more,html body .menu-btn,html body .menu-btn .lbl,html body .hello .tag:last-child{}
+html body .pill,html body .meta,html body .meta span,html body .dt,html body .co,html body .panel .co,html body .sig,html body .ct dt,html body p.lbl,
+html body .langs em,html body .cp,html body a.cp,html body .top,html body .more,html body .menu-btn,html body .menu-btn .lbl{font-family:var(--mono)!important;font-size:var(--t-mono-m)!important;font-weight:500!important;letter-spacing:var(--ls-mono)!important;text-transform:uppercase!important}
+html body .roles .dt,html body .dt{line-height:1.5!important}
+html body p.lbl,html body .langs em{line-height:1.5!important}
+/* Mono S: capciones */
+html body small,html body .langs h3,html body .pcap,html body .lang,html body .lang .o{font-family:var(--mono)!important;font-size:var(--t-mono-s)!important;font-weight:500!important;letter-spacing:var(--ls-mono)!important}
+html body .langs h3,html body .pcap{text-transform:uppercase!important}
+html body .lang,html body .lang .o{text-transform:none!important}
+/* Botón M: una sola altura (40 px) para copiar, abrir, ver todas y volver arriba; menú e idioma a 43 px como el botón de tema */
+html body .cp,html body a.cp,html body .more,html body .top{height:40px;padding:0 1.4em!important;display:inline-flex;align-items:center;justify-content:center;border-radius:999px}
+html body .row .cp{width:100%;padding:0!important}
+html body .menu-btn{height:43px;padding-block:0!important}
+html body .pill{display:inline-flex;align-items:center;height:32px;padding:0 1.1em!important}
 
 </style>
 
