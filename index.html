@@ -752,6 +752,23 @@ html body .pill{display:inline-flex;align-items:center;height:32px;padding:0 1.1
 html body .hd .lang,html body .hd .menu-btn,html body .hd .tm2{border-color:var(--btn-line)!important}
 @media (max-width:900px){html body .hd .tm2{border-color:transparent!important}}
 
+/* ---- Revisión de coherencia (2ª pasada) ---- */
+/* Mono M también en empresa dentro de h3 (12,16 → 12,48) */
+html body .roles h3 span,html body .wc h3 span{font-family:var(--mono)!important;font-size:var(--t-mono-m)!important;font-weight:500!important;letter-spacing:var(--ls-mono)!important;text-transform:uppercase!important}
+/* Interlineado mono: 1 en una línea, 1,5 en varias */
+html body .meta,html body .dt,html body .co,html body .panel .co,html body .ct dt,html body .langs em,html body small,html body .pcap,html body .roles h3 span,html body .wc h3 span{line-height:1.5!important}
+/* Mono S siempre en mayúsculas */
+html body small,html body .lang .o{text-transform:uppercase!important}
+/* Serif cursiva: un solo tracking */
+html body .ai,html body .hello .tag:last-child,html body .ct dd,html body .wt em,html body .yr{letter-spacing:-.02em!important}
+html body p .ai{line-height:inherit!important}
+/* Statement: un solo peso */
+html body .wt,html body .wt span{font-weight:400!important}
+/* Radios: una sola píldora */
+html body .lang,html body .lang .th,html body .menu-btn,html body .pill,html body .vt,html body .cp,html body .more,html body .top{border-radius:999px!important}
+/* Borde de botón único: el selector de vista de clientes usaba otro */
+html body .vt{border-color:var(--btn-line)!important}
+
 </style>
 
 <div class="cur" id="cur"></div>
