@@ -363,7 +363,7 @@ html[data-theme=dark] .tm{border-color:color-mix(in srgb,var(--paper) 24%,transp
 .tm2[data-mode=dark] .o:nth-child(1){opacity:0;transform:rotate(90deg) scale(.5)}
 .tm.up .o{opacity:1;transform:none}
 /* movil / ventana estrecha: tema tambien en la cabecera, con la cabecera mas pegada a los bordes */
-@media(max-width:900px){.tm2{display:grid;order:0}.lang{order:1}.menu-btn{order:2}#tm{display:none}.wa{bottom:calc(env(safe-area-inset-bottom,0px) + 18px)}.hd-r{gap:6px}}
+@media(max-width:900px){.tm2{display:grid;order:1;border-color:transparent;width:36px}.lang{order:0}.menu-btn{order:2}#tm{display:none}.wa{bottom:calc(env(safe-area-inset-bottom,0px) + 18px)}.hd-r{gap:6px}}
 @media(max-width:350px){.hd-r{gap:4px}.menu-btn{padding:1.16em 1em}.brand{font-size:1.1rem}}
 @media(min-width:901px) and (hover:hover){.tm2{display:grid}.tm.up{display:grid;text-decoration:none}#tm{display:none}.top{display:none}}
 /* transicion suave de tema + sin flash */
@@ -564,7 +564,7 @@ html[data-theme=dark] .wa:hover svg,html[data-theme=dark] .wa:active svg,html[da
 .brand{font-size:clamp(16px,1.3vw,19px)}
 @media(max-width:900px){.hd{padding:9px 8px 9px 14px}.brand{font-size:15px}}
 @media(max-width:430px){.hd{padding:9px 6px 9px 12px}.brand{font-size:14px}.hd-r{gap:2px}.menu-btn{padding:1.05em 1.15em;letter-spacing:.02em}}
-@media(max-width:370px){.menu-btn{padding:1em .9em}.lang{transform-origin:right center}}
+@media(max-width:370px){.menu-btn{padding:1em .9em}.tm2{width:30px}.lang{transform-origin:right center}}
 /* todas las lineas al 20% de opacidad; sin la linea bajo la marquesina de logos */
 .ov a{border-bottom-color:var(--line)}
 .marq,.hero .marq,.hero .mq2 .marq{border-bottom:0}
@@ -748,6 +748,7 @@ a.cp,
 .hd .lang,
 .hd .menu-btn,
 .hd .tm2{border-color:var(--btn-line)!important}
+@media (max-width:900px){.hd .tm2{border-color:transparent!important}}
 
 /* ---- Revisión de coherencia (2ª pasada) ---- */
 /* Mono M también en empresa dentro de h3 (12,16 → 12,48) */
