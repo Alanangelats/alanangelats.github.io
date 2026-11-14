@@ -452,7 +452,7 @@ h1,h2,h3{font-family:var(--display);font-weight:500;letter-spacing:-.045em;line-
 @media (min-width:901px){}
 .wt{font-family:var(--display);font-weight:500;letter-spacing:-.05em}
 .wt em{font-family:var(--serif);font-weight:400}
-.lc{border:0;box-shadow:none;background:color-mix(in srgb,currentColor 4%,transparent);color:#191816}
+.lc{border:0;box-shadow:none;background:color-mix(in srgb,currentColor 9%,transparent);color:#191816}
 html[data-theme=dark] .lc{border:0;box-shadow:none;color:var(--paper)}
 .ov a{text-transform:uppercase;font-weight:500;letter-spacing:-.05em}
 .ov a small{font-family:var(--mono)}
@@ -481,7 +481,7 @@ html[data-theme=dark] .tm,html[data-theme=dark] .tm.up{background:var(--paper);c
 /* sin parallax en el pie: el contacto fluye como una seccion mas */
 #contacto{position:relative;bottom:auto}
 .cover{clip-path:none}
-.lc{padding:calc(var(--u)*.84) calc(var(--u)*1.08)}
+.lc{padding:calc(var(--u)*.7) calc(var(--u)*.9)}
 /* cursivas (Instrument Serif italic) en acentos puntuales */
 .panel h3 .co,.roles h3 span{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(1.25rem,1.7vw,1.7rem);text-transform:none;letter-spacing:-.01em;opacity:.85;margin-top:.5rem}
 b.ai{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.12em;letter-spacing:-.01em}
