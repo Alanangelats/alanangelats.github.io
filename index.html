@@ -799,10 +799,10 @@ p .ai{line-height:inherit}
 .sr,
 h2.sr{font-size:0;line-height:0}
 
-/* Marquesina superior de skills: se va con el scroll; la cabecera baja a su sitio */
+/* Marquesina superior de skills: fija arriba; la cabecera va siempre 36 px más abajo (--mq) */
 :root{--mq:36px}
 body{padding-top:36px}
-.mq{position:absolute;top:0;left:0;right:0;height:36px;z-index:90;overflow:hidden;background:#EAFDB7;color:#191816;display:flex;align-items:center}
+.mq{position:fixed;top:0;left:0;right:0;height:36px;z-index:90;overflow:hidden;background:#EAFDB7;color:#191816;display:flex;align-items:center}
 .mq-t{display:flex;width:max-content;animation:mq 60s linear infinite}
 .mq-s{display:flex;flex:none}
 .mq-s span{flex:none;display:flex;align-items:center;gap:1.6em;padding-left:1.6em;font:400 .86rem/1 var(--body);letter-spacing:-.005em;white-space:nowrap}
@@ -1398,6 +1398,5 @@ body{padding-top:36px}
 })();
 </script>
 
-<script>(function(){var b=document.getElementById('rmore'),l=document.getElementById('rlist');if(!b||!l)return;b.addEventListener('click',function(){var t0=b.getBoundingClientRect().top;var c=l.classList.toggle('col');b.setAttribute('aria-expanded',String(!c));b.classList.toggle('open',!c);if(c){var d=b.getBoundingClientRect().top-t0;if(d)window.scrollTo({top:window.scrollY+d,behavior:'instant'})}})})()</script><script>(function(){var m=document.getElementById('mq'),r=document.documentElement;if(!m)return;function u(){var h=m.offsetHeight;r.style.setProperty('--mq',Math.min(h,Math.max(0,h-scrollY))+'px')}addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u()})();</script>
-</body>
+<script>(function(){var b=document.getElementById('rmore'),l=document.getElementById('rlist');if(!b||!l)return;b.addEventListener('click',function(){var t0=b.getBoundingClientRect().top;var c=l.classList.toggle('col');b.setAttribute('aria-expanded',String(!c));b.classList.toggle('open',!c);if(c){var d=b.getBoundingClientRect().top-t0;if(d)window.scrollTo({top:window.scrollY+d,behavior:'instant'})}})})()</script></body>
 </html>
