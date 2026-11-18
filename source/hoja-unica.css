@@ -43,7 +43,7 @@ html.touch .ov.spot{--sa:0}
 .rv.in{opacity:1;transform:none}
 
 /* header */
-.hd{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:10px;right:10px;z-index:92;display:flex;justify-content:space-between;align-items:center;
+.hd{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px + var(--mq,0px));left:10px;right:10px;z-index:92;display:flex;justify-content:space-between;align-items:center;
   padding:9px 22px;border-radius:20px;border:1px solid transparent;color:var(--ink);background:rgba(231,224,218,0);transition:color .4s,background .4s,backdrop-filter .4s,border-color .4s,box-shadow .4s}
 .hd.show{background:transparent;border-color:transparent;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 12px 32px -12px rgba(0,0,0,.28)}
 .hd[data-tone=red]{color:var(--paper)}
@@ -750,3 +750,16 @@ p .ai{line-height:inherit}
 .lc{border-radius:var(--r-tile)}
 .sr,
 h2.sr{font-size:0;line-height:0}
+
+/* Marquesina superior de skills: se va con el scroll; la cabecera baja a su sitio */
+:root{--mq:36px}
+body{padding-top:36px}
+.mq{position:absolute;top:0;left:0;right:0;height:36px;z-index:90;overflow:hidden;background:#EAFDB7;color:#191816;display:flex;align-items:center}
+.mq-t{display:flex;width:max-content;animation:mq 60s linear infinite}
+.mq-s{display:flex;flex:none}
+.mq-s span{flex:none;display:flex;align-items:center;gap:1.6em;padding-left:1.6em;font:400 .86rem/1 var(--body);letter-spacing:-.005em;white-space:nowrap}
+.mq-s span::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;flex:none}
+.mq-s .b{font-weight:700}
+.mq-s .i{font-family:var(--serif);font-style:italic;font-size:1.2em;letter-spacing:-.02em}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.mq-t{animation:none}}
