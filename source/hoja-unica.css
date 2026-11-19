@@ -806,6 +806,6 @@ body{padding-bottom:var(--mqb)}
 
 /* Carga de abajo arriba: logos → pastillas → texto y foto → cabecera y «00 Intro» */
 @keyframes ihUp{
- 0%{opacity:0;filter:blur(12px);transform:translateY(16px);-webkit-mask:linear-gradient(0deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat;mask:linear-gradient(0deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat}
- 100%{opacity:1;filter:blur(0);transform:none;-webkit-mask:linear-gradient(0deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat;mask:linear-gradient(0deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat}
+ 0%{opacity:0;transform:translateY(16px);-webkit-mask:linear-gradient(0deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat;mask:linear-gradient(0deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat}
+ 100%{opacity:1;transform:none;-webkit-mask:linear-gradient(0deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat;mask:linear-gradient(0deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat}
 }
