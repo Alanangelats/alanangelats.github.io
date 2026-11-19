@@ -769,7 +769,12 @@ body{padding-bottom:var(--mqb)}
 .tm{bottom:calc(env(safe-area-inset-bottom,0px) + 18px + var(--mqb))}
 .wa{bottom:calc(env(safe-area-inset-bottom,0px) + 73px + var(--mqb))}
 @media(max-width:900px){.wa{bottom:calc(env(safe-area-inset-bottom,0px) + 18px + var(--mqb))}}
-.sign{margin:-40px 0 -10px;font-family:"Qwitcher Grypen",cursive;font-style:normal;font-weight:400;font-size:clamp(2.55rem,4.8vw,4.35rem);line-height:.9;letter-spacing:0}
-@media(max-width:900px){.sign{margin:-16px 0 -8px}}
+.sign{transform:rotate(-3deg);transform-origin:0 70%;padding:.3em .2em .4em;margin:calc(-40px - .3em) -.2em calc(-10px - .4em);font-family:"Qwitcher Grypen",cursive;font-style:normal;font-weight:400;font-size:clamp(2.55rem,4.8vw,4.35rem);line-height:.9;letter-spacing:-.05em}
+@media(max-width:900px){.sign{margin:calc(-16px - .3em) -.2em calc(-8px - .4em)}}
 .hl{background:linear-gradient(#EAFDB7,#EAFDB7) 0 62%/100% .92em no-repeat;color:#191816;padding:0 .14em;margin:0 -.04em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 @media(max-width:900px){html body .ih h1{font-size:calc(var(--t-statement)*1.2);letter-spacing:0}html body .intro p.lead{font-size:calc(var(--t-lead)*1.2)!important;letter-spacing:0}}
+
+/* La firma se escribe de izquierda a derecha al cargar */
+.sign{width:fit-content;-webkit-mask:linear-gradient(90deg,#000 40%,transparent 48%) 100% 0/250% 100% no-repeat;mask:linear-gradient(90deg,#000 40%,transparent 48%) 100% 0/250% 100% no-repeat;animation:sign 2.6s cubic-bezier(.4,.1,.3,1) .9s both}
+@keyframes sign{from{-webkit-mask-position:100% 0;mask-position:100% 0}to{-webkit-mask-position:0 0;mask-position:0 0}}
+@media (prefers-reduced-motion:reduce){.sign{animation:none;-webkit-mask:none;mask:none}}
