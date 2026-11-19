@@ -770,7 +770,7 @@ body{padding-bottom:var(--mqb)}
 .wa{bottom:calc(env(safe-area-inset-bottom,0px) + 73px + var(--mqb))}
 @media(max-width:900px){.wa{bottom:calc(env(safe-area-inset-bottom,0px) + 18px + var(--mqb))}}
 .sign{transform:rotate(-3deg);transform-origin:0 70%;padding:.3em .2em .4em;margin:calc(-40px - .3em) -.2em calc(-10px - .4em);font-family:"Qwitcher Grypen",cursive;font-style:normal;font-weight:400;font-size:clamp(2.55rem,4.8vw,4.35rem);line-height:.9;letter-spacing:-.05em}
-@media(max-width:900px){.sign{margin:calc(-16px - .3em) -.2em calc(-8px - .4em)}}
+@media(max-width:900px){.sign{margin:calc(-6px - .3em) -.2em calc(-8px - .4em)}}
 .hl{background:linear-gradient(#EAFDB7,#EAFDB7) 0 62%/100% .92em no-repeat;color:#191816;padding:0 .14em;margin:0 -.04em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 @media(max-width:900px){html body .ih h1{font-size:calc(var(--t-statement)*1.2);letter-spacing:0}html body .intro p.lead{font-size:calc(var(--t-lead)*1.2)!important;letter-spacing:0}}
 
@@ -781,3 +781,14 @@ body{padding-bottom:var(--mqb)}
 
 /* Estrellitas de IA en el párrafo 01: -25% */
 .intro .lead .sp{width:.79em;height:.79em;vertical-align:-.06em}
+
+/* Carga de la intro: enfoque (desenfoque→nítido) con barrido de arriba a abajo, luego el marcador y la firma */
+.ih h1{padding-bottom:.25em;margin-bottom:-.25em;animation:ihIn 1.5s cubic-bezier(.2,.7,.2,1) .15s backwards}
+@keyframes ihIn{
+ 0%{opacity:0;filter:blur(12px);transform:translateY(14px);-webkit-mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat;mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat}
+ 100%{opacity:1;filter:blur(0);transform:none;-webkit-mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat;mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat}
+}
+.hl{animation:hlIn .9s cubic-bezier(.5,0,.2,1) 1.2s backwards}
+@keyframes hlIn{from{background-size:0 .92em}}
+.sign{animation-delay:1.8s}
+@media (prefers-reduced-motion:reduce){.ih h1,.hl{animation:none}}
