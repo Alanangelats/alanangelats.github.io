@@ -809,3 +809,7 @@ body{padding-bottom:var(--mqb)}
  0%{-webkit-mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat;mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat}
  100%{-webkit-mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat;mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat}
 }
+
+/* Firma con la tipografía de «00 Intro», casi pegada al párrafo */
+.sign{transform:none;padding:0;margin:2px 0 0;font:500 .95rem/1 var(--display);letter-spacing:-.01em;-webkit-mask:none;mask:none;animation:none}
+@media(min-width:901px){.sign{margin-top:-8px}}
