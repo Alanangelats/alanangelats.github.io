@@ -831,7 +831,7 @@ body{padding-bottom:var(--mqb)}
 .intro .lead .sp{width:.79em;height:.79em;vertical-align:-.06em}
 
 /* Carga de la intro: enfoque (desenfoque→nítido) con barrido de arriba a abajo, luego el marcador y la firma */
-.ih h1{padding-bottom:.25em;margin-bottom:-.25em;animation:ihUp 1.3s cubic-bezier(.2,.7,.2,1) .5s backwards}
+.ih h1{padding-bottom:.25em;margin-bottom:-.25em;animation:ihDown 1.3s cubic-bezier(.2,.7,.2,1) .3s backwards}
 @keyframes ihIn{
  0%{opacity:0;filter:blur(12px);transform:translateY(14px);-webkit-mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat;mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat}
  100%{opacity:1;filter:blur(0);transform:none;-webkit-mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat;mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat}
@@ -842,20 +842,20 @@ body{padding-bottom:var(--mqb)}
 @media (prefers-reduced-motion:reduce){.ih h1,.hl{animation:none}}
 
 /* La foto carga con el mismo efecto y a la vez que el texto de la intro */
-.photo{animation:ihUp 1.3s cubic-bezier(.2,.7,.2,1) .5s backwards}
+.photo{animation:ihDown 1.3s cubic-bezier(.2,.7,.2,1) .3s backwards}
 @media (prefers-reduced-motion:reduce){.photo{animation:none}}
 
 /* Cabecera, pastillas y marquesina de logos: mismo efecto de carga, a la vez que la intro y la foto */
-.marq{animation:ihUp 1.3s cubic-bezier(.2,.7,.2,1) 0s backwards}
-.role.rv{animation:ihUp 1.3s cubic-bezier(.2,.7,.2,1) .25s backwards}
-.hd,.hello{animation:ihUp 1.3s cubic-bezier(.2,.7,.2,1) .8s backwards}
+.marq{animation:ihDown 1.3s cubic-bezier(.2,.7,.2,1) .8s backwards}
+.role.rv{animation:ihDown 1.3s cubic-bezier(.2,.7,.2,1) .55s backwards}
+.hd,.hello{animation:ihDown 1.3s cubic-bezier(.2,.7,.2,1) 0s backwards}
 .role.rv{transition:none;opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.hd,.hello,.role.rv,.marq{animation:none}}
 
 /* Carga de abajo arriba: logos → pastillas → texto y foto → cabecera y «00 Intro» */
-@keyframes ihUp{
- 0%{opacity:0;transform:translateY(16px);-webkit-mask:linear-gradient(0deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat;mask:linear-gradient(0deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat}
- 100%{opacity:1;transform:none;-webkit-mask:linear-gradient(0deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat;mask:linear-gradient(0deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat}
+@keyframes ihDown{
+ 0%{-webkit-mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat;mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 100%/100% 260% no-repeat}
+ 100%{-webkit-mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat;mask:linear-gradient(180deg,#000 38%,transparent 62%) 0 0/100% 260% no-repeat}
 }
 </style>
 
