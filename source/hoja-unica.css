@@ -813,3 +813,5 @@ body{padding-bottom:var(--mqb)}
 /* Firma con la tipografía de «00 Intro», casi pegada al párrafo */
 .sign{transform:none;padding:0;margin:2px 0 0;font:500 .95rem/1 var(--display);letter-spacing:-.01em;-webkit-mask:none;mask:none;animation:none}
 @media(min-width:901px){.sign{margin-top:-8px}}
+.sign{animation:ihDown 1.3s cubic-bezier(.2,.7,.2,1) .3s backwards}
+@media (prefers-reduced-motion:reduce){.sign{animation:none}}
