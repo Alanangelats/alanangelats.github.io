@@ -627,6 +627,8 @@ html[data-theme=dark] .hd{background:rgba(25,24,22,0)}
 @media (max-width:900px){.hero-row{display:contents}#hero .photo{width:auto;max-width:none;justify-self:stretch;margin-left:var(--wp);margin-right:var(--wp)}}
 /* móvil: recorta ~20% del fondo gris superior de la foto (4:5 -> 1:1) */
 @media (max-width:900px){#hero .photo{aspect-ratio:1/1}#hero .photo .pf:not(.pb) img{inset:auto 0 0 0;height:auto;aspect-ratio:1122/1402}#hero .photo .pcap{top:calc(100% + 14px)}}
+/* móvil: el pie de foto (hasta 2-3 líneas) cuelga bajo la foto; reservar espacio para que no choque con la franja oscura */
+@media (max-width:900px){#hero .photo{margin-bottom:clamp(76px,20vw,96px)}}
 .sh{display:none}
 /* móvil: bloques oscuros a sangre (como el pie); contenido con margen --wp */
 @media (max-width:900px){
