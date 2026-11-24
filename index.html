@@ -900,6 +900,9 @@ html[data-theme=dark] .cif.dk{background:#2A2825}
 .arrows li.mk::before{margin-top:0}
 .arrows li.mk.on{background-size:100% 100%;color:#191816}
 @media (prefers-reduced-motion:reduce){.arrows li.mk{transition:none;background-size:100% 100%;color:#191816}}
+.mk2{background:linear-gradient(#EAFDB7,#EAFDB7) 0 58%/0 1em no-repeat;padding:0 .14em;margin:0 -.14em;box-decoration-break:clone;-webkit-box-decoration-break:clone;transition:background-size .9s cubic-bezier(.5,0,.2,1),color .9s cubic-bezier(.5,0,.2,1)}
+.mk2.on{background-size:100% 1em;color:#191816}
+@media (prefers-reduced-motion:reduce){.mk2{transition:none;background-size:100% 1em;color:#191816}}
 </style>
 
 <div class="cur" id="cur"></div>
@@ -1077,7 +1080,7 @@ html[data-theme=dark] .cif.dk{background:#2A2825}
     <div class="tag"><b>05</b>Educación</div>
     <h2 class="big" style="margin-top:clamp(20px,3vw,40px)">educación.</h2>
     <div class="grid edu">
-      <div><span class="yr">2017 – 2022</span><div><h3>Grado Universitario en Diseño y Creación Digital</h3><p>Universitat Oberta de Catalunya</p></div></div>
+      <div><span class="yr">2017 – 2022</span><div><h3><span class="mk2">Grado Universitario en Diseño y Creación Digital</span></h3><p>Universitat Oberta de Catalunya</p></div></div>
       <div><span class="yr">2011 – 2012</span><div><h3>Posgrado en Diseño de Experiencia de Usuario</h3><p>Universitat Oberta de Catalunya</p></div></div>
       <div><span class="yr">2005 – 2006</span><div><h3>Máster en Diseño Web y Multimedia</h3><p>Centro de Estudios Visuales</p></div></div>
     </div>
@@ -1531,6 +1534,10 @@ html[data-theme=dark] .cif.dk{background:#2A2825}
   var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
   if(rm||!('IntersectionObserver' in window)){li.classList.add('on');return}
   new IntersectionObserver(function(en,io){if(en[0].isIntersecting){io.disconnect();setTimeout(function(){li.classList.add('on')},900)}},{threshold:.9}).observe(li);
+})();
+;(function(){var el=document.querySelector('.edu .mk2');if(!el)return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches||!('IntersectionObserver' in window)){el.classList.add('on');return}
+  new IntersectionObserver(function(en,io){if(en[0].isIntersecting){io.disconnect();setTimeout(function(){el.classList.add('on')},900)}},{threshold:.9}).observe(el);
 })();
 </script></body>
 </html>
