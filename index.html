@@ -867,6 +867,35 @@ body{padding-bottom:var(--mqb)}
 @media(min-width:901px){.sign{margin-top:-8px}}
 .sign{animation:ihDown 1.3s cubic-bezier(.2,.7,.2,1) .3s backwards}
 @media (prefers-reduced-motion:reduce){.sign{animation:none}}
+
+/* Cifras: cuadro de datos con contadores animados */
+.cifras{padding-block:clamp(40px,6vw,90px) 0}
+.cif-g{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;grid-template-rows:clamp(280px,29vw,520px) clamp(240px,24vw,430px);gap:clamp(8px,1.2vw,18px)}
+.cif{border-radius:0;padding:clamp(18px,2.2vw,36px);display:flex;flex-direction:column;position:relative;overflow:hidden;min-width:0}
+.cif.dk{background:var(--ink);color:var(--paper)}
+html[data-theme=dark] .cif.dk{background:#2A2825}
+.cif.gr{background:#EAFDB7;color:#191816}
+.cif.a{grid-column:1;grid-row:1}.cif.p1{grid-column:2;grid-row:1}.cif.b{grid-column:3/5;grid-row:1}
+.cif.c{grid-column:1;grid-row:2}.cif.d{grid-column:2/4;grid-row:2}.cif.p2{grid-column:4;grid-row:2}
+.cif-l{font:600 clamp(.95rem,1.25vw,1.2rem)/1.1 var(--display);letter-spacing:-.02em}
+.cif-b{margin-top:auto;display:flex;flex-direction:column}
+.cif-n{font:700 clamp(3.6rem,9.4vw,9.6rem)/.8 var(--display);letter-spacing:-.06em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cif-s{font:italic 400 clamp(1.05rem,1.5vw,1.45rem)/1.12 var(--serif);margin-top:.7em;max-width:30ch;opacity:.9}
+.cif-w{position:relative;flex:1;margin-inline:calc(-1 * clamp(18px,2.2vw,36px))}
+.cif-w span{position:absolute;left:0;right:0;top:50%;text-align:center;font:700 clamp(2rem,4.2vw,4.4rem)/1 var(--display);letter-spacing:-.05em;white-space:nowrap;transition:transform .9s cubic-bezier(.5,0,.2,1),filter .9s,opacity .9s;will-change:transform,filter}
+.cif.ph{background:color-mix(in srgb,currentColor 7%,transparent);border:1.5px dashed color-mix(in srgb,currentColor 35%,transparent);align-items:center;justify-content:center;font:500 .8rem/1 var(--mono);text-transform:uppercase;letter-spacing:.04em;color:color-mix(in srgb,currentColor 55%,transparent)}
+.cif.has img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media(max-width:900px){
+ .cif-g{grid-template-columns:1fr 1fr;grid-template-rows:none;grid-auto-rows:auto}
+ .cif.a,.cif.b,.cif.c,.cif.d{grid-column:1/-1;grid-row:auto}
+ .cif.a,.cif.b,.cif.d{min-height:62vw}.cif.c{min-height:48vw}
+ .cif.p1,.cif.p2{grid-column:auto;grid-row:auto;aspect-ratio:3/4}
+ .cif.a{order:1}.cif.p1{order:2}.cif.p2{order:3}.cif.b{order:4}.cif.c{order:5}.cif.d{order:6}
+ .cif-n{font-size:clamp(4.4rem,26vw,8rem)}
+ .cif-w span{font-size:clamp(1.8rem,9vw,3rem)}
+}
+.cif.has{padding:0}
+.cif.has img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 </style>
 
 <div class="cur" id="cur"></div>
@@ -930,6 +959,19 @@ body{padding-bottom:var(--mqb)}
     <div class="cols">
       <p class="lead rv" data-rv>Llevo más de 20 años diseñando productos y servicios digitales en entornos complejos, sobre todo en el sector financiero y bancario. Combino visión estratégica, conocimiento del negocio y atención al detalle para convertir necesidades de negocio, datos y comportamiento de los usuarios en experiencias simples, intuitivas y escalables.</p>
       <p class="lead rv" data-rv style="--d:.15s">He liderado iniciativas de salud financiera, gestión de la economía doméstica y coaching financiero digital, cubriendo todo el ciclo de vida del producto. Incorporo analítica de producto e <b class="ai">inteligencia&nbsp;artificial<svg class="sp" viewBox="0 0 100 100" aria-hidden="true"><path class="s1" d="M33 31C35.56 52.76 43.24 60.44 65 63C43.24 65.56 35.56 73.24 33 95C30.44 73.24 22.76 65.56 1 63C22.76 60.44 30.44 52.76 33 31Z"/><path class="s2" d="M75 7C76.6 20.6 81.4 25.4 95 27C81.4 28.6 76.6 33.4 75 47C73.4 33.4 68.6 28.6 55 27C68.6 25.4 73.4 20.6 75 7Z"/><path class="s3" d="M79 65C79.96 73.16 82.84 76.04 91 77C82.84 77.96 79.96 80.84 79 89C78.04 80.84 75.16 77.96 67 77C75.16 76.04 78.04 73.16 79 65Z"/></svg></b> a mi proceso de diseño y defiendo los Design Systems como aceleradores de calidad, consistencia y accesibilidad.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec bone cifras" data-tone="bone" id="cifras" aria-label="Cifras">
+  <div class="wrap">
+    <div class="cif-g">
+      <div class="cif dk a"><span class="cif-l">Clientes digitales de BBVA</span><div class="cif-b"><span class="cif-n"><span class="n" data-to="8">8</span><span class="u">&thinsp;M</span></span><span class="cif-s">= el alcance de los productos en los que trabajo</span></div></div>
+      <div class="cif has p1"><img src="cifra-1.webp" alt="Persona usando el móvil en el metro" loading="lazy" style="object-position:48% 50%"></div>
+      <div class="cif gr b"><span class="cif-l">Colchón financiero con Coach</span><div class="cif-b"><span class="cif-n"><span class="u">+</span><span class="n" data-to="14">14</span><span class="u">%</span></span><span class="cif-s">= más de colchón financiero en los clientes de BBVA que lo usan</span></div></div>
+      <div class="cif gr c"><span class="cif-l">Sectores donde he diseñado</span><div class="cif-w" aria-live="off"><span>Banca</span><span>Salud</span><span>Transporte</span><span>Energía</span><span>Administración pública</span></div></div>
+      <div class="cif dk d"><span class="cif-l">Días diseñando pantallas</span><div class="cif-b"><span class="cif-n"><span class="u">+</span><span class="n" data-to="7300" data-fmt="1">7.300</span></span><span class="cif-s">= más de 20 años, de la banca a la administración pública</span></div></div>
+      <div class="cif has p2"><img src="cifra-2.webp" alt="Pareja revisando sus finanzas con el portátil" loading="lazy" style="object-position:60% 50%"></div>
     </div>
   </div>
 </section>
@@ -1327,6 +1369,7 @@ body{padding-bottom:var(--mqb)}
    'Diseño con Inteligencia Artificial':'Artificial Intelligence Design','Experiencia de usuario':'User Experience','Diseñador visual':'Visual Designer','Sistemas de diseño':'Design Systems','Tecnología e innovación':'Technology & Innovation',
    'Cerrar':'Close','sobre mí':'about me','skills':'skills','experiencia':'experience','trayectoria':'career','educación':'education','clientes':'clients','contacto':'contact',
    'Creativo por vocación. Tecnológico por pasión. Analítico por convicción.':'Design maker. Tech lover. Data believer.','Combino diseño, tecnología y visión humana para transformar los':'I connect creativity, technology, and human needs to rethink','servicios financieros':'financial services','y explorar nuevas posibilidades con IA':'and explore new possibilities powered by AI','Madrid · España':'Madrid · Spain','+20 años de experiencia':'+20 years of experience','Banca digital':'Digital banking','IA':'AI',
+   'Clientes digitales de BBVA':'BBVA digital customers','= el alcance de los productos en los que trabajo':'= the reach of the products I work on','Colchón financiero con Coach':'Financial cushion with Coach','= más de colchón financiero en los clientes de BBVA que lo usan':'= more financial cushion among the BBVA customers who use it','Sectores donde he diseñado':'Sectors I have designed for','Banca':'Banking','Salud':'Health','Transporte':'Transport','Energía':'Energy','Administración pública':'Public sector','Días diseñando pantallas':'Days designing screens','= más de 20 años, de la banca a la administración pública':'= over 20 years, from banking to public sector','foto':'photo',
    'Sobre mí':'About me',
    'Llevo más de 20 años diseñando productos y servicios digitales en entornos complejos, sobre todo en el sector financiero y bancario. Combino visión estratégica, conocimiento del negocio y atención al detalle para convertir necesidades de negocio, datos y comportamiento de los usuarios en experiencias simples, intuitivas y escalables.':'For more than 20 years I have designed digital products and services in complex environments, mostly in the financial and banking sector. I combine strategic vision, business knowledge and attention to detail to turn business needs, data and user behaviour into simple, intuitive and scalable experiences.',
    'He liderado iniciativas de salud financiera, gestión de la economía doméstica y coaching financiero digital, cubriendo todo el ciclo de vida del producto. Incorporo analítica de producto e':'I have led initiatives in financial health, household money management and digital financial coaching, covering the whole product lifecycle. I bring product analytics and',
@@ -1455,5 +1498,30 @@ body{padding-bottom:var(--mqb)}
 })();
 </script>
 
-<script>(function(){var b=document.getElementById('rmore'),l=document.getElementById('rlist');if(!b||!l)return;b.addEventListener('click',function(){var t0=b.getBoundingClientRect().top;var c=l.classList.toggle('col');b.setAttribute('aria-expanded',String(!c));b.classList.toggle('open',!c);if(c){var d=b.getBoundingClientRect().top-t0;if(d)window.scrollTo({top:window.scrollY+d,behavior:'instant'})}})})()</script></body>
+<script>(function(){var b=document.getElementById('rmore'),l=document.getElementById('rlist');if(!b||!l)return;b.addEventListener('click',function(){var t0=b.getBoundingClientRect().top;var c=l.classList.toggle('col');b.setAttribute('aria-expanded',String(!c));b.classList.toggle('open',!c);if(c){var d=b.getBoundingClientRect().top-t0;if(d)window.scrollTo({top:window.scrollY+d,behavior:'instant'})}})})();/* Cifras: contadores y carrusel de sectores */
+(function(){
+  var sec=document.getElementById('cifras');if(!sec)return;
+  var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var ns=[].slice.call(sec.querySelectorAll('.n'));
+  function fm(el,v){if(!el.dataset.fmt)return v;var l=document.getElementById('lg');return String(v).replace(/\B(?=(\d{3})+(?!\d))/g,l&&l.dataset.lang==='en'?',':'.')}
+  var lg=document.getElementById('lg');if(lg)new MutationObserver(function(){ns.forEach(function(el){if(el.dataset.fmt&&/\d/.test(el.textContent))el.textContent=fm(el,+el.textContent.replace(/\D/g,''))})}).observe(lg,{attributes:true,attributeFilter:['data-lang']});
+  function run(){ns.forEach(function(el){var to=+el.dataset.to,t0=performance.now(),d=1900;
+    (function f(t){var k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent=fm(el,Math.round(to*e));if(k<1)requestAnimationFrame(f)})(t0)})}
+  if(!rm)ns.forEach(function(el){el.textContent='0'});
+  var seen=false;
+  new IntersectionObserver(function(en,io){if(en[0].isIntersecting&&!seen){seen=true;io.disconnect();if(!rm)run()}},{threshold:.35}).observe(sec.querySelector('.cif-g'));
+  var it=[].slice.call(sec.querySelectorAll('.cif-w span')),N=it.length,pos=0;
+  function put(first){it.forEach(function(el,i){
+    var o=(((i-pos+N/2)%N)+N)%N-N/2,prev=+el.dataset.o,jump=!first&&prev!==undefined&&Math.abs(o-prev)>N/2;
+    if(first||jump)el.style.transition='none';
+    el.dataset.o=o;var a=Math.abs(o);
+    el.style.transform='translateY(calc(-50% + '+(o*1.25)+'em))';
+    el.style.filter='blur('+(Math.min(a,1.6)*3.4)+'px)';
+    el.style.opacity=a<.5?1:Math.max(.12,.5-a*.18);
+    if(first||jump){void el.offsetWidth;el.style.transition=''}
+  })}
+  put(true);
+  if(!rm)setInterval(function(){pos=(pos+1)%N;put(false)},2200);
+})();
+</script></body>
 </html>
