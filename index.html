@@ -903,8 +903,8 @@ html[data-theme=dark] .cif.dk{background:#2A2825}
 .mk2{background:linear-gradient(#EAFDB7,#EAFDB7) 0 58%/0 1em no-repeat;padding:0 .14em;margin:0 -.14em;box-decoration-break:clone;-webkit-box-decoration-break:clone;transition:background-size .9s cubic-bezier(.5,0,.2,1),color .9s cubic-bezier(.5,0,.2,1)}
 .mk2.on{background-size:100% 1em;color:#191816}
 @media (prefers-reduced-motion:reduce){.mk2{transition:none;background-size:100% 1em;color:#191816}}
-/* cabecera flotante a la mitad del ancho en vista web */
-@media(min-width:901px){.hd{left:calc(50% - max(25vw,280px));right:calc(50% - max(25vw,280px))}}
+/* cabecera flotante compacta y alineada a la derecha en vista web */
+@media(min-width:901px){.hd{left:auto;right:10px;width:fit-content;justify-content:flex-start;gap:22px;padding-inline:18px}.hd-r{gap:6px}}
 </style>
 
 <div class="cur" id="cur"></div>
