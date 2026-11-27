@@ -904,7 +904,7 @@ html[data-theme=dark] .cif.dk{background:#2A2825}
 .mk2.on{background-size:100% 1em;color:#191816}
 @media (prefers-reduced-motion:reduce){.mk2{transition:none;background-size:100% 1em;color:#191816}}
 /* cabecera flotante compacta y alineada a la derecha en vista web */
-@media(min-width:901px){.hd{left:auto;right:10px;width:fit-content;justify-content:flex-start;gap:22px;padding-inline:18px}.hd-r{gap:6px}}
+@media(min-width:901px){.hd{left:auto;right:calc(max(0px,(100vw - 1900px)/2) + var(--wp) - 18px);width:fit-content;justify-content:flex-start;gap:22px;padding-inline:18px}.hd-r{gap:6px}}
 </style>
 
 <div class="cur" id="cur"></div>
